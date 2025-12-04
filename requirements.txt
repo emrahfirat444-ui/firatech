@@ -1,1 +1,10 @@
+<<<<<<< HEAD
+streamlit==1.40.1
+requests==2.31.0
+python-dotenv==1.0.0
+flask==3.0.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+=======
 streamlit==1.28.1
+>>>>>>> 4fc113de1bb3045a1ea73a9776ba7fdcc4b41ebf
