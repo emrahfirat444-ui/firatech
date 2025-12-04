@@ -1,0 +1,10 @@
+__pycache__/
+venv*/
+*.pyc
+.pytest_cache/
+.env
+resp.txt
+err.txt
+node_modules
+dist
+build
