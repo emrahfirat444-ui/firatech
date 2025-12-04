@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import streamlit as st
 import os
 import requests
@@ -1301,3 +1302,9 @@ else:
             st.session_state.page = "menu"
             st.rerun()
 
+=======
+import streamlit as st
+
+st.title("Hoş Geldiniz")
+st.write("Merhaba!")
+>>>>>>> 4fc113de1bb3045a1ea73a9776ba7fdcc4b41ebf
