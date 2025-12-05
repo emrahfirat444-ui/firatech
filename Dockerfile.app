@@ -9,6 +9,9 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
+    libxml2-dev \
+    libxslt1-dev \
+    zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Kütüphaneler
