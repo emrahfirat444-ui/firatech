@@ -36,6 +36,8 @@ EXPOSE 80
 # Basit entrypoint, env'den PORT'u alarak Streamlit'i başlatır
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# Ensure entrypoint has UNIX line endings so /bin/sh can execute it inside container
+RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh || true
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
