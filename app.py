@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import streamlit as st
 import os
 import requests
@@ -37,7 +36,13 @@ SAP_API_CONFIG = {
 }
 
 # Demo mode flag - if set, short-circuit all external calls and use demo data
-DEMO_MODE = os.getenv("SAP_GATEWAY_DEMO", "0").lower() in ("1", "true", "yes")
+"""
+Demo mode: when True the app short-circuits SSO, SAP and external B2C scrapes
+and uses deterministic demo data so the app can run without any external
+connections. Default is True for published demo builds; set env var
+`SAP_GATEWAY_DEMO=0` or `false` to disable demo mode.
+"""
+DEMO_MODE = os.getenv("SAP_GATEWAY_DEMO", "1").lower() in ("1", "true", "yes")
 if DEMO_MODE:
     # Clear any external endpoints to avoid accidental network calls
     SSO_CONFIG["sso_url"] = ""
@@ -1301,10 +1306,3 @@ else:
         if st.button("🔄 Yeniden Dene", use_container_width=True):
             st.session_state.page = "menu"
             st.rerun()
-
-=======
-import streamlit as st
-
-st.title("Hoş Geldiniz")
-st.write("Merhaba!")
->>>>>>> 4fc113de1bb3045a1ea73a9776ba7fdcc4b41ebf

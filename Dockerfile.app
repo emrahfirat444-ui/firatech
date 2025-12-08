@@ -3,12 +3,16 @@ FROM python:3.8-slim
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
+# Force demo mode in container so external connections are disabled by default
+ENV SAP_GATEWAY_DEMO=1
+
 WORKDIR /app
 
 # Sistem bağımlılıkları (gerekirse genişletilebilir)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
+    python3-dev \
     libxml2-dev \
     libxslt1-dev \
     zlib1g-dev \
@@ -17,6 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Kütüphaneler
 COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip setuptools wheel
+# Install Cython/wheel early to help build packages like lxml if needed
+RUN pip install cython wheel
 RUN pip install -r /app/requirements.txt
 
 # Uygulama dosyalarını kopyala
