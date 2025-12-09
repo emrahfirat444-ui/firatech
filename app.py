@@ -60,11 +60,11 @@ st.markdown("""
     /* Responsive Login Container */
     .login-wrapper {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         min-height: 100vh;
         background: #f5f5f5;
-        padding: 20px;
+        padding: 60px 20px 20px 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         width: 100vw;
