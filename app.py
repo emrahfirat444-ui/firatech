@@ -53,6 +53,9 @@ st.markdown("""
     header {visibility: hidden;}
     .stDeployButton {display: none;}
     .stDecoration {display: none;}
+    .stApp {background: #f5f5f5 !important;}
+    .stAppViewContainer {padding: 0 !important;}
+    [data-testid="stAppViewContainer"] {padding: 0 !important;}
     
     /* Responsive Login Container */
     .login-wrapper {
@@ -63,6 +66,9 @@ st.markdown("""
         background: #f5f5f5;
         padding: 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        width: 100vw;
+    }
     }
     
     .login-container {
