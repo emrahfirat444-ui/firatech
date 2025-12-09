@@ -60,14 +60,16 @@ st.markdown("""
     /* Responsive Login Container */
     .login-wrapper {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
         min-height: 100vh;
+        height: 100vh;
         background: #f5f5f5;
-        padding: 60px 20px 20px 20px;
+        padding: 20px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         width: 100vw;
+        overflow: hidden;
     }
     }
     
