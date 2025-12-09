@@ -754,22 +754,20 @@ if not st.session_state.authenticated:
     with col2:
         st.markdown('<div class="login-container">', unsafe_allow_html=True)
         
-        # E-posta alanı
-        st.markdown('<label class="form-label">E-Posta</label>', unsafe_allow_html=True)
+        # E-posta alanı (kendi label'ımızı kaldırıp Streamlit label'ını kullanıyoruz)
         email = st.text_input(
-            "E-posta",
+            "E-POSTA",
             placeholder="user@yatas.com",
-            label_visibility="collapsed",
+            label_visibility="visible",
             key="login_email"
         )
         
-        # Şifre alanı
-        st.markdown('<label class="form-label">Şifre</label>', unsafe_allow_html=True)
+        # Şifre alanı (kendi label'ımızı kaldırıp Streamlit label'ını kullanıyoruz)
         password = st.text_input(
-            "Şifre",
+            "ŞİFRE",
             type="password",
             placeholder="Şifrenizi girin",
-            label_visibility="collapsed",
+            label_visibility="visible",
             key="login_password"
         )
         
