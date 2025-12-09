@@ -57,25 +57,21 @@ st.markdown("""
     .stAppViewContainer {padding: 0 !important;}
     [data-testid="stAppViewContainer"] {padding: 0 !important;}
     
-    /* Responsive Login Container - fixed near top to avoid page scrolling */
+    /* Responsive Login Container - simplified and pinned near top */
     .login-wrapper {
         position: fixed;
-        top: 6vh;
+        top: 20px;
         left: 0;
         right: 0;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
-        min-height: auto;
-        height: auto;
-        background: transparent;
-        padding: 0 12px;
+        padding: 12px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        width: 100vw;
+        margin: 0 auto;
+        width: 100%;
         z-index: 9999;
     }
-    
     .login-container {
         width: 100%;
         max-width: 420px;
