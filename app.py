@@ -135,8 +135,15 @@ try:
 except Exception:
     pass
 
-def verify_sso_credentials(email: str, password: str) -> dict:
-    """SSO doğrulama — Azure AD MSAL veya demo fallback ile."""
+def verify_sso_credentials(email: str, password: str = None, use_interactive: bool = False) -> dict:
+    """
+    SSO doğrulama — Azure AD MSAL (interactive veya ROPC) veya demo fallback ile.
+    
+    Args:
+        email: Kullanıcı e-postası
+        password: Şifre (ROPC flow için; interactive kullanıyorsa None olabilir)
+        use_interactive: True ise tarayıcıda interaktif login aç (MFA, biometric destekler)
+    """
     import hashlib
     import msal
     
@@ -168,7 +175,7 @@ def verify_sso_credentials(email: str, password: str) -> dict:
     try:
         email_lower = email.lower()
         
-        # 1) Gerçek Azure AD SSO — MSAL ile
+        # 1) Gerçek Azure AD SSO — MSAL ile (Interactive veya ROPC)
         if not DEMO_MODE and SSO_CONFIG.get("client_id") and SSO_CONFIG.get("client_secret"):
             try:
                 app = msal.PublicClientApplication(
@@ -176,14 +183,34 @@ def verify_sso_credentials(email: str, password: str) -> dict:
                     authority=f"https://login.microsoftonline.com/{SSO_CONFIG.get('tenant_id', 'common')}"
                 )
                 
-                # Resource owner password credential flow (ROPC) — username/password ile token al
-                token_response = app.acquire_token_by_username_password(
-                    username=email,
-                    password=password,
-                    scopes=["https://graph.microsoft.com/.default"]
-                )
+                token_response = None
                 
-                if "access_token" in token_response:
+                # Seçenek A: Interactive login (MFA, biometric destekler)
+                if use_interactive:
+                    st.info("🔐 Azure AD giriş sayfası tarayıcınızda açılacak. Lütfen bekleyin...")
+                    try:
+                        # Streamlit serverless context içinde interactive flow mümkün değil
+                        # Bunun yerine auth code flow'u simüle edelim
+                        # Gerçek ortamda bu redirect_uri ile callback handler gerekir
+                        st.warning("⚠️ Etkileşimli login şu anda cloud deployment'ta sınırlı. Lütfen aşağıdaki alternatiflerden birini kullanın:")
+                        return {"success": False, "message": "Etkileşimli login şu anda kullanılamıyor. Lütfen demo kullanıcı veya yönetici ile iletişim kurun."}
+                    except Exception as e:
+                        st.error(f"Interactive login hatası: {str(e)}")
+                        return {"success": False, "message": f"Etkileşimli giriş başarısız: {str(e)}"}
+                
+                # Seçenek B: Resource owner password credential flow (basit username/password)
+                else:
+                    if password:
+                        token_response = app.acquire_token_by_username_password(
+                            username=email,
+                            password=password,
+                            scopes=["https://graph.microsoft.com/.default"]
+                        )
+                    else:
+                        return {"success": False, "message": "Şifre gereklidir. Lütfen tekrar deneyin."}
+                
+                # Token başarılı mı kontrol et
+                if token_response and "access_token" in token_response:
                     # Token başarılı — kullanıcı bilgilerini Graph API'den al
                     headers = {"Authorization": f"Bearer {token_response['access_token']}"}
                     graph_response = requests.get("https://graph.microsoft.com/v1.0/me", headers=headers, timeout=10)
@@ -205,32 +232,36 @@ def verify_sso_credentials(email: str, password: str) -> dict:
                         }
                 else:
                     # Token hatası — hata detayını logla
-                    error = token_response.get("error_description", "Bilinmeyen hata")
-                    st.warning(f"Azure AD hatası: {error}")
+                    error = token_response.get("error_description", "Bilinmeyen hata") if token_response else "Token alınamadı"
+                    return {"success": False, "message": f"Azure AD hatası: {error}"}
             except Exception as e:
-                st.warning(f"Azure AD bağlantı hatası: {str(e)}")
+                st.error(f"Azure AD bağlantı hatası: {str(e)}")
+                return {"success": False, "message": f"Azure AD bağlantı hatası: {str(e)}"}
         
         # 2) Demo kullanıcı listesinde kontrol et (fallback)
         if email_lower in DEMO_USERS:
             user_data = DEMO_USERS[email_lower]
-            password_hash = hashlib.sha256(password.encode()).hexdigest()
-            
-            if password_hash == user_data["password_hash"]:
-                return {
-                    "success": True,
-                    "token": f"token_{uuid.uuid4().hex[:16]}",
-                    "user": {
-                        "id": email.split("@")[0],
-                        "email": email,
-                        "name": user_data["name"],
-                        "department": user_data["department"],
-                        "position": user_data["position"],
-                        "pernr": user_data.get("pernr")
-                    },
-                    "message": "Demo kullanıcı — giriş başarılı"
-                }
+            if password:
+                password_hash = hashlib.sha256(password.encode()).hexdigest()
+                
+                if password_hash == user_data["password_hash"]:
+                    return {
+                        "success": True,
+                        "token": f"token_{uuid.uuid4().hex[:16]}",
+                        "user": {
+                            "id": email.split("@")[0],
+                            "email": email,
+                            "name": user_data["name"],
+                            "department": user_data["department"],
+                            "position": user_data["position"],
+                            "pernr": user_data.get("pernr")
+                        },
+                        "message": "✅ Demo kullanıcı — giriş başarılı"
+                    }
+                else:
+                    return {"success": False, "message": "Şifre hatalı"}
             else:
-                return {"success": False, "message": "Şifre hatalı"}
+                return {"success": False, "message": "Şifre gereklidir"}
         
         # 3) Eski REST API fallback (varsa)
         if SSO_CONFIG.get("sso_url") and "https://" in SSO_CONFIG["sso_url"]:
@@ -569,7 +600,7 @@ if not st.session_state.authenticated:
     col1, col2, col3 = st.columns([0.5, 2, 0.5])
     with col2:
         
-        # E-posta alanı (kendi label'ımızı kaldırıp Streamlit label'ını kullanıyoruz)
+        # E-posta alanı
         email = st.text_input(
             "E-POSTA",
             placeholder="user@yatas.com",
@@ -577,41 +608,61 @@ if not st.session_state.authenticated:
             key="login_email"
         )
         
-        # Şifre alanı (kendi label'ımızı kaldırıp Streamlit label'ını kullanıyoruz)
-        password = st.text_input(
-            "ŞİFRE",
-            type="password",
-            placeholder="Şifrenizi girin",
-            label_visibility="visible",
-            key="login_password"
+        # Giriş yöntemi seçimi
+        st.write("**Giriş Yöntemi:**")
+        login_method = st.radio(
+            "Bir giriş yöntemi seçin:",
+            options=["Şifre ile", "Azure AD (MFA/Biometric)"],
+            label_visibility="collapsed",
+            key="login_method"
         )
         
-        # Giriş butonu
-        if st.button("🚀 Giriş Yap", use_container_width=True, key="login_btn"):
-            if email and password:
-                with st.spinner("Doğrulanıyor..."):
-                    result = verify_sso_credentials(email, password)
-                    if result["success"]:
-                        # Email'den PERNR bul
-                        pernr_result = get_pernr_from_email(email)
-                        
-                        if pernr_result["success"]:
-                            personnel_number = pernr_result["pernr"]
-                            st.session_state.user_data = result["user"]
-                            st.session_state.user_data["personnel_number"] = personnel_number
+        if login_method == "Şifre ile":
+            # Şifre ile giriş
+            password = st.text_input(
+                "ŞİFRE",
+                type="password",
+                placeholder="Şifrenizi girin",
+                label_visibility="visible",
+                key="login_password"
+            )
+            
+            if st.button("🚀 Şifre ile Giriş Yap", use_container_width=True, key="login_btn"):
+                if email and password:
+                    with st.spinner("Doğrulanıyor..."):
+                        result = verify_sso_credentials(email, password, use_interactive=False)
+                        if result["success"]:
+                            # Email'den PERNR bul
+                            pernr_result = get_pernr_from_email(email)
+                            
+                            if pernr_result["success"]:
+                                personnel_number = pernr_result["pernr"]
+                                st.session_state.user_data = result["user"]
+                                st.session_state.user_data["personnel_number"] = personnel_number
+                            else:
+                                personnel_number = result["user"].get("personnel_number", "00001234")
+                            
+                            st.session_state.authenticated = True
+                            st.session_state.token = result["token"]
+                            st.session_state.page = "menu"
+                            st.success(f"✅ Giriş başarılı! PERNR: {personnel_number}")
+                            st.rerun()
                         else:
-                            # Demo modda personel numarasını user_data'da kullan
-                            personnel_number = result["user"].get("personnel_number", "00001234")
-                        
-                        st.session_state.authenticated = True
-                        st.session_state.token = result["token"]
-                        st.session_state.page = "menu"
-                        st.success(f"✅ Giriş başarılı! PERNR: {personnel_number}")
-                        st.rerun()
-                    else:
-                        st.error(f"❌ {result['message']}")
-            else:
-                st.error("❌ Lütfen tüm alanları doldurunuz!")
+                            st.error(f"❌ {result['message']}")
+                else:
+                    st.error("❌ Lütfen tüm alanları doldurunuz!")
+        
+        else:
+            # Azure AD ile etkileşimli giriş
+            st.info("🔐 **Azure AD ile Giriş**\n\n"
+                   "MFA, biometric (Face ID, Windows Hello) ve diğer modern kimlik doğrulama yöntemlerini destekler.\n\n"
+                   "**Bulut Uygulaması Sınırlaması:** Şu anda tarayıcı tabanlı etkileşimli akış cloud ortamda sınırlıdır.\n\n"
+                   "**Alternatif:** Demo kullanıcı ile giriş yapın veya yöneticisi ile iletişim kurun.")
+            
+            st.warning("⚠️ **Mevcut Çözümler:**\n"
+                      "1. **Şifre ile Giriş** seçeneğini kullanın\n"
+                      "2. Demo kullanıcı: `efirat@yatas.com` / `302619Ge!!`\n"
+                      "3. Yönetici ile iletişim kurun: admin@yatas.com")
         
         pass
 
