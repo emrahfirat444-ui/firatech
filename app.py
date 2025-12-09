@@ -135,15 +135,80 @@ try:
 except Exception:
     pass
 
-def verify_sso_credentials(email: str, password: str = None, use_interactive: bool = False) -> dict:
-    """
-    SSO doğrulama — Azure AD MSAL (interactive veya ROPC) veya demo fallback ile.
+def generate_azure_ad_login_url() -> str:
+    """Azure AD Authorization Code Flow login URL'sini oluştur."""
+    from urllib.parse import urlencode
     
-    Args:
-        email: Kullanıcı e-postası
-        password: Şifre (ROPC flow için; interactive kullanıyorsa None olabilir)
-        use_interactive: True ise tarayıcıda interaktif login aç (MFA, biometric destekler)
-    """
+    client_id = SSO_CONFIG.get("client_id")
+    redirect_uri = SSO_CONFIG.get("redirect_uri")
+    tenant_id = SSO_CONFIG.get("tenant_id", "common")
+    
+    params = {
+        "client_id": client_id,
+        "response_type": "code",
+        "scope": "https://graph.microsoft.com/User.Read",
+        "redirect_uri": redirect_uri,
+        "prompt": "select_account"
+    }
+    
+    auth_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize?{urlencode(params)}"
+    return auth_url
+
+def exchange_code_for_token(code: str) -> dict:
+    """Authorization code'u token ile değiştir."""
+    try:
+        token_url = f"https://login.microsoftonline.com/{SSO_CONFIG.get('tenant_id', 'common')}/oauth2/v2.0/token"
+        
+        payload = {
+            "client_id": SSO_CONFIG.get("client_id"),
+            "client_secret": SSO_CONFIG.get("client_secret"),
+            "code": code,
+            "redirect_uri": SSO_CONFIG.get("redirect_uri"),
+            "grant_type": "authorization_code",
+            "scope": "https://graph.microsoft.com/User.Read"
+        }
+        
+        response = requests.post(token_url, data=payload, timeout=10)
+        
+        if response.status_code == 200:
+            token_data = response.json()
+            return {"success": True, "token": token_data.get("access_token")}
+        else:
+            error = response.json().get("error_description", "Bilinmeyen hata")
+            return {"success": False, "message": f"Token hatası: {error}"}
+    except Exception as e:
+        return {"success": False, "message": f"Token değişim hatası: {str(e)}"}
+
+def get_user_from_graph(access_token: str) -> dict:
+    """Graph API'den kullanıcı bilgilerini al."""
+    try:
+        headers = {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json"
+        }
+        
+        response = requests.get("https://graph.microsoft.com/v1.0/me", headers=headers, timeout=10)
+        
+        if response.status_code == 200:
+            user = response.json()
+            return {
+                "success": True,
+                "user": {
+                    "id": user.get("id", ""),
+                    "email": user.get("mail", user.get("userPrincipalName", "")),
+                    "name": user.get("displayName", ""),
+                    "department": user.get("department", ""),
+                    "position": user.get("jobTitle", ""),
+                    "pernr": ""
+                }
+            }
+        else:
+            return {"success": False, "message": "Kullanıcı bilgileri alınamadı"}
+    except Exception as e:
+        return {"success": False, "message": f"Graph API hatası: {str(e)}"}
+
+def verify_sso_credentials(email: str, password: str = None) -> dict:
+    """SSO doğrulama — Azure AD ROPC veya demo fallback ile."""
     import hashlib
     import msal
     
@@ -175,7 +240,7 @@ def verify_sso_credentials(email: str, password: str = None, use_interactive: bo
     try:
         email_lower = email.lower()
         
-        # 1) Gerçek Azure AD SSO — MSAL ile (Interactive veya ROPC)
+        # 1) Gerçek Azure AD SSO — MSAL ile (ROPC)
         if not DEMO_MODE and SSO_CONFIG.get("client_id") and SSO_CONFIG.get("client_secret"):
             try:
                 app = msal.PublicClientApplication(
@@ -183,35 +248,17 @@ def verify_sso_credentials(email: str, password: str = None, use_interactive: bo
                     authority=f"https://login.microsoftonline.com/{SSO_CONFIG.get('tenant_id', 'common')}"
                 )
                 
-                token_response = None
-                
-                # Seçenek A: Interactive login (MFA, biometric destekler)
-                if use_interactive:
-                    st.info("🔐 Azure AD giriş sayfası tarayıcınızda açılacak. Lütfen bekleyin...")
-                    try:
-                        # Streamlit serverless context içinde interactive flow mümkün değil
-                        # Bunun yerine auth code flow'u simüle edelim
-                        # Gerçek ortamda bu redirect_uri ile callback handler gerekir
-                        st.warning("⚠️ Etkileşimli login şu anda cloud deployment'ta sınırlı. Lütfen aşağıdaki alternatiflerden birini kullanın:")
-                        return {"success": False, "message": "Etkileşimli login şu anda kullanılamıyor. Lütfen demo kullanıcı veya yönetici ile iletişim kurun."}
-                    except Exception as e:
-                        st.error(f"Interactive login hatası: {str(e)}")
-                        return {"success": False, "message": f"Etkileşimli giriş başarısız: {str(e)}"}
-                
-                # Seçenek B: Resource owner password credential flow (basit username/password)
+                if password:
+                    token_response = app.acquire_token_by_username_password(
+                        username=email,
+                        password=password,
+                        scopes=["https://graph.microsoft.com/.default"]
+                    )
                 else:
-                    if password:
-                        token_response = app.acquire_token_by_username_password(
-                            username=email,
-                            password=password,
-                            scopes=["https://graph.microsoft.com/.default"]
-                        )
-                    else:
-                        return {"success": False, "message": "Şifre gereklidir. Lütfen tekrar deneyin."}
+                    return {"success": False, "message": "Şifre gereklidir."}
                 
                 # Token başarılı mı kontrol et
                 if token_response and "access_token" in token_response:
-                    # Token başarılı — kullanıcı bilgilerini Graph API'den al
                     headers = {"Authorization": f"Bearer {token_response['access_token']}"}
                     graph_response = requests.get("https://graph.microsoft.com/v1.0/me", headers=headers, timeout=10)
                     
@@ -231,11 +278,9 @@ def verify_sso_credentials(email: str, password: str = None, use_interactive: bo
                             "message": "✅ Azure AD SSO başarılı"
                         }
                 else:
-                    # Token hatası — hata detayını logla
                     error = token_response.get("error_description", "Bilinmeyen hata") if token_response else "Token alınamadı"
                     return {"success": False, "message": f"Azure AD hatası: {error}"}
             except Exception as e:
-                st.error(f"Azure AD bağlantı hatası: {str(e)}")
                 return {"success": False, "message": f"Azure AD bağlantı hatası: {str(e)}"}
         
         # 2) Demo kullanıcı listesinde kontrol et (fallback)
@@ -263,21 +308,9 @@ def verify_sso_credentials(email: str, password: str = None, use_interactive: bo
             else:
                 return {"success": False, "message": "Şifre gereklidir"}
         
-        # 3) Eski REST API fallback (varsa)
-        if SSO_CONFIG.get("sso_url") and "https://" in SSO_CONFIG["sso_url"]:
-            try:
-                payload = {
-                    "username": email,
-                    "password": password,
-                    "client_id": SSO_CONFIG.get("client_id"),
-                    "client_secret": SSO_CONFIG.get("client_secret"),
-                }
-                resp = requests.post(f"{SSO_CONFIG['sso_url']}/login", json=payload, timeout=5)
-                if resp.status_code == 200:
-                    data = resp.json()
-                    return {"success": True, "token": data.get("access_token"), "user": data.get("user"), "message": "SSO başarılı"}
-            except Exception:
-                pass
+        return {"success": False, "message": "Kullanıcı bulunamadı"}
+    except Exception as e:
+        return {"success": False, "message": f"Hata: {str(e)}"}
         
         # 3) Hiçbiri uymadıysa hata döndür
         return {"success": False, "message": "Kullanıcı bulunamadı veya şifre hatalı"}
@@ -597,72 +630,113 @@ def logout():
 
 # GİRİŞ EKRANI
 if not st.session_state.authenticated:
-    col1, col2, col3 = st.columns([0.5, 2, 0.5])
-    with col2:
-        
-        # E-posta alanı
-        email = st.text_input(
-            "E-POSTA",
-            placeholder="user@yatas.com",
-            label_visibility="visible",
-            key="login_email"
-        )
-        
-        # Giriş yöntemi seçimi
-        st.write("**Giriş Yöntemi:**")
-        login_method = st.radio(
-            "Bir giriş yöntemi seçin:",
-            options=["Şifre ile", "Azure AD (MFA/Biometric)"],
-            label_visibility="collapsed",
-            key="login_method"
-        )
-        
-        if login_method == "Şifre ile":
-            # Şifre ile giriş
-            password = st.text_input(
-                "ŞİFRE",
-                type="password",
-                placeholder="Şifrenizi girin",
-                label_visibility="visible",
-                key="login_password"
+    # URL parametrelerini kontrol et - authorization code callback
+    query_params = st.query_params
+    auth_code = query_params.get("code")
+    
+    if auth_code:
+        # Microsoft'tan dönen authorization code var - token ile değiştir
+        with st.spinner("🔐 Azure AD ile doğrulanıyor..."):
+            token_result = exchange_code_for_token(auth_code)
+            
+            if token_result["success"]:
+                # Token başarılı - Graph API'den kullanıcı bilgilerini al
+                user_result = get_user_from_graph(token_result["token"])
+                
+                if user_result["success"]:
+                    user_info = user_result["user"]
+                    
+                    # Session state'e kaydet
+                    st.session_state.authenticated = True
+                    st.session_state.token = token_result["token"]
+                    st.session_state.user_data = user_info
+                    st.session_state.page = "menu"
+                    
+                    # PERNR bul
+                    pernr_result = get_pernr_from_email(user_info.get("email", ""))
+                    if pernr_result["success"]:
+                        st.session_state.user_data["personnel_number"] = pernr_result["pernr"]
+                    
+                    st.success("✅ Azure AD giriş başarılı!")
+                    st.rerun()
+                else:
+                    st.error(f"❌ Kullanıcı bilgileri alınamadı: {user_result['message']}")
+            else:
+                st.error(f"❌ Token hatası: {token_result['message']}")
+    else:
+        # Normal giriş ekranı
+        col1, col2, col3 = st.columns([0.5, 2, 0.5])
+        with col2:
+            
+            # Giriş yöntemi seçimi
+            st.write("**Giriş Yöntemi:**")
+            login_method = st.radio(
+                "Bir giriş yöntemi seçin:",
+                options=["Şifre ile", "Azure AD (Tarayıcıda)"],
+                label_visibility="collapsed",
+                key="login_method"
             )
             
-            if st.button("🚀 Şifre ile Giriş Yap", use_container_width=True, key="login_btn"):
-                if email and password:
-                    with st.spinner("Doğrulanıyor..."):
-                        result = verify_sso_credentials(email, password, use_interactive=False)
-                        if result["success"]:
-                            # Email'den PERNR bul
-                            pernr_result = get_pernr_from_email(email)
-                            
-                            if pernr_result["success"]:
-                                personnel_number = pernr_result["pernr"]
-                                st.session_state.user_data = result["user"]
-                                st.session_state.user_data["personnel_number"] = personnel_number
+            if login_method == "Şifre ile":
+                # Şifre ile giriş
+                email = st.text_input(
+                    "E-POSTA",
+                    placeholder="user@yatas.com",
+                    label_visibility="visible",
+                    key="login_email"
+                )
+                
+                password = st.text_input(
+                    "ŞİFRE",
+                    type="password",
+                    placeholder="Şifrenizi girin",
+                    label_visibility="visible",
+                    key="login_password"
+                )
+                
+                if st.button("🚀 Şifre ile Giriş Yap", use_container_width=True, key="login_btn"):
+                    if email and password:
+                        with st.spinner("Doğrulanıyor..."):
+                            result = verify_sso_credentials(email, password)
+                            if result["success"]:
+                                # Email'den PERNR bul
+                                pernr_result = get_pernr_from_email(email)
+                                
+                                if pernr_result["success"]:
+                                    personnel_number = pernr_result["pernr"]
+                                    st.session_state.user_data = result["user"]
+                                    st.session_state.user_data["personnel_number"] = personnel_number
+                                else:
+                                    personnel_number = result["user"].get("personnel_number", "00001234")
+                                
+                                st.session_state.authenticated = True
+                                st.session_state.token = result["token"]
+                                st.session_state.page = "menu"
+                                st.success(f"✅ Giriş başarılı! PERNR: {personnel_number}")
+                                st.rerun()
                             else:
-                                personnel_number = result["user"].get("personnel_number", "00001234")
-                            
-                            st.session_state.authenticated = True
-                            st.session_state.token = result["token"]
-                            st.session_state.page = "menu"
-                            st.success(f"✅ Giriş başarılı! PERNR: {personnel_number}")
-                            st.rerun()
-                        else:
-                            st.error(f"❌ {result['message']}")
-                else:
-                    st.error("❌ Lütfen tüm alanları doldurunuz!")
-        
-        else:
-            # Azure AD ile etkileşimli giriş
-            st.info("🔐 **Azure AD ile Giriş**\n\n"
-                   "MFA, biometric (Face ID, Windows Hello) ve diğer modern kimlik doğrulama yöntemlerini destekler.\n\n"
-                   "**Bulut Uygulaması Sınırlaması:** Şu anda tarayıcı tabanlı etkileşimli akış cloud ortamda sınırlıdır.\n\n"
-                   "**Alternatif:** Demo kullanıcı ile giriş yapın veya yöneticisi ile iletişim kurun.")
+                                st.error(f"❌ {result['message']}")
+                    else:
+                        st.error("❌ Lütfen tüm alanları doldurunuz!")
             
-            st.warning("⚠️ **Mevcut Çözümler:**\n"
-                      "1. **Şifre ile Giriş** seçeneğini kullanın\n"
-                      "2. Demo kullanıcı: `efirat@yatas.com` / `302619Ge!!`\n"
-                      "3. Yönetici ile iletişim kurun: admin@yatas.com")
+            else:
+                # Azure AD ile tarayıcı aracılığıyla giriş
+                st.info("🔐 **Microsoft Azure AD ile Giriş**\n\n"
+                       "Tarayıcınız Microsoft login sayfasına yönlendirilecektir. "
+                       "Orada giriş yapıp uygulamaya döneceksiniz.\n\n"
+                       "MFA, Biometric (Face ID, Windows Hello) ve tüm Azure AD seçenekleri desteklenir.")
+                
+                # Azure AD login URL'sini oluştur
+                login_url = generate_azure_ad_login_url()
+                
+                if st.button("🌐 Microsoft ile Giriş Yap", use_container_width=True, key="azure_ad_login_btn"):
+                    # JavaScript ile tarayıcı yeniden yönlendir
+                    st.markdown(f"""
+                    <script>
+                        window.location.href = "{login_url}";
+                    </script>
+                    """, unsafe_allow_html=True)
+                    st.info("🔄 Tarayıcınız yönlendiriliyoruz...")
         
         pass
 
