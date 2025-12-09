@@ -748,11 +748,8 @@ def logout():
 
 # GİRİŞ EKRANI
 if not st.session_state.authenticated:
-    st.markdown('<div class="login-wrapper">', unsafe_allow_html=True)
-    
     col1, col2, col3 = st.columns([0.5, 2, 0.5])
     with col2:
-        st.markdown('<div class="login-container">', unsafe_allow_html=True)
         
         # E-posta alanı (kendi label'ımızı kaldırıp Streamlit label'ını kullanıyoruz)
         email = st.text_input(
@@ -798,9 +795,7 @@ if not st.session_state.authenticated:
             else:
                 st.error("❌ Lütfen tüm alanları doldurunuz!")
         
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+        pass
 
 # ANA SAYFA
 else:
