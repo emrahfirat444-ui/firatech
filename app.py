@@ -14,8 +14,9 @@ st.set_page_config(page_title="Yataş Giriş", layout="wide")
 # Load configuration from environment to avoid embedding secrets in code
 SSO_CONFIG = {
     "sso_url": os.getenv("SSO_URL", ""),
-    "client_id": os.getenv("SSO_CLIENT_ID", "yatas_app_2025"),
+    "client_id": os.getenv("SSO_CLIENT_ID", ""),
     "client_secret": os.getenv("SSO_CLIENT_SECRET", ""),
+    "tenant_id": os.getenv("SSO_TENANT_ID", "a9967bb3-3814-4e7f-bee0-428a98fffca7"),
     "redirect_uri": os.getenv("SSO_REDIRECT_URI", "http://localhost:8501")
 }
 
@@ -44,108 +45,43 @@ if DEMO_MODE:
 
 # CSS stilleri
 st.markdown("""
-    <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    /* Hide Streamlit elements */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    .stDeployButton {display: none;}
-    # CSS stilleri - minimal to avoid unintended overlays
-    st.markdown("""
-        <style>
-        /* Hide Streamlit chrome */
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
-        .stDecoration {display: none;}
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Ensure default Streamlit styling for inputs/buttons (no large shadows) */
-        .stApp {background: #f5f5f5 !important;}
-        .stApp .stTextInput input {background: #fff !important; box-shadow: none !important; border-radius: 8px !important;}
-        .stApp .stButton > button {box-shadow: none !important; border-radius: 8px !important;}
+/* Hide Streamlit chrome and decorations */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header { visibility: hidden; }
+.stDecoration, .stDeployButton { display: none !important; }
 
-        /* Keep login area centered but avoid custom cards */
-        [data-testid="stAppViewContainer"] {padding: 20px !important;}
-        </style>
-    """, unsafe_allow_html=True)
-        word-wrap: break-word;
-        line-height: 1.5;
-    }
-    .chat-user {
-        background-color: #667eea;
-        color: white;
-        text-align: right;
-        border-radius: 12px;
-        margin-left: 40px;
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    }
-    .chat-ai {
-        background-color: #f0f0f0;
-        color: #333;
-        border-left: 4px solid #764ba2;
-        margin-right: 40px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .chat-response-title {
-        color: #667eea;
-        font-weight: bold;
-        margin-top: 10px;
-        margin-bottom: 5px;
-    }
-    .chat-response-item {
-        color: #333;
-        margin: 5px 0;
-        padding-left: 10px;
-    }
-    /* Dark theme inputs & buttons */
-    .stApp input, .stApp textarea, .stApp select {
-        background: #252631 !important;
-        color: #e6e6e6 !important;
-        border-radius: 10px !important;
-        padding: 10px !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-    }
-    .stApp .stButton>button {
-        background: linear-gradient(90deg,#2b2e3a,#3b3f4d) !important;
-        color: #fff !important;
-        border: 1px solid rgba(255,255,255,0.06) !important;
-        padding: 8px 14px !important;
-        border-radius: 10px !important;
-        box-shadow: none !important;
-    }
-    .stApp .stButton>button:active { transform: translateY(1px); }
-    /* Card like sections */
-    .card-section {
-        background: #0f1113;
-        border: 1px solid rgba(255,255,255,0.03);
-        padding: 18px;
-        border-radius: 12px;
-        margin-bottom: 18px;
-    }
-    .card-title { color: #e6e6e6; font-weight:600; margin-bottom:12px }
-    /* Thumbnails and gallery */
-    .thumb-img { width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,0.04); }
-    .thumb-wrap { padding:6px; background: #0b0c0e; border-radius:10px; }
-    .preview-img { width:100%; max-width:760px; height:auto; border-radius:12px; border:1px solid rgba(255,255,255,0.04); }
-    .small-muted { color: #9aa0a6; font-size:13px }
-    /* Hover overlay and compact grid */
-    .thumb-wrap { position: relative; overflow: hidden; }
-    .thumb-wrap img.thumb-img { transition: transform 0.25s ease, filter 0.25s ease; display:block; }
-    .thumb-wrap:hover img.thumb-img { transform: scale(1.06); filter: brightness(0.94); }
-    .thumb-overlay { position: absolute; left:0; right:0; bottom:0; padding:10px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); color: #fff; display:flex; justify-content:space-between; align-items:center; opacity:0; transition: opacity 0.2s ease; }
-    .thumb-wrap:hover .thumb-overlay { opacity:1; }
-    .overlay-title { font-size:13px; font-weight:600; }
-    .overlay-price { font-size:13px; color:#ffd28a; font-weight:700 }
-    /* compact grid helpers */
-    .gallery-row { display:flex; gap:12px; }
-    .gallery-cell { flex:1 1 0; min-width:140px; }
-    .gallery-container { position: relative; }
-    .gallery-overlay { position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); display:flex; justify-content:space-between; pointer-events:none; }
-    .gallery-overlay button { pointer-events:auto; background: rgba(0,0,0,0.5); color:#fff; border: none; padding:8px 10px; border-radius:8px; margin:0 6px; font-weight:700 }
-    .gallery-overlay button:hover { background: rgba(0,0,0,0.7); transform: scale(1.03); }
-    </style>
+/* Minimal app background and input/button styling to avoid large floating boxes */
+.stApp { background: #f5f5f5 !important; }
+.stApp .stTextInput input, .stApp input, .stApp textarea, .stApp select {
+    background: #fff !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(0,0,0,0.06) !important;
+}
+.stApp .stButton>button { box-shadow: none !important; border-radius: 8px !important; }
+
+/* Keep login area padded and remove custom card shadows */
+[data-testid="stAppViewContainer"] { padding: 20px !important; }
+.login-wrapper, .card-section, .stTextInput, .stButton { box-shadow: none !important; background: transparent !important; }
+
+/* Chat and gallery helpers (kept minimal) */
+.chat-user { background-color: #667eea; color: white; text-align: right; border-radius: 12px; margin-left: 40px; box-shadow: 0 2px 8px rgba(102,126,234,0.3); }
+.chat-ai { background-color: #f0f0f0; color: #333; border-left: 4px solid #764ba2; margin-right: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.card-section { background: #0f1113; border: 1px solid rgba(255,255,255,0.03); padding: 18px; border-radius: 12px; margin-bottom: 18px; }
+.thumb-img { width:100%; height:160px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,0.04); }
+.thumb-wrap { padding:6px; background: #0b0c0e; border-radius:10px; position:relative; overflow:hidden; }
+.thumb-overlay { position:absolute; left:0; right:0; bottom:0; padding:10px; background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%); color:#fff; display:flex; justify-content:space-between; align-items:center; opacity:0; transition: opacity 0.2s ease; }
+.thumb-wrap:hover .thumb-overlay { opacity:1; }
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  [data-testid="stAppViewContainer"] { padding: 12px !important; }
+}
+</style>
 """, unsafe_allow_html=True)
 
 # Session state başlatma
@@ -200,11 +136,11 @@ except Exception:
     pass
 
 def verify_sso_credentials(email: str, password: str) -> dict:
-    """SSO doğrulama - şifre kontrolü ile."""
+    """SSO doğrulama — Azure AD MSAL veya demo fallback ile."""
     import hashlib
+    import msal
     
-    # Demo kullanıcı veritabanı (gerçek ortamda LDAP/AD veya veritabanından gelir)
-    # Şifreler SHA256 hash olarak saklanır
+    # Demo kullanıcı veritabanı (fallback)
     DEMO_USERS = {
         "efirat@yatas.com": {
             "password_hash": hashlib.sha256("302619Ge!!".encode()).hexdigest(),
@@ -232,7 +168,49 @@ def verify_sso_credentials(email: str, password: str) -> dict:
     try:
         email_lower = email.lower()
         
-        # 1) Demo kullanıcı listesinde kontrol et
+        # 1) Gerçek Azure AD SSO — MSAL ile
+        if not DEMO_MODE and SSO_CONFIG.get("client_id") and SSO_CONFIG.get("client_secret"):
+            try:
+                app = msal.PublicClientApplication(
+                    client_id=SSO_CONFIG.get("client_id"),
+                    authority=f"https://login.microsoftonline.com/{SSO_CONFIG.get('tenant_id', 'common')}"
+                )
+                
+                # Resource owner password credential flow (ROPC) — username/password ile token al
+                token_response = app.acquire_token_by_username_password(
+                    username=email,
+                    password=password,
+                    scopes=["https://graph.microsoft.com/.default"]
+                )
+                
+                if "access_token" in token_response:
+                    # Token başarılı — kullanıcı bilgilerini Graph API'den al
+                    headers = {"Authorization": f"Bearer {token_response['access_token']}"}
+                    graph_response = requests.get("https://graph.microsoft.com/v1.0/me", headers=headers, timeout=10)
+                    
+                    if graph_response.status_code == 200:
+                        graph_user = graph_response.json()
+                        return {
+                            "success": True,
+                            "token": token_response.get("access_token"),
+                            "user": {
+                                "id": graph_user.get("id", email.split("@")[0]),
+                                "email": email,
+                                "name": graph_user.get("displayName", email),
+                                "department": graph_user.get("department", ""),
+                                "position": graph_user.get("jobTitle", ""),
+                                "pernr": ""
+                            },
+                            "message": "✅ Azure AD SSO başarılı"
+                        }
+                else:
+                    # Token hatası — hata detayını logla
+                    error = token_response.get("error_description", "Bilinmeyen hata")
+                    st.warning(f"Azure AD hatası: {error}")
+            except Exception as e:
+                st.warning(f"Azure AD bağlantı hatası: {str(e)}")
+        
+        # 2) Demo kullanıcı listesinde kontrol et (fallback)
         if email_lower in DEMO_USERS:
             user_data = DEMO_USERS[email_lower]
             password_hash = hashlib.sha256(password.encode()).hexdigest()
@@ -249,12 +227,12 @@ def verify_sso_credentials(email: str, password: str) -> dict:
                         "position": user_data["position"],
                         "pernr": user_data.get("pernr")
                     },
-                    "message": "Giriş başarılı"
+                    "message": "Demo kullanıcı — giriş başarılı"
                 }
             else:
                 return {"success": False, "message": "Şifre hatalı"}
         
-        # 2) Gerçek SSO endpoint varsa dene (opsiyonel)
+        # 3) Eski REST API fallback (varsa)
         if SSO_CONFIG.get("sso_url") and "https://" in SSO_CONFIG["sso_url"]:
             try:
                 payload = {
