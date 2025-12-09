@@ -747,15 +747,6 @@ if not st.session_state.authenticated:
     with col2:
         st.markdown('<div class="login-container">', unsafe_allow_html=True)
         
-        # Logo ve başlık
-        st.markdown('''
-            <div class="logo-container">
-                <div class="firatech-logo">💼</div>
-                <h1 class="logo-text">FiraTech</h1>
-                <p class="logo-subtitle">HR Portal</p>
-            </div>
-        ''', unsafe_allow_html=True)
-        
         # E-posta alanı
         st.markdown('<label class="form-label">E-Posta</label>', unsafe_allow_html=True)
         email = st.text_input(
