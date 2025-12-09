@@ -57,20 +57,23 @@ st.markdown("""
     .stAppViewContainer {padding: 0 !important;}
     [data-testid="stAppViewContainer"] {padding: 0 !important;}
     
-    /* Responsive Login Container */
+    /* Responsive Login Container - fixed near top to avoid page scrolling */
     .login-wrapper {
+        position: fixed;
+        top: 6vh;
+        left: 0;
+        right: 0;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        min-height: 100vh;
-        height: 100vh;
-        background: #f5f5f5;
-        padding: 20px;
+        min-height: auto;
+        height: auto;
+        background: transparent;
+        padding: 0 12px;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         width: 100vw;
-        overflow: hidden;
-    }
+        z-index: 9999;
     }
     
     .login-container {
@@ -79,7 +82,7 @@ st.markdown("""
         background: white;
         border-radius: 16px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        padding: 40px 30px;
+        padding: 28px 22px;
         animation: slideIn 0.4s ease-out;
     }
     
