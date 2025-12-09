@@ -47,6 +47,13 @@ st.markdown("""
     <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
+    /* Hide Streamlit elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    .stDeployButton {display: none;}
+    .stDecoration {display: none;}
+    
     /* Responsive Login Container */
     .login-wrapper {
         display: flex;
@@ -748,8 +755,6 @@ if not st.session_state.authenticated:
                 <p class="logo-subtitle">HR Portal</p>
             </div>
         ''', unsafe_allow_html=True)
-        
-        st.markdown('<div class="form-title">Giriş Yap</div>', unsafe_allow_html=True)
         
         # E-posta alanı
         st.markdown('<label class="form-label">E-Posta</label>', unsafe_allow_html=True)
