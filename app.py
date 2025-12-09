@@ -51,29 +51,155 @@ if DEMO_MODE:
 # CSS stilleri
 st.markdown("""
     <style>
-    .login-container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 40px;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Responsive Login Container */
+    .login-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
+    .login-container {
+        width: 100%;
+        max-width: 420px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 40px 30px;
+        animation: slideIn 0.4s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
     .logo-container {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     }
-    .logo-text {
-        font-size: 32px;
+    
+    .firatech-logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
         font-weight: bold;
         color: white;
-        margin: 0;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
     }
+    
+    .logo-text {
+        font-size: 28px;
+        font-weight: 700;
+        color: #333;
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+    
+    .logo-subtitle {
+        font-size: 13px;
+        color: #999;
+        font-weight: 500;
+        margin-top: 5px;
+        letter-spacing: 0.5px;
+    }
+    
     .form-title {
-        color: white;
+        color: #333;
         text-align: center;
-        font-size: 24px;
-        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        margin-top: 10px;
+    }
+    
+    /* Form styling */
+    .form-group {
+        margin-bottom: 18px;
+    }
+    
+    .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .stApp .stTextInput input {
+        background: #f5f5f5 !important;
+        color: #333 !important;
+        border: 2px solid #e0e0e0 !important;
+        border-radius: 10px !important;
+        padding: 12px 14px !important;
+        font-size: 14px !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stApp .stTextInput input:focus {
+        background: #ffffff !important;
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+    }
+    
+    /* Button styling */
+    .stApp .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 12px 20px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        width: 100% !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3) !important;
+        margin-top: 8px !important;
+    }
+    
+    .stApp .stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4) !important;
+    }
+    
+    .stApp .stButton > button:active {
+        transform: translateY(0) !important;
+    }
+    
+    /* Mobile responsive */
+    @media (max-width: 480px) {
+        .login-container {
+            padding: 30px 20px;
+            border-radius: 12px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+        }
+        
+        .form-title {
+            font-size: 18px;
+            margin-bottom: 24px;
+        }
+        
+        .firatech-logo {
+            width: 70px;
+            height: 70px;
+            font-size: 36px;
+        }
     }
     .leave-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -614,16 +740,46 @@ def logout():
 
 # GİRİŞ EKRANI
 if not st.session_state.authenticated:
-    col1, col2, col3 = st.columns([1, 2, 1])
+    st.markdown('<div class="login-wrapper">', unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([0.5, 2, 0.5])
     with col2:
-        # Header removed per request - keep login fields only
+        st.markdown('<div class="login-container">', unsafe_allow_html=True)
         
-        email = st.text_input("📧 E-posta", placeholder="user@yatas.com")
-        password = st.text_input("🔐 Şifre", type="password", placeholder="Şifrenizi girin")
+        # Logo ve başlık
+        st.markdown('''
+            <div class="logo-container">
+                <div class="firatech-logo">💼</div>
+                <h1 class="logo-text">FiraTech</h1>
+                <p class="logo-subtitle">HR Portal</p>
+            </div>
+        ''', unsafe_allow_html=True)
         
-        if st.button("🚀 Giriş Yap", use_container_width=True, type="primary"):
+        st.markdown('<div class="form-title">Giriş Yap</div>', unsafe_allow_html=True)
+        
+        # E-posta alanı
+        st.markdown('<label class="form-label">E-Posta</label>', unsafe_allow_html=True)
+        email = st.text_input(
+            "E-posta",
+            placeholder="user@yatas.com",
+            label_visibility="collapsed",
+            key="login_email"
+        )
+        
+        # Şifre alanı
+        st.markdown('<label class="form-label">Şifre</label>', unsafe_allow_html=True)
+        password = st.text_input(
+            "Şifre",
+            type="password",
+            placeholder="Şifrenizi girin",
+            label_visibility="collapsed",
+            key="login_password"
+        )
+        
+        # Giriş butonu
+        if st.button("🚀 Giriş Yap", use_container_width=True, key="login_btn"):
             if email and password:
-                with st.spinner("SSO ile doğrulanıyor..."):
+                with st.spinner("Doğrulanıyor..."):
                     result = verify_sso_credentials(email, password)
                     if result["success"]:
                         # Email'den PERNR bul
@@ -646,6 +802,10 @@ if not st.session_state.authenticated:
                         st.error(f"❌ {result['message']}")
             else:
                 st.error("❌ Lütfen tüm alanları doldurunuz!")
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # ANA SAYFA
 else:
