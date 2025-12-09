@@ -101,12 +101,12 @@ jobs:
 
       - name: Deploy app to Azure Container Instance
         run: |
-          az container delete --resource-group yatas-rg --name yatas-app-container --yes || true
+          az container delete --resource-group yatas-rg --name firatech-app --yes || true
           az container create \
             --resource-group yatas-rg \
-            --name yatas-app-container \
+            --name firatech-app \
             --image ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_APP }}:${{ github.sha }} \
-            --dns-name-label yatas-app \
+            --dns-name-label firatech-app \
             --ports 80 \
             --os-type Linux \
             --cpu 1 \
@@ -135,7 +135,7 @@ jobs:
 
       - name: Output deployment URLs
         run: |
-          echo "App URL: http://yatas-app.northeurope.azurecontainer.io"
+          echo "App URL: http://firatech-app.northeurope.azurecontainer.io"
           echo "Gateway URL: http://yatas-gateway.northeurope.azurecontainer.io"
 
 # Required repository secrets (set these in the GitHub repository Settings → Secrets):
