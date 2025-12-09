@@ -52,184 +52,24 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     .stDeployButton {display: none;}
-    .stDecoration {display: none;}
-    .stApp {background: #f5f5f5 !important;}
-    .stAppViewContainer {padding: 0 !important;}
-    [data-testid="stAppViewContainer"] {padding: 0 !important;}
-    
-    /* Responsive Login Container - simplified and pinned near top */
-    .login-wrapper {
-        position: fixed;
-        top: 20px;
-        left: 0;
-        right: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0 auto;
-        width: 100%;
-        z-index: 9999;
-    }
-    .login-container {
-        width: 100%;
-        max-width: 420px;
-        background: white;
-        border-radius: 16px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        padding: 28px 22px;
-        animation: slideIn 0.4s ease-out;
-    }
-    
-    @keyframes slideIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .logo-container {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    
-    .firatech-logo {
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 40px;
-        font-weight: bold;
-        color: white;
-        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-    }
-    
-    .logo-text {
-        font-size: 28px;
-        font-weight: 700;
-        color: #333;
-        margin: 0;
-        letter-spacing: -0.5px;
-    }
-    
-    .logo-subtitle {
-        font-size: 13px;
-        color: #999;
-        font-weight: 500;
-        margin-top: 5px;
-        letter-spacing: 0.5px;
-    }
-    
-    .form-title {
-        color: #333;
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 30px;
-        margin-top: 10px;
-    }
-    
-    /* Form styling */
-    .form-group {
-        margin-bottom: 18px;
-    }
-    
-    .form-label {
-        display: block;
-        font-size: 13px;
-        font-weight: 600;
-        color: #555;
-        margin-bottom: 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    
-    .stApp .stTextInput input {
-        background: #f5f5f5 !important;
-        color: #333 !important;
-        border: 2px solid #e0e0e0 !important;
-        border-radius: 10px !important;
-        padding: 12px 14px !important;
-        font-size: 14px !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .stApp .stTextInput input:focus {
-        background: #ffffff !important;
-        border-color: #667eea !important;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
-    }
-    
-    /* Button styling */
-    .stApp .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        color: white !important;
-        border: none !important;
-        padding: 12px 20px !important;
-        font-size: 15px !important;
-        font-weight: 600 !important;
-        border-radius: 10px !important;
-        width: 100% !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3) !important;
-        margin-top: 8px !important;
-    }
-    
-    .stApp .stButton > button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4) !important;
-    }
-    
-    .stApp .stButton > button:active {
-        transform: translateY(0) !important;
-    }
-    
-    /* Mobile responsive */
-    @media (max-width: 480px) {
-        .login-container {
-            padding: 30px 20px;
-            border-radius: 12px;
-        }
-        
-        .logo-text {
-            font-size: 24px;
-        }
-        
-        .form-title {
-            font-size: 18px;
-            margin-bottom: 24px;
-        }
-        
-        .firatech-logo {
-            width: 70px;
-            height: 70px;
-            font-size: 36px;
-        }
-    }
-    .leave-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 30px;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    .leave-number {
-        font-size: 48px;
-        font-weight: bold;
-        margin: 20px 0;
-    }
-    .leave-label {
-        font-size: 18px;
-        opacity: 0.9;
-    }
-    .chat-message {
-        padding: 15px 20px;
-        border-radius: 12px;
-        margin: 10px 0;
+    # CSS stilleri - minimal to avoid unintended overlays
+    st.markdown("""
+        <style>
+        /* Hide Streamlit chrome */
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+        .stDecoration {display: none;}
+
+        /* Ensure default Streamlit styling for inputs/buttons (no large shadows) */
+        .stApp {background: #f5f5f5 !important;}
+        .stApp .stTextInput input {background: #fff !important; box-shadow: none !important; border-radius: 8px !important;}
+        .stApp .stButton > button {box-shadow: none !important; border-radius: 8px !important;}
+
+        /* Keep login area centered but avoid custom cards */
+        [data-testid="stAppViewContainer"] {padding: 20px !important;}
+        </style>
+    """, unsafe_allow_html=True)
         word-wrap: break-word;
         line-height: 1.5;
     }
