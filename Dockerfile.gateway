@@ -1,0 +1,20 @@
+FROM python:3.8-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /gateway
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /gateway/requirements.txt
+RUN pip install --upgrade pip setuptools wheel
+RUN pip install -r /gateway/requirements.txt
+
+COPY sap_gateway.py /gateway/sap_gateway.py
+
+EXPOSE 5000
+
+CMD ["python", "sap_gateway.py"]

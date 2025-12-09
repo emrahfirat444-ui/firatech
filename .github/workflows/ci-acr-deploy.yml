@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: firatech_streamlit_app
+  IMAGE_NAME_APP: firatech_streamlit_app
+  IMAGE_NAME_GATEWAY: firatech_gateway
 
 jobs:
   build-and-deploy:
@@ -67,7 +68,7 @@ jobs:
         run: |
           az acr login --name "$ACR_NAME"
 
-      - name: Build and push image to ACR
+      - name: Build and push app image to ACR
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -75,14 +76,67 @@ jobs:
           push: true
           platforms: linux/amd64
           tags: |
-            ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_APP }}:${{ github.sha }}
+            ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_APP }}:latest
 
-      - name: Deploy container image to Azure Web App
-        uses: azure/webapps-deploy@v3
+      - name: Build and push gateway image to ACR
+        uses: docker/build-push-action@v4
         with:
-          app-name: ${{ secrets.APP_NAME }}
-          images: ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          context: .
+          file: Dockerfile.gateway
+          push: true
+          platforms: linux/amd64
+          tags: |
+            ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_GATEWAY }}:${{ github.sha }}
+            ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_GATEWAY }}:latest
+
+      - name: Get ACR credentials
+        id: acr-creds
+        run: |
+          ACR_USERNAME=$(az acr credential show --name ${{ secrets.ACR_NAME }} --query username -o tsv)
+          ACR_PASSWORD=$(az acr credential show --name ${{ secrets.ACR_NAME }} --query "passwords[0].value" -o tsv)
+          echo "::add-mask::$ACR_PASSWORD"
+          echo "username=$ACR_USERNAME" >> $GITHUB_OUTPUT
+          echo "password=$ACR_PASSWORD" >> $GITHUB_OUTPUT
+
+      - name: Deploy app to Azure Container Instance
+        run: |
+          az container delete --resource-group yatas-rg --name yatas-app-container --yes || true
+          az container create \
+            --resource-group yatas-rg \
+            --name yatas-app-container \
+            --image ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_APP }}:${{ github.sha }} \
+            --dns-name-label yatas-app \
+            --ports 80 \
+            --os-type Linux \
+            --cpu 1 \
+            --memory 1.5 \
+            --registry-login-server ${{ secrets.ACR_LOGIN_SERVER }} \
+            --registry-username ${{ steps.acr-creds.outputs.username }} \
+            --registry-password ${{ steps.acr-creds.outputs.password }} \
+            --environment-variables SAP_GATEWAY_DEMO=0 PORT=80 SAP_API_BASE_URL=http://yatas-gateway.northeurope.azurecontainer.io/api
+
+      - name: Deploy gateway to Azure Container Instance
+        run: |
+          az container delete --resource-group yatas-rg --name yatas-gateway-container --yes || true
+          az container create \
+            --resource-group yatas-rg \
+            --name yatas-gateway-container \
+            --image ${{ secrets.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME_GATEWAY }}:${{ github.sha }} \
+            --dns-name-label yatas-gateway \
+            --ports 5000 \
+            --os-type Linux \
+            --cpu 0.5 \
+            --memory 0.5 \
+            --registry-login-server ${{ secrets.ACR_LOGIN_SERVER }} \
+            --registry-username ${{ steps.acr-creds.outputs.username }} \
+            --registry-password ${{ steps.acr-creds.outputs.password }} \
+            --environment-variables PORT=5000
+
+      - name: Output deployment URLs
+        run: |
+          echo "App URL: http://yatas-app.northeurope.azurecontainer.io"
+          echo "Gateway URL: http://yatas-gateway.northeurope.azurecontainer.io"
 
 # Required repository secrets (set these in the GitHub repository Settings → Secrets):
 # - AZURE_CREDENTIALS : JSON output from `az ad sp create-for-rbac --name "gitHubActionSp" --sdk-auth`

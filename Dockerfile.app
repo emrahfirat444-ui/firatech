@@ -3,8 +3,9 @@ FROM python:3.8-slim
 ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1
 
-# Force demo mode in container so external connections are disabled by default
-ENV SAP_GATEWAY_DEMO=1
+# Control demo mode via build-arg so CI or runtime can override it
+ARG SAP_GATEWAY_DEMO=1
+ENV SAP_GATEWAY_DEMO=${SAP_GATEWAY_DEMO}
 
 WORKDIR /app
 
