@@ -192,8 +192,8 @@ if "gallery_state" not in st.session_state:
 
 # Quick test helper: if URL has ?test=1, prefill demo login and a test chat message
 try:
-    params = st.experimental_get_query_params()
-    if params.get("test") and params.get("test")[0] == "1":
+    params = st.query_params
+    if params.get("test") == "1":
         if not st.session_state.get("authenticated"):
             # create demo user and auto-login
             demo_email = "test@yatas.com"
@@ -755,7 +755,7 @@ else:
                                             }
                                             st.session_state.b2c_order_items.append(item)
                                             st.success("Kalem sepete eklendi")
-                                            st.experimental_rerun()
+                                            st.rerun()
                             else:
                                 # single image
                                 try:
@@ -1228,7 +1228,7 @@ else:
                 }
                 st.session_state.b2c_order_items.append(item)
                 st.success("Kalem eklendi")
-                st.experimental_rerun()
+                st.rerun()
 
         # Items table and totals
         st.write("---")
@@ -1270,12 +1270,12 @@ else:
                             if st.button("Sil", key=f"del_item_{it['id']}"):
                                 # remove specific item
                                 st.session_state.b2c_order_items = [x for x in st.session_state.b2c_order_items if x['id'] != it['id']]
-                                st.experimental_rerun()
+                                st.rerun()
 
             # allow removing last item
             if st.button("Son Kalemi Kaldır", help="Son eklenen kalemi sil"):
                 st.session_state.b2c_order_items.pop()
-                st.experimental_rerun()
+                st.rerun()
 
             if st.button("Siparişi Kaydet", key="save_order"):
                 order_id = f"B2C-{datetime.now().strftime('%Y%m%d')}-{str(uuid.uuid4())[:6]}"
