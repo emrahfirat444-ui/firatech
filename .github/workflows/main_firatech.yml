@@ -4,11 +4,13 @@
 
 name: Build and deploy Python app to Azure Web App - firatech
 
+# DISABLED: This workflow is replaced by ci-acr-deploy.yml (Container Instance deployment)
+# Re-enable this after Azure quota increase approval for App Service
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_dispatch:  # Manual trigger only
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   build:
