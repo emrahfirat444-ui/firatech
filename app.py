@@ -36,12 +36,6 @@ SAP_API_CONFIG = {
 }
 
 # Demo mode flag - if set, short-circuit all external calls and use demo data
-"""
-Demo mode: when True the app short-circuits SSO, SAP and external B2C scrapes
-and uses deterministic demo data so the app can run without any external
-connections. Default is True for published demo builds; set env var
-`SAP_GATEWAY_DEMO=0` or `false` to disable demo mode.
-"""
 DEMO_MODE = os.getenv("SAP_GATEWAY_DEMO", "1").lower() in ("1", "true", "yes")
 if DEMO_MODE:
     # Clear any external endpoints to avoid accidental network calls
