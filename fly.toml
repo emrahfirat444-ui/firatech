@@ -1,5 +1,0 @@
-app = "my-yatas-app"
-
-# If you need to specify a port for the builder, uncomment and set:
-# [env]
-# PORT = 8501

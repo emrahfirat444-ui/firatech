@@ -1,6 +1,0 @@
-{
-  "redirectUri": "http://firatech-app.northeurope.azurecontainer.io/auth/callback",
-  "clientSecret": "<REDACTED>",
-  "clientId": "86bb3e9b-d544-4a06-b7c8-302eb3209226",
-  "tenantId": "a9967bb3-3814-4e7f-bee0-428a98fffca7"
-}
