@@ -1,1 +1,0 @@
-{"url": "https://apigw.trendyol.com/discovery-sfint-browsing-service/api/top-rankings/top-ranking-contents?rankingType=bestSeller&webGenderId=1&page=6&pageSize=20&categoryId=27&channelId=1&storefrontId=1&language=tr&countryCode=TR", "json": {"isSuccess": false, "message": "requested page does not exist"}}
