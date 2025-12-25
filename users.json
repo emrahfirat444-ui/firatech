@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": "user_001",
+      "email": "efirat@yatas.com",
+      "name": "Emrah Fırat",
+      "password_hash": "1b3ab8fd0a564826cd1c3812797d7ac67a4ae160a7e01c0f9bd14ead83d8a90b",
+      "department": "IT",
+      "position": "Yazılım Uzmanı",
+      "role": "admin",
+      "permissions": [
+        "read",
+        "write",
+        "delete",
+        "admin"
+      ],
+      "pernr": "00012345",
+      "is_active": true,
+      "created_at": "2025-12-09T00:00:00Z",
+      "last_login": "2025-12-25T06:50:33.739635Z",
+      "password_reset_token": null,
+      "password_reset_expires": null
+    },
+    {
+      "id": "user_002",
+      "email": "demo@yatas.com",
+      "name": "Demo Kullanıcı",
+      "password_hash": "d3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791",
+      "department": "IT",
+      "position": "Test Uzmanı",
+      "role": "user",
+      "permissions": [
+        "read",
+        "write"
+      ],
+      "pernr": "00099999",
+      "is_active": true,
+      "created_at": "2025-12-09T00:00:00Z",
+      "last_login": null,
+      "password_reset_token": null,
+      "password_reset_expires": null
+    },
+    {
+      "id": "user_003",
+      "email": "admin@yatas.com",
+      "name": "Admin Kullanıcı",
+      "password_hash": "0e89f223e226ae63268cf39152ab75722e811b89d29efb22a852f1667bd22ae0",
+      "department": "Bilgi Teknolojileri",
+      "position": "Sistem Yöneticisi",
+      "role": "admin",
+      "permissions": [
+        "read",
+        "write",
+        "delete",
+        "admin"
+      ],
+      "pernr": "00000001",
+      "is_active": true,
+      "created_at": "2025-12-09T00:00:00Z",
+      "last_login": null,
+      "password_reset_token": null,
+      "password_reset_expires": null
+    },
+    {
+      "id": "user_004",
+      "email": "emrahfirat444@gmail.com",
+      "name": "Emrah Fırat",
+      "password_hash": "56826c8e0b0502b4fce6ca23feea880aedd37455864bd09a7a443d86ddc0daeb",
+      "department": "",
+      "position": "",
+      "role": "user",
+      "permissions": [
+        "read",
+        "write"
+      ],
+      "pernr": "",
+      "is_active": true,
+      "created_at": "2025-12-10T00:00:00Z",
+      "last_login": "2025-12-23T11:41:37.394829Z",
+      "password_reset_token": null,
+      "password_reset_expires": null
+    }
+  ]
+}

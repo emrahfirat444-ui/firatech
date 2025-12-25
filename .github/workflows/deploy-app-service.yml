@@ -6,9 +6,14 @@ on:
 env:
   IMAGE_NAME_APP: firatech_streamlit_app
   IMAGE_NAME_GATEWAY: firatech_gateway
+  # Safety defaults: set STOP_COSTS=1 to prevent accidental deploys unless explicitly allowed
+  STOP_COSTS: ${{ secrets.STOP_COSTS || '1' }}
+  ALLOW_DEPLOY: ${{ secrets.ALLOW_DEPLOY || '0' }}
 
 jobs:
   deploy-to-app-service:
+    # Job will be skipped unless STOP_COSTS != '1' and ALLOW_DEPLOY == '1'
+    if: ${{ env.STOP_COSTS != '1' && env.ALLOW_DEPLOY == '1' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read

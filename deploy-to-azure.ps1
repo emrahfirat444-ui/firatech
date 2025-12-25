@@ -23,6 +23,18 @@ param(
     [Parameter(Mandatory=$false)][string]$ImageTag = "latest"
 )
 
+# Safety: respect STOP_COSTS to avoid accidental cloud costs
+if ($env:STOP_COSTS -eq "1") {
+  Write-Host "STOP_COSTS=1 - Aborting deploy-to-azure.ps1 to avoid incurring cloud costs."
+  exit 0
+}
+
+# Require explicit allow to deploy (prevents accidental runs)
+if ($env:ALLOW_DEPLOY -ne "1") {
+  Write-Host "ALLOW_DEPLOY is not set to 1. Set environment variable ALLOW_DEPLOY=1 to permit deployment. Aborting."
+  exit 0
+}
+
 Write-Host "Setting subscription to $SubscriptionId"
 az account set --subscription $SubscriptionId
 

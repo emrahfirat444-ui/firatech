@@ -7,3 +7,5 @@ lxml==4.9.3
 pandas==2.0.3
 matplotlib==3.7.2
 msal==1.28.0
+azure-data-tables==12.4.0
+APScheduler==3.10.4

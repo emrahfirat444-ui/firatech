@@ -150,3 +150,19 @@ Notes:
 - You must run `az login` interactively or have appropriate Azure CLI auth configured.
 - The script sets `SAP_GATEWAY_DEMO=1` on the deployed App by default (safe demo). Change via App Settings in portal to connect to real gateway.
 - If you want me to run these steps directly, provide credentialed access details (not recommended publicly). Instead run the script locally and share outputs if you want me to finish remote configuration.
+
+**SAP_API_BASE_URL** değerini aşağıdaki gibi güncelleyin:
+```
+http://20.105.96.139  (IP adresi ile)
+veya
+http://firatech-app.northeurope.azurecontainer.io (DNS ile)
+```
+
+{
+  "clientId": "86bb3e9b-d544-4a06-b7c8-302eb3209226",
+  "clientSecret": "vxi8Q~MONEkczNliCNysdXewMUY-Gv~5Cl-45bXL",
+  "tenantId": "a9967bb3-3814-4e7f-bee0-428a98fffca7",
+  "redirectUri": "http://firatech-app.northeurope.azurecontainer.io/auth/callback"
+}
+
+https://portal.azure.com/#view/Microsoft_AAD_IAM/UsersManagementMenuBlade/~/AllUsers

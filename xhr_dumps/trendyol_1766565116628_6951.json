@@ -1,0 +1,1 @@
+{"url": "https://apigw.trendyol.com/discovery-sfint-checkout-service/api/sidebar-basket/basket/item/count?channelId=1&storefrontId=1&language=tr&countryCode=TR", "json": {"isSuccess": true, "data": {"itemCount": 0, "selectedItemCount": 0}}}
