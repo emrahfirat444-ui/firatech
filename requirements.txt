@@ -3,7 +3,8 @@ requests==2.31.0
 python-dotenv==1.0.0
 flask==3.0.0
 beautifulsoup4==4.12.2
-lxml==4.9.3
+# Removed `lxml` — using BeautifulSoup's built-in `html.parser` to avoid system
+# libxml2/libxslt build requirements on Streamlit Community Cloud.
 pandas==2.0.3
 matplotlib==3.7.2
 msal==1.28.0

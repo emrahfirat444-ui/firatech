@@ -829,7 +829,7 @@ def search_products_detailed(query: str, max_results: int = 8) -> list:
             r = requests.get(url, timeout=8, headers=headers)
             if r.status_code != 200:
                 continue
-            soup = BeautifulSoup(r.text, "lxml")
+            soup = BeautifulSoup(r.text, "html.parser")
 
             # Try common product card selectors
             product_selectors = [
