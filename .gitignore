@@ -1,0 +1,16 @@
+venv/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+app_debug.log
+.env
+secrets.toml
+users.secret.json
