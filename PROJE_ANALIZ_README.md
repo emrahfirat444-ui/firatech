@@ -163,3 +163,12 @@ No products found
 ## İletişim
 
 Sorularınız için: emrahfirat@yatas.com
+
+{
+  "id": "local_test_user",
+  "email": "test@yatas.com",
+  "name": "Test Kullanıcı",
+  "department": "IT",
+  "position": "Uzman",
+  "personnel_number": "00001234"
+}

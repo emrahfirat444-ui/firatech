@@ -584,12 +584,29 @@ def reset_password(reset_token: str, email: str, new_password: str) -> bool:
     logger.debug("reset_password: save_users returned %s", save_result)
     return save_result
 
-def verify_sso_credentials(email: str, password: str = None) -> dict:
-    """SSO doğrulama — users.json'dan kontrol et."""
+def verify_sso_credentials(identifier: str, password: str = None) -> dict:
+    """SSO doğrulama — users.json'dan kontrol et.
+    `identifier` e-posta veya kullanıcı id/name olabilir. Eğer '@' içeriyorsa e-posta
+    olarak kabul edilir; değilse önce `id` sonra `name` ile eşleştirme denenir.
+    """
     import msal
-    
-    # Kullanıcıyı dosyadan bul
-    user = find_user_by_email(email)
+
+    # Resolve identifier to a user record
+    user = None
+    try:
+        if isinstance(identifier, str) and "@" in identifier:
+            user = find_user_by_email(identifier)
+        else:
+            users_data = load_users()
+            for u in users_data.get("users", []):
+                if u.get("id") == identifier or (isinstance(u.get("name"), str) and u.get("name").lower() == str(identifier).lower()):
+                    user = u
+                    break
+            # fallback: try matching as email
+            if user is None:
+                user = find_user_by_email(identifier)
+    except Exception:
+        user = None
     if not user:
         return {"success": False, "message": "Kullanıcı bulunamadı"}
     
@@ -608,8 +625,9 @@ def verify_sso_credentials(email: str, password: str = None) -> dict:
     try:
         # Son login zamanını güncelle
         users_data = load_users()
+        user_email = (user.get("email") or "")
         for u in users_data.get("users", []):
-            if u.get("email", "").lower() == email.lower():
+            if u.get("email", "").lower() == user_email.lower():
                 u["last_login"] = datetime.utcnow().isoformat() + "Z"
                 break
         save_users(users_data)
@@ -1252,53 +1270,54 @@ if not st.session_state.authenticated:
         col1, col2, col3 = st.columns([0.5, 2, 0.5])
         with col2:
             
-            # Sadece şifre ile giriş
-            st.write("**Giriş Yöntemi:** Şifre ile")
-            email = st.text_input(
-                "E-POSTA",
-                placeholder="user@yatas.com",
-                label_visibility="visible",
-                key="login_email"
-            )
-            
-            password = st.text_input(
-                "ŞİFRE",
-                type="password",
-                placeholder="Şifrenizi girin",
-                label_visibility="visible",
-                key="login_password"
-            )
+            # Use a Streamlit form for the login inputs to avoid accidental UI overlay issues
+            st.write("**Giriş Yöntemi:** Kullanıcı adı veya E-posta + Şifre")
+            with st.form(key="login_form"):
+                identifier = st.text_input(
+                    "Kullanıcı adı veya E-POSTA",
+                    placeholder="kullanici_adi veya user@yatas.com",
+                    label_visibility="visible",
+                    key="login_identifier"
+                )
+                password = st.text_input(
+                    "ŞİFRE",
+                    type="password",
+                    placeholder="Şifrenizi girin",
+                    label_visibility="visible",
+                    key="login_password"
+                )
 
-            if ENABLE_PASSWORD_RESET:
-                if st.button("🔑 Şifremi Unuttum", use_container_width=True, key="btn_forgot"):
-                    logger.debug("Forgot-password button clicked; email=%s", email)
-                    if email:
-                        with st.spinner("E-posta gönderiliyor..."):
-                            logger.debug("Calling request_password_reset for %s", email)
-                            try:
-                                ok = request_password_reset(email)
-                            except Exception as e:
-                                logger.exception("request_password_reset raised: %s", str(e))
-                                ok = False
-                            logger.debug("request_password_reset returned %s for %s", ok, email)
-                            if ok:
-                                st.success("Şifre sıfırlama bağlantısı e-posta olarak gönderildi (SMTP yoksa konsola yazılır).")
-                            else:
-                                st.error("Kullanıcı bulunamadı veya e-posta gönderilemedi.")
+                forgot = st.form_submit_button("🔑 Şifremi Unuttum")
+                submit = st.form_submit_button("🚀 Şifre ile Giriş Yap")
+
+                # Handle form actions after submission
+                if forgot:
+                    if ENABLE_PASSWORD_RESET:
+                        if identifier and "@" in identifier:
+                            with st.spinner("E-posta gönderiliyor..."):
+                                try:
+                                    ok = request_password_reset(identifier)
+                                except Exception as e:
+                                    logger.exception("request_password_reset raised: %s", str(e))
+                                    ok = False
+                                if ok:
+                                    st.success("Şifre sıfırlama bağlantısı e-posta olarak gönderildi (SMTP yoksa konsola yazılır).")
+                                else:
+                                    st.error("Kullanıcı bulunamadı veya e-posta gönderilemedi.")
+                        else:
+                            st.error("Lütfen e-posta adresinizi girin (örn. user@yatas.com)")
                     else:
-                        logger.debug("Forgot-password clicked without email")
-                        st.error("Lütfen e-posta giriniz")
-            else:
-                st.info("Şifre sıfırlama şu anda devre dışı bırakılmıştır.")
-            
-            if st.button("🚀 Şifre ile Giriş Yap", use_container_width=True, key="login_btn"):
-                if email and password:
-                    with st.spinner("Doğrulanıyor..."):
-                        result = verify_sso_credentials(email, password)
+                        st.info("Şifre sıfırlama şu anda devre dışı bırakılmıştır.")
+
+                if submit:
+                    identifier_val = identifier.strip() if identifier and identifier.strip() else ""
+                    if identifier_val and password:
+                        with st.spinner("Doğrulanıyor..."):
+                            result = verify_sso_credentials(identifier_val, password)
                         if result["success"]:
-                            # Email'den PERNR bul
-                            pernr_result = get_pernr_from_email(email)
-                            
+                            # Email'den PERNR bul (kullanıcı bilgisi doğrulanmış result içinden al)
+                            pernr_result = get_pernr_from_email(result.get("user", {}).get("email", ""))
+
                             if pernr_result["success"]:
                                 personnel_number = pernr_result["pernr"]
                                 st.session_state.user_data = result["user"]
@@ -1505,57 +1524,59 @@ else:
                         st.markdown(overlay_html, unsafe_allow_html=True)
 
                         cols = st.columns(len(page_imgs))
-                for i, u in enumerate(page_imgs):
-                    col = cols[i]
-                    with col:
-                        # u may be a dict with keys image, price, code, title or a plain url
-                        if isinstance(u, dict):
-                            img_url = u.get('image')
-                            price = u.get('price', 0.0) or 0.0
-                            code = u.get('code', '') or ''
-                            title = u.get('title', '') or ''
-                        else:
-                            img_url = u
-                            price = 0.0
-                            code = ''
-                            title = ''
-                        try:
-                            # determine global index
-                            global_index = start + i
-                            sel = gs.get('selected', 0)
-                            # add selected highlight class if selected
-                            highlight_style = "border:2px solid #ffd28a; box-shadow:0 4px 18px rgba(0,0,0,0.6);" if global_index == sel else ""
-                            title_html = (f"<div class='overlay-title'>{title}</div>") if title else ""
-                            price_html = (f"<div class='overlay-price'>{price:.2f} TL</div>") if price and price > 0 else ""
-                            img_html = (
-                                f"<div class='thumb-wrap' style='{highlight_style}'>"
-                                f"<img class='thumb-img' src='{img_url}'/>"
-                                f"<div class='thumb-overlay'>{title_html}<div style='flex:1'></div>{price_html}</div>"
-                                f"</div>"
-                            )
-                            st.markdown(img_html, unsafe_allow_html=True)
-                        except Exception:
-                            st.write("(Görsel yüklenemedi)")
-                        # preview and add buttons
-                        key_preview = f"gal_preview_{start+i}_{abs(hash(str(img_url)))}"
-                        key_add = f"gal_add_{start+i}_{abs(hash(str(img_url)))}"
-                        if st.button("🔍 Önizle", key=key_preview):
-                            st.session_state.gallery_state['preview'] = u
-                            st.rerun()
-                        if st.button("➕ Sepete Ekle", key=key_add):
-                            if "b2c_order_items" not in st.session_state:
-                                st.session_state.b2c_order_items = []
-                            item = {
-                                "id": str(uuid.uuid4())[:8],
-                                "code": code or "IMG",
-                                "desc": title or "Seçilen Ürün (galeri)",
-                                "qty": 1.0,
-                                "unit_price": float(price) if price else 0.0,
-                                "total": round((float(price) if price else 0.0) * 1.0, 2),
-                                "image_url": img_url
-                            }
-                            st.session_state.b2c_order_items.append(item)
-                            st.success("Kalem sepete eklendi")
+                # Only iterate if page_imgs is defined and non-empty
+                if 'page_imgs' in locals() and page_imgs:
+                    for i, u in enumerate(page_imgs):
+                        col = cols[i]
+                        with col:
+                            # u may be a dict with keys image, price, code, title or a plain url
+                            if isinstance(u, dict):
+                                img_url = u.get('image')
+                                price = u.get('price', 0.0) or 0.0
+                                code = u.get('code', '') or ''
+                                title = u.get('title', '') or ''
+                            else:
+                                img_url = u
+                                price = 0.0
+                                code = ''
+                                title = ''
+                            try:
+                                # determine global index
+                                global_index = start + i
+                                sel = gs.get('selected', 0)
+                                # add selected highlight class if selected
+                                highlight_style = "border:2px solid #ffd28a; box-shadow:0 4px 18px rgba(0,0,0,0.6);" if global_index == sel else ""
+                                title_html = (f"<div class='overlay-title'>{title}</div>") if title else ""
+                                price_html = (f"<div class='overlay-price'>{price:.2f} TL</div>") if price and price > 0 else ""
+                                img_html = (
+                                    f"<div class='thumb-wrap' style='{highlight_style}'>"
+                                    f"<img class='thumb-img' src='{img_url}'/>"
+                                    f"<div class='thumb-overlay'>{title_html}<div style='flex:1'></div>{price_html}</div>"
+                                    f"</div>"
+                                )
+                                st.markdown(img_html, unsafe_allow_html=True)
+                            except Exception:
+                                st.write("(Görsel yüklenemedi)")
+                            # preview and add buttons
+                            key_preview = f"gal_preview_{start+i}_{abs(hash(str(img_url)))}"
+                            key_add = f"gal_add_{start+i}_{abs(hash(str(img_url)))}"
+                            if st.button("🔍 Önizle", key=key_preview):
+                                st.session_state.gallery_state['preview'] = u
+                                st.rerun()
+                            if st.button("➕ Sepete Ekle", key=key_add):
+                                if "b2c_order_items" not in st.session_state:
+                                    st.session_state.b2c_order_items = []
+                                item = {
+                                    "id": str(uuid.uuid4())[:8],
+                                    "code": code or "IMG",
+                                    "desc": title or "Seçilen Ürün (galeri)",
+                                    "qty": 1.0,
+                                    "unit_price": float(price) if price else 0.0,
+                                    "total": round((float(price) if price else 0.0) * 1.0, 2),
+                                    "image_url": img_url
+                                }
+                                st.session_state.b2c_order_items.append(item)
+                                st.success("Kalem sepete eklendi")
                             st.rerun()
 
                     # preview modal / large preview

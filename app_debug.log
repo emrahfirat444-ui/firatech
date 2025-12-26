@@ -1,0 +1,125 @@
+2025-12-25 16:50:19,505 DEBUG Starting app.py
+2025-12-25 16:50:19,505 DEBUG Initial session_state keys: []
+2025-12-25 16:50:19,505 DEBUG Initial query_params: {}
+2025-12-25 16:50:19,505 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:50:29,125 DEBUG Starting app.py
+2025-12-25 16:50:29,126 DEBUG Initial session_state keys: ['authenticated', 'token', 'login_email', 'gallery_state', 'login_btn', 'user_data', 'page', 'login_password', 'leave_data', 'chat_history']
+2025-12-25 16:50:29,127 DEBUG Initial query_params: {}
+2025-12-25 16:50:29,127 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:50:31,458 DEBUG Starting app.py
+2025-12-25 16:50:31,460 DEBUG Initial session_state keys: ['authenticated', 'token', 'login_email', 'gallery_state', 'login_btn', 'user_data', 'page', 'login_password', 'leave_data', 'chat_history']
+2025-12-25 16:50:31,460 DEBUG Initial query_params: {}
+2025-12-25 16:50:31,460 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:50:32,047 DEBUG Starting app.py
+2025-12-25 16:50:32,048 DEBUG Initial session_state keys: ['authenticated', 'token', 'login_email', 'gallery_state', 'login_btn', 'user_data', 'page', 'login_password', 'leave_data', 'chat_history']
+2025-12-25 16:50:32,048 DEBUG Initial query_params: {}
+2025-12-25 16:50:32,048 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:57:06,580 DEBUG Starting app.py
+2025-12-25 16:57:06,581 DEBUG Initial session_state keys: []
+2025-12-25 16:57:06,581 DEBUG Initial query_params: {}
+2025-12-25 16:57:06,581 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:57:09,840 DEBUG Starting app.py
+2025-12-25 16:57:09,841 DEBUG Initial session_state keys: ['authenticated', 'token', 'login_email', 'gallery_state', 'login_btn', 'user_data', 'page', 'login_password', 'leave_data', 'chat_history']
+2025-12-25 16:57:09,841 DEBUG Initial query_params: {}
+2025-12-25 16:57:09,841 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:57:12,374 DEBUG Starting app.py
+2025-12-25 16:57:12,375 DEBUG Initial session_state keys: ['authenticated', 'token', 'login_email', 'gallery_state', 'login_btn', 'user_data', 'page', 'login_password', 'leave_data', 'chat_history']
+2025-12-25 16:57:12,375 DEBUG Initial query_params: {}
+2025-12-25 16:57:12,375 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:57:12,484 DEBUG Starting app.py
+2025-12-25 16:57:12,494 DEBUG Initial session_state keys: ['authenticated', 'token', 'login_email', 'gallery_state', 'login_btn', 'user_data', 'page', 'login_password', 'leave_data', 'chat_history']
+2025-12-25 16:57:12,494 DEBUG Initial query_params: {}
+2025-12-25 16:57:12,494 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:57:20,983 DEBUG Starting app.py
+2025-12-25 16:57:20,985 DEBUG Initial session_state keys: []
+2025-12-25 16:57:20,985 DEBUG Initial query_params: {}
+2025-12-25 16:57:20,985 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:58:52,615 DEBUG Starting app.py
+2025-12-25 16:58:52,616 DEBUG Initial session_state keys: []
+2025-12-25 16:58:52,617 DEBUG Initial query_params: {'test': '1'}
+2025-12-25 16:58:52,617 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:58:56,355 DEBUG Starting app.py
+2025-12-25 16:58:56,355 DEBUG Initial session_state keys: ['authenticated', 'token', 'gallery_state', 'user_data', 'page', 'leave_data', 'back_btn', 'chat_history']
+2025-12-25 16:58:56,355 DEBUG Initial query_params: {'test': '1'}
+2025-12-25 16:58:56,355 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-25 16:58:56,431 DEBUG Starting app.py
+2025-12-25 16:58:56,432 DEBUG Initial session_state keys: ['authenticated', 'token', 'gallery_state', 'user_data', 'page', 'leave_data', 'chat_history']
+2025-12-25 16:58:56,433 DEBUG Initial query_params: {'test': '1'}
+2025-12-25 16:58:56,433 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:15:24,002 DEBUG Starting app.py
+2025-12-26 12:15:24,002 DEBUG Initial session_state keys: []
+2025-12-26 12:15:24,002 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:15:24,006 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:15:28,974 DEBUG Starting app.py
+2025-12-26 12:15:29,096 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:15:29,096 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:15:29,204 DEBUG Starting app.py
+2025-12-26 12:15:29,207 DEBUG Initial session_state keys: ['token', 'back_btn', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'page']
+2025-12-26 12:15:29,207 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:15:29,208 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:15:59,624 DEBUG Starting app.py
+2025-12-26 12:15:59,624 DEBUG Initial session_state keys: ['token', 'btn_proje_analiz', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'btn_assistant', 'btn_b2c', 'page', 'btn_dashboard', 'btn_organization']
+2025-12-26 12:15:59,624 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:15:59,624 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:15:59,735 DEBUG Starting app.py
+2025-12-26 12:15:59,735 DEBUG Initial session_state keys: ['token', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'page']
+2025-12-26 12:15:59,741 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:15:59,741 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:16:02,029 DEBUG Starting app.py
+2025-12-26 12:16:02,064 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:16:02,066 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:16:02,196 DEBUG Starting app.py
+2025-12-26 12:16:02,206 DEBUG Initial session_state keys: ['token', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'page']
+2025-12-26 12:16:02,207 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:16:02,207 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:16:04,151 DEBUG Starting app.py
+2025-12-26 12:16:04,158 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:16:04,158 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:16:04,303 DEBUG Starting app.py
+2025-12-26 12:16:04,305 DEBUG Initial session_state keys: ['token', 'back_btn', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'page']
+2025-12-26 12:16:04,305 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:16:04,305 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:16:05,391 DEBUG Starting app.py
+2025-12-26 12:16:05,391 DEBUG Initial session_state keys: ['token', 'btn_proje_analiz', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'btn_assistant', 'btn_b2c', 'page', 'btn_dashboard', 'btn_organization']
+2025-12-26 12:16:05,391 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:16:05,391 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:16:05,508 DEBUG Starting app.py
+2025-12-26 12:16:05,516 DEBUG Initial session_state keys: ['token', 'btn_proje_analiz', 'leave_data', 'gallery_state', 'authenticated', 'user_data', 'chat_history', 'btn_assistant', 'btn_b2c', 'page', 'btn_dashboard', 'btn_organization']
+2025-12-26 12:16:05,516 DEBUG Initial query_params: {'test': '1'}
+2025-12-26 12:16:05,516 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:53:10,236 DEBUG Starting app.py
+2025-12-26 12:53:10,236 DEBUG Initial session_state keys: []
+2025-12-26 12:53:10,240 DEBUG Initial query_params: {}
+2025-12-26 12:53:10,240 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 12:53:19,101 DEBUG Starting app.py
+2025-12-26 12:53:19,102 DEBUG Initial session_state keys: ['login_btn', 'gallery_state', 'chat_history', 'page', 'login_email', 'leave_data', 'login_password', 'user_data', 'login_username', 'token', 'authenticated']
+2025-12-26 12:53:19,102 DEBUG Initial query_params: {}
+2025-12-26 12:53:19,104 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:23:31,834 DEBUG Starting app.py
+2025-12-26 13:23:31,836 DEBUG Initial session_state keys: []
+2025-12-26 13:23:31,836 DEBUG Initial query_params: {}
+2025-12-26 13:23:31,836 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:23:58,586 DEBUG Starting app.py
+2025-12-26 13:23:58,589 DEBUG Initial session_state keys: ['login_btn', 'gallery_state', 'chat_history', 'page', 'leave_data', 'login_password', 'user_data', 'login_identifier', 'token', 'authenticated']
+2025-12-26 13:23:58,590 DEBUG Initial query_params: {}
+2025-12-26 13:23:58,592 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:24:02,890 DEBUG Starting app.py
+2025-12-26 13:24:02,892 DEBUG Initial session_state keys: ['login_btn', 'gallery_state', 'chat_history', 'page', 'leave_data', 'login_password', 'user_data', 'login_identifier', 'token', 'authenticated']
+2025-12-26 13:24:02,892 DEBUG Initial query_params: {}
+2025-12-26 13:24:02,893 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:24:12,598 DEBUG Starting app.py
+2025-12-26 13:24:12,621 DEBUG Initial session_state keys: ['login_btn', 'gallery_state', 'chat_history', 'page', 'leave_data', 'login_password', 'user_data', 'login_identifier', 'token', 'authenticated']
+2025-12-26 13:24:12,623 DEBUG Initial query_params: {}
+2025-12-26 13:24:12,623 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:24:14,983 DEBUG Starting app.py
+2025-12-26 13:24:14,985 DEBUG Initial session_state keys: ['login_btn', 'gallery_state', 'chat_history', 'page', 'leave_data', 'login_password', 'user_data', 'login_identifier', 'token', 'authenticated']
+2025-12-26 13:24:14,985 DEBUG Initial query_params: {}
+2025-12-26 13:24:14,985 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:25:10,253 DEBUG Starting app.py
+2025-12-26 13:25:10,256 DEBUG Initial session_state keys: ['login_btn', 'gallery_state', 'chat_history', 'page', 'leave_data', 'login_password', 'user_data', 'login_identifier', 'token', 'authenticated']
+2025-12-26 13:25:10,257 DEBUG Initial query_params: {}
+2025-12-26 13:25:10,257 DEBUG ENABLE_PASSWORD_RESET=False
+2025-12-26 13:45:16,027 DEBUG Starting app.py
+2025-12-26 13:45:16,039 DEBUG Initial session_state keys: []
+2025-12-26 13:45:16,039 DEBUG Initial query_params: {}
+2025-12-26 13:45:16,039 DEBUG ENABLE_PASSWORD_RESET=False
