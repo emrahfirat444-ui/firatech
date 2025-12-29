@@ -405,15 +405,54 @@ def get_file_path(filename):
 
 USERS_FILE = get_file_path("users.json")
 
+# Default users for first-run initialization (if users.json doesn't exist on deployment)
+DEFAULT_USERS = {
+    "users": [
+        {
+            "id": "demo_user",
+            "email": "demo@example.com",
+            "name": "Demo Kullanıcı",
+            "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+            "role": "user",
+            "permissions": ["read"],
+            "is_active": True,
+            "created_at": "2025-12-26T00:00:00Z",
+            "last_login": None
+        },
+        {
+            "id": "user_emrah_444",
+            "email": "emrahfirat444@gmail.com",
+            "name": "Emrah Fırat",
+            "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+            "department": "IT",
+            "position": "Yazılım Uzmanı",
+            "role": "admin",
+            "permissions": ["read", "write", "delete", "admin"],
+            "pernr": "00012345",
+            "is_active": True,
+            "created_at": "2025-12-09T00:00:00Z",
+            "last_login": None,
+            "password_reset_token": None,
+            "password_reset_expires": None
+        }
+    ]
+}
+
 def load_users() -> dict:
-    """users.json dosyasından kullanıcıları yükle."""
+    """users.json dosyasından kullanıcıları yükle. Yoksa varsayılan kullanıcıları oluştur."""
     try:
         if os.path.exists(USERS_FILE):
             with open(USERS_FILE, 'r', encoding='utf-8') as f:
                 return json.load(f)
+        else:
+            # Dosya yoksa (Cloud'da ilk çalıştırma), varsayılan kullanıcıları oluştur
+            logger.debug("users.json bulunamadı, varsayılan kullanıcılar oluşturuluyor")
+            save_users(DEFAULT_USERS)
+            return DEFAULT_USERS
     except Exception as e:
         st.error(f"Kullanıcılar yüklenemedi: {str(e)}")
-    return {"users": []}
+        logger.exception("Error loading users")
+        return DEFAULT_USERS
 
 def save_users(data: dict):
     """Kullanıcıları users.json'a kaydet."""
