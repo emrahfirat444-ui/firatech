@@ -339,7 +339,7 @@ def _normalize_analysis_items(items):
         out.append(d)
     return out
 
-def exchange_code_for_token(code: str) -> dict:
+def exchange_code_for_token(code: str) -> dict: 
     """Authorization code'u token ile değiştir."""
     try:
         token_url = f"https://login.microsoftonline.com/{SSO_CONFIG.get('tenant_id', 'common')}/oauth2/v2.0/token"
@@ -392,9 +392,18 @@ def get_user_from_graph(access_token: str) -> dict:
     except Exception as e:
         return {"success": False, "message": f"Graph API hatası: {str(e)}"}
 
+# ============ FILE PATH UTILITIES ============
+def get_app_root():
+    """Get the root directory of the app (where app.py is located)."""
+    return os.path.dirname(os.path.abspath(__file__))
+
+def get_file_path(filename):
+    """Get absolute path to a data file in the app root directory."""
+    return os.path.join(get_app_root(), filename)
+
 # ============ USER MANAGEMENT FUNCTIONS ============
 
-USERS_FILE = "users.json"
+USERS_FILE = get_file_path("users.json")
 
 def load_users() -> dict:
     """users.json dosyasından kullanıcıları yükle."""
@@ -2098,15 +2107,15 @@ else:
         if st.session_state.analysis_data is None:
             with st.spinner("Canlı veriler yükleniyor (local cache kontrol ediliyor)..."):
                 try:
-                    # Prefer aggregated multi-site Top-40 if present
-                    if os.path.exists('proje_analiz_top40.json'):
-                        with open('proje_analiz_top40.json', 'r', encoding='utf-8') as f:
+                    # Prefer per-site top lists (Trendyol / N11) which contain real price fields
+                    if os.path.exists(get_file_path('trendyol_top20.json')):
+                        with open(get_file_path('trendyol_top20.json'), 'r', encoding='utf-8') as f:
                             raw = json.load(f)
-                        raw_items = raw.get('items', raw) if isinstance(raw, dict) else raw
+                        raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
                         st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime('proje_analiz_top40.json')).strftime('%Y-%m-%d %H:%M:%S')
-                    elif os.path.exists('trendyol_top10.json'):
-                        with open('trendyol_top10.json', 'r', encoding='utf-8') as f:
+                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('trendyol_top20.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                    elif os.path.exists(get_file_path('trendyol_top10.json')):
+                        with open(get_file_path('trendyol_top10.json'), 'r', encoding='utf-8') as f:
                             raw = json.load(f)
                         # If the file contains dict {'products': [...]}, normalize
                         if isinstance(raw, dict) and 'products' in raw:
@@ -2117,10 +2126,28 @@ else:
                             raw_items = []
                         # normalize into UI schema
                         st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime('trendyol_top10.json')).strftime('%Y-%m-%d %H:%M:%S')
+                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('trendyol_top10.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                    elif os.path.exists(get_file_path('n11_top20.json')):
+                        with open(get_file_path('n11_top20.json'), 'r', encoding='utf-8') as f:
+                            raw = json.load(f)
+                        raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
+                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('n11_top20.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                    elif os.path.exists(get_file_path('n11_top10.json')):
+                        with open(get_file_path('n11_top10.json'), 'r', encoding='utf-8') as f:
+                            raw = json.load(f)
+                        raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
+                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('n11_top10.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                    elif os.path.exists(get_file_path('proje_analiz_top40.json')):
+                        with open(get_file_path('proje_analiz_top40.json'), 'r', encoding='utf-8') as f:
+                            raw = json.load(f)
+                        raw_items = raw.get('items', raw) if isinstance(raw, dict) else raw
+                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime('proje_analiz_top40.json')).strftime('%Y-%m-%d %H:%M:%S')
                     else:
                         st.session_state.analysis_data = _normalize_analysis_items(scrape_turkish_ecommerce_sites() or [])
-                        st.session_state.last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        st.session_state.last_update = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 except Exception:
                     st.session_state.analysis_data = _normalize_analysis_items(scrape_turkish_ecommerce_sites() or [])
                     st.session_state.last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
