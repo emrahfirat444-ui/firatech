@@ -93,33 +93,28 @@ def scrape_with_playwright(sites, timeout=20000):
                 browser.close()
             except Exception:
                 pass
-                            collected = [] 
+    except Exception:
         return None
 
     return collected
 
 import hashlib
-                                        items = raw if isinstance(raw, list) else raw.get('items') or raw.get('products') or raw.get('products_list') or []
+import secrets
 import string
-                                        added = 0
-                                        for it in items:
-                                            if not isinstance(it, dict):
-                                                continue
-                                            # If source/site missing, set to site_name; else normalize
-                                            src = it.get('source') or it.get('site') or it.get('marketplace')
-                                            if not src:
-                                                it['site'] = site_name
-                                                it['source'] = site_name
-                                            else:
-                                                # normalize capitalization
-                                                norm = src.title() if isinstance(src, str) else site_name
-                                                it['site'] = it.get('site') or norm
-                                                it['source'] = it.get('source') or norm
-                                            collected.append(it)
-                                            added += 1
-                                        logger.debug("Loaded %d items from %s (site=%s)", added, path, site_name)
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from urllib.parse import urlencode
 
 # Sayfa yapılandırması
+# Setup simple file logger for debugging
+logger = logging.getLogger("yatas_app_debug")
+if not logger.handlers:
+    fh = logging.FileHandler(get_file_path("app_debug.log"))
+    fh.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
+    logger.addHandler(fh)
+    logger.setLevel(logging.DEBUG)
+
 logger.debug("Starting app.py")
 
 # set_page_config must be the first Streamlit command in the script
@@ -343,6 +338,51 @@ def _normalize_analysis_items(items):
             d['site'] = d.get('source') or d.get('site_name') or d.get('marketplace') or None
         out.append(d)
     return out
+
+
+def load_analysis_from_local_files():
+    """Load analysis items from local JSON files (top lists) and infer site if missing.
+    Returns a list of normalized items suitable for the UI.
+    """
+    candidates = [
+        (get_file_path('trendyol_top20.json'), 'Trendyol'),
+        (get_file_path('trendyol_top10.json'), 'Trendyol'),
+        (get_file_path('n11_top20.json'), 'N11'),
+        (get_file_path('n11_top10.json'), 'N11'),
+        (get_file_path('proje_analiz_top40.json'), 'Analiz')
+    ]
+    collected = []
+    for path, site_name in candidates:
+        try:
+            if os.path.exists(path):
+                with open(path, 'r', encoding='utf-8') as f:
+                    raw = json.load(f)
+                # Normalize raw into a list of items
+                if isinstance(raw, list):
+                    items = raw
+                elif isinstance(raw, dict):
+                    items = raw.get('items') or raw.get('products') or raw.get('products_list') or []
+                else:
+                    items = []
+                added = 0
+                for it in items:
+                    if not isinstance(it, dict):
+                        continue
+                    src = it.get('source') or it.get('site') or it.get('marketplace')
+                    if not src:
+                        it['site'] = site_name
+                        it['source'] = site_name
+                    else:
+                        norm = src.title() if isinstance(src, str) else site_name
+                        it['site'] = it.get('site') or norm
+                        it['source'] = it.get('source') or norm
+                    collected.append(it)
+                    added += 1
+                logger.debug("Loaded %d items from %s (site=%s)", added, path, site_name)
+        except Exception:
+            logger.exception("Failed to read local analysis file: %s", path)
+            continue
+    return _normalize_analysis_items(collected)
 
 def exchange_code_for_token(code: str) -> dict: 
     """Authorization code'u token ile değiştir."""
