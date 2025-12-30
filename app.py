@@ -2137,8 +2137,17 @@ else:
         
         # Manual refresh button
         if st.button("🔄 Verileri Yenile", key="refresh_analysis"):
-            with st.spinner("Gerçek zamanlı veriler toplanıyor..."):
-                st.session_state.analysis_data = scrape_turkish_ecommerce_sites()
+            with st.spinner("Veriler yenileniyor..."):
+                # Try live scrape first (if Playwright available)
+                try:
+                    live = scrape_turkish_ecommerce_sites()
+                except Exception:
+                    live = None
+                if live:
+                    st.session_state.analysis_data = _normalize_analysis_items(live)
+                else:
+                    # Fallback: re-read local cache files and infer site/source
+                    st.session_state.analysis_data = load_analysis_from_local_files()
                 st.session_state.last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 st.rerun()
         
