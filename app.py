@@ -1450,31 +1450,7 @@ else:
         st.write(f"Hoş geldiniz, **{st.session_state.user_data.get('name', 'Kullanıcı')}**!")
         st.subheader("Ne yapmak istersiniz?")
         
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            if st.button("💼 İK ASİSTANI", use_container_width=True, key="btn_assistant"):
-                st.session_state.page = "assistant"
-                st.rerun()
-        
-        with col2:
-            if st.button("📊 İZİN BİLGİSİ", use_container_width=True, key="btn_dashboard"):
-                st.session_state.page = "dashboard"
-                st.rerun()
-        
-        with col3:
-            if st.button("🏢 ORGANİZASYON", use_container_width=True, key="btn_organization"):
-                st.session_state.page = "organization"
-                st.rerun()
-
-        with col4:
-            if st.button("🛒 B2C SİPARİŞ", use_container_width=True, key="btn_b2c"):
-                st.session_state.page = "b2c_order"
-                # initialize order state
-                if "b2c_order_items" not in st.session_state:
-                    st.session_state.b2c_order_items = []
-                st.rerun()
-        
-        # Proje Analiz butonu (5th button in new row)
+        # Proje Analiz button (kept) - other menu buttons removed
         st.write("")  # spacing
         col5, col6, col7, col8 = st.columns(4)
         with col5:
