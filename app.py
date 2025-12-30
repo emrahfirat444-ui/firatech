@@ -1093,7 +1093,7 @@ def fetch_top_products_from_azure():
         st.error(f"Azure Table'dan veri çekerken hata: {str(e)}")
         return []
 
-def scrape_turkish_ecommerce_sites():
+def scrape_turkish_ecommerce_sites(allow_demo: bool = True):
     """Perform a best-effort scrape of several Turkish e-commerce sites and
     return an aggregated list of top products (up to 10). This is a lightweight
     agent implementation using requests + BeautifulSoup. If `AZURE_TABLE` is
@@ -1191,8 +1191,10 @@ def scrape_turkish_ecommerce_sites():
 
     # Aggregate by product name (simple frequency + avg rank) and pick top 10
     if not collected:
-        # fallback to demo data
-        return fetch_top_products_from_azure()
+        # If demo allowed, return demo/fallback; otherwise return empty to allow local-file fallback
+        if allow_demo:
+            return fetch_top_products_from_azure()
+        return []
 
     agg = {}
     for item in collected:
@@ -2185,7 +2187,8 @@ else:
             with st.spinner("Veriler yenileniyor..."):
                 # Try live scrape first (if Playwright available)
                 try:
-                    live = scrape_turkish_ecommerce_sites()
+                    # disable demo fallback here so we can prefer local cached files if scrape fails
+                    live = scrape_turkish_ecommerce_sites(allow_demo=False)
                 except Exception:
                     live = None
                 if live:
