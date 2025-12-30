@@ -1465,8 +1465,8 @@ else:
                 st.session_state.page = "admin_panel"
                 st.rerun()
     
-    # İK ASISTAN SAYFASI
-    elif st.session_state.page == "assistant":
+    # İK ASISTAN SAYFASI (disabled)
+    elif False and st.session_state.page == "assistant":
         if st.session_state.leave_data is None:
             with st.spinner("SAP'den veriler alınıyor..."):
                 personnel_number = st.session_state.user_data.get('personnel_number', '00001234')
@@ -1796,8 +1796,8 @@ else:
                     st.session_state.chat_history.append({"role": "assistant", "content": ai_response})
                     st.rerun()
     
-    # DASHBOARD SAYFASI
-    elif st.session_state.page == "dashboard":
+    # DASHBOARD SAYFASI (disabled)
+    elif False and st.session_state.page == "dashboard":
         if st.session_state.leave_data is None:
             with st.spinner("SAP'den veriler alınıyor..."):
                 personnel_number = st.session_state.user_data.get('personnel_number', '00001234')
@@ -1848,8 +1848,8 @@ else:
             st.subheader("🔧 RFC Hata Detayları")
             st.json(leave_data)
 
-    # ORGANİZASYON SAYFASI
-    elif st.session_state.page == "organization":
+    # ORGANİZASYON SAYFASI (disabled)
+    elif False and st.session_state.page == "organization":
         col1, col2 = st.columns([1, 10])
         with col1:
             if st.button("⬅️", key="back_org"):
@@ -2016,8 +2016,8 @@ else:
                             st.rerun()
         st.info("E-posta gönderimi için SMTP bilgilerini .env'de tanımlayın (SMTP_SERVER, SMTP_PORT, SENDER_EMAIL, SENDER_PASSWORD).")
 
-    # B2C SİPARİŞ SAYFASI
-    elif st.session_state.page == "b2c_order":
+    # B2C SİPARİŞ SAYFASI (disabled)
+    elif False and st.session_state.page == "b2c_order":
         # initialize items list if not present
         if "b2c_order_items" not in st.session_state:
             st.session_state.b2c_order_items = []
