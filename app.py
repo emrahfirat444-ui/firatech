@@ -117,6 +117,41 @@ if not logger.handlers:
 
 logger.debug("Starting app.py")
 
+
+def fetch_google_trends_top50(region: str = 'turkey'):
+    """Fetch top trending search terms from Google Trends (best-effort).
+    Returns (items_list, error_message). items_list is a list of dicts with keys: rank, product_name, source.
+    If pytrends is not installed, returns (None, 'pytrends_missing').
+    """
+    try:
+        from pytrends.request import TrendReq
+    except Exception:
+        return None, 'pytrends_missing'
+
+    try:
+        pytrends = TrendReq(hl='tr-TR', tz=360)
+        # trending_searches returns a DataFrame with one column of search terms
+        df = pytrends.trending_searches(pn=region)
+        terms = []
+        if df is not None and not df.empty:
+            # df.iloc[:,0] covers the first column
+            try:
+                terms = df.iloc[:, 0].astype(str).tolist()
+            except Exception:
+                terms = df[0].astype(str).tolist()
+
+        items = []
+        for i, t in enumerate(terms[:50]):
+            items.append({
+                'rank': i + 1,
+                'product_name': t,
+                'site': 'google_trends'
+            })
+
+        return items, None
+    except Exception as e:
+        return None, str(e)
+
 # set_page_config must be the first Streamlit command in the script
 st.set_page_config(page_title="Yataş Giriş", layout="wide")
 
@@ -1457,6 +1492,10 @@ else:
             if st.button("📈 PROJE ANALİZ", use_container_width=True, key="btn_proje_analiz"):
                 st.session_state.page = "proje_analiz"
                 st.rerun()
+        with col6:
+            if st.button("🔎 Google Trends Analiz", use_container_width=True, key="btn_google_trends"):
+                st.session_state.page = "google_trends"
+                st.rerun()
         
         # Admin Panel (sadece admin users)
         if st.session_state.user_data.get("role") == "admin":
@@ -2144,6 +2183,45 @@ else:
             st.rerun()
     
     # PROJE ANALİZ SAYFASI
+    # GOOGLE TRENDS SAYFASI
+    elif st.session_state.page == "google_trends":
+        if st.button("⬅️ Ana Menü", key="back_from_google_trends"):
+            st.session_state.page = "menu"
+            st.rerun()
+
+        st.title("🔎 Google Trends Analiz")
+        st.write("Google Trends tarafından döndürülen o günün popüler aramalarını gösterir. (pytrends gerektirir)")
+
+        if "google_trends_data" not in st.session_state:
+            st.session_state.google_trends_data = None
+        if "google_trends_last_update" not in st.session_state:
+            st.session_state.google_trends_last_update = None
+
+        if st.button("🔄 Verileri Çek / Yenile", key="refresh_google_trends"):
+            with st.spinner("Google Trends verileri alınıyor..."):
+                items, err = fetch_google_trends_top50('turkey')
+                if err == 'pytrends_missing':
+                    st.error("`pytrends` yüklü değil. Lütfen `.venv` içine `pip install pytrends` ile kurun.")
+                    st.session_state.google_trends_data = []
+                elif err:
+                    st.error(f"Google Trends alınamadı: {err}")
+                    st.session_state.google_trends_data = []
+                else:
+                    st.session_state.google_trends_data = items
+                    st.session_state.google_trends_last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                st.rerun()
+
+        if st.session_state.google_trends_last_update:
+            st.caption(f"Son güncelleme: {st.session_state.google_trends_last_update}")
+
+        data = st.session_state.get('google_trends_data')
+        if data:
+            df = pd.DataFrame(data)
+            st.subheader("Top Trendler")
+            st.dataframe(df, use_container_width=True)
+        else:
+            st.info("Henüz veri yok. 'Verileri Çek / Yenile' ile başlayın veya pytrends kurulu değilse kurulum yapın.")
+
     elif st.session_state.page == "proje_analiz":
         if st.button("⬅️ Ana Menü", key="back_from_proje_analiz"):
             st.session_state.page = "menu"
