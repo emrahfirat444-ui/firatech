@@ -93,26 +93,31 @@ def scrape_with_playwright(sites, timeout=20000):
                 browser.close()
             except Exception:
                 pass
-    except Exception:
+                            collected = [] 
         return None
 
     return collected
 
 import hashlib
-import secrets
+                                        items = raw if isinstance(raw, list) else raw.get('items') or raw.get('products') or raw.get('products_list') or []
 import string
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from urllib.parse import urlencode
-
-# Setup simple file logger for debugging
-logger = logging.getLogger("yatas_app_debug")
-if not logger.handlers:
-    fh = logging.FileHandler("app_debug.log")
-    fh.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
-    logger.addHandler(fh)
-    logger.setLevel(logging.DEBUG)
+                                        added = 0
+                                        for it in items:
+                                            if not isinstance(it, dict):
+                                                continue
+                                            # If source/site missing, set to site_name; else normalize
+                                            src = it.get('source') or it.get('site') or it.get('marketplace')
+                                            if not src:
+                                                it['site'] = site_name
+                                                it['source'] = site_name
+                                            else:
+                                                # normalize capitalization
+                                                norm = src.title() if isinstance(src, str) else site_name
+                                                it['site'] = it.get('site') or norm
+                                                it['source'] = it.get('source') or norm
+                                            collected.append(it)
+                                            added += 1
+                                        logger.debug("Loaded %d items from %s (site=%s)", added, path, site_name)
 
 # Sayfa yapılandırması
 logger.debug("Starting app.py")
