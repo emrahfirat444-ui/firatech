@@ -277,6 +277,14 @@ if "gallery_state" not in st.session_state:
     # gallery_state: {"images": [...], "page": 0, "page_size": 4, "preview": None}
     st.session_state.gallery_state = None
 
+# Test helper: allow forcing the menu page when running locally by setting env FORCE_MENU=1
+try:
+    if os.getenv('FORCE_MENU', '0').lower() in ('1', 'true'):
+        st.session_state.page = 'menu'
+        logger.debug('FORCE_MENU active: forcing page=menu')
+except Exception:
+    pass
+
 # Quick test helper: if URL has ?test=1, prefill demo login and a test chat message
 try:
     params = st.query_params
