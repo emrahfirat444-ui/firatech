@@ -110,10 +110,12 @@ from urllib.parse import urlencode
 # Setup simple file logger for debugging
 logger = logging.getLogger("yatas_app_debug")
 if not logger.handlers:
-    fh = logging.FileHandler(os.path.join(os.path.dirname(os.path.abspath(__file__)), "app_debug.log"))
+    # ensure file handler uses UTF-8 and don't propagate to root handlers (avoid console encoding errors)
+    fh = logging.FileHandler(os.path.join(os.path.dirname(os.path.abspath(__file__)), "app_debug.log"), encoding='utf-8')
     fh.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
     logger.addHandler(fh)
     logger.setLevel(logging.DEBUG)
+    logger.propagate = False
 
 logger.debug("Starting app.py")
 
