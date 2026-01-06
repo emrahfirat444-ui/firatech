@@ -372,9 +372,50 @@ def _normalize_analysis_items(items):
                 d['rank'] = int(d.get('rank', idx+1))
             except Exception:
                 d['rank'] = idx+1
+        # clean product_name: remove promotional lines and leading quantity tokens
+        try:
+            name = d.get('product_name') or ''
+            # split lines and pick the most likely product title (longest non-company line)
+            parts = [p.strip() for p in str(name).splitlines() if p.strip()]
+            if parts:
+                # remove common noise tokens
+                filtered = [p for p in parts if not re.search(r'^(en ço?k|en çok ziyaret|en çok satan|en çok değerlendirilen|en çok favorilenen)', p, re.I)]
+                # remove company-only lines like 'Yataş'
+                filtered = [p for p in filtered if len(p) > 2 and not re.fullmatch(r'[A-Za-zÇÖÜĞİçöüğıŞş\s]+', p) or (len(p.split())>1)]
+                choose_from = filtered or parts
+                # pick the longest remaining line as title
+                title_choice = max(choose_from, key=lambda s: len(s))
+            else:
+                title_choice = ''
+
+            # strip leading quantity tokens like '1 adet', '1 Adet', '2 ADET' etc.
+            title_choice = re.sub(r'^\s*\d+\s*(adet|adet\.|adet\b|adet\s*-\s*)\s*[:\-–—]?\s*', '', title_choice, flags=re.I)
+            title_choice = re.sub(r'^\s*\d+\s*[x×]\s*', '', title_choice)
+            d['product_name'] = title_choice.strip() or d.get('product_name')
+        except Exception:
+            pass
+
         # ensure site/source information when available
         if 'site' not in d:
             d['site'] = d.get('source') or d.get('site_name') or d.get('marketplace') or None
+        # if price looks like a placeholder (very small integer), try to extract real price from name
+        try:
+            pval = d.get('price')
+            if (pval is None) or (isinstance(pval, (int, float)) and pval <= 5):
+                # search product_name for explicit TL price
+                m = re.search(r'([0-9\.,]+)\s*(TL|₺)', str(d.get('product_name') or ''), re.I)
+                if m:
+                    parsed = _parse_price_text(m.group(1))
+                    if parsed and parsed > 5:
+                        d['price'] = parsed
+                    else:
+                        d['price'] = None
+                else:
+                    # leave as None to avoid showing misleading tiny numbers
+                    d['price'] = None
+        except Exception:
+            pass
+
         out.append(d)
     return out
 
