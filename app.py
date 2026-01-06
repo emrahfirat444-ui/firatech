@@ -153,7 +153,7 @@ def fetch_google_trends_top50(region: str = 'turkey'):
         return None, str(e)
 
 # set_page_config must be the first Streamlit command in the script
-st.set_page_config(page_title="Yataş Giriş", layout="wide")
+st.set_page_config(page_title="Firatech Stream", layout="wide")
 
 # Global exception hook to capture uncaught exceptions in Streamlit worker threads
 def _handle_uncaught(exc_type, exc_value, exc_tb):
@@ -654,7 +654,7 @@ def send_password_reset_email(email: str, temp_password: str, user_name: str) ->
         msg = MIMEMultipart()
         msg['From'] = sender_email
         msg['To'] = email
-        msg['Subject'] = 'Yataş Portal - Geçici Şifre'
+        msg['Subject'] = 'Firatech Stream - Geçici Şifre'
         
         html_body = f"""
         <html>
@@ -665,7 +665,7 @@ def send_password_reset_email(email: str, temp_password: str, user_name: str) ->
                 <p style="font-size:18px; font-weight:bold; color:#1f2937;">Geçici Şifre: <span style="background:#f3f4f6; padding:6px 10px; border-radius:6px;">{temp_password}</span></p>
                 <p>Bu e-posta yalnızca bilgilendirme amaçlıdır; buton veya link yoktur.</p>
                 <p>Eğer bu talebi siz yapmadıysanız, lütfen IT ile iletişime geçin.</p>
-                <p>Yataş IT Team</p>
+                <p>Firatech IT Team</p>
             </body>
         </html>
         """
@@ -877,10 +877,10 @@ def get_ai_response(user_message: str, leave_data: dict) -> str:
     
     if any(word in msg for word in ["organizasyon", "departman", "bölüm", "organization", "department"]):
         return f"""🏢 **Organizasyon Bilgileriniz:**
-🏭 Şirket: Yataş
-🏢 Departman: İnsan Kaynakları
-👔 Pozisyon: İK Uzmanı
-📍 Lokasyon: İstanbul - Merkez Ofis"""
+    🏭 Şirket: Firatech
+    🏢 Departman: İnsan Kaynakları
+    👔 Pozisyon: İK Uzmanı
+    📍 Lokasyon: İstanbul - Merkez Ofis"""
     elif any(word in msg for word in ["izin", "kalan", "leave", "remaining"]):
         return f"""🎯 **İzin Bilgileriniz:**
 📅 Toplam: {leave_data['total_leave_days']} gün
