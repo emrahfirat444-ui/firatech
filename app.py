@@ -354,11 +354,15 @@ def _normalize_analysis_items(items):
         p = d.get('price')
         if p is not None and not isinstance(p, (int, float)):
             try:
-                s = str(p)
-                m = re.search(r"[0-9][0-9.,]{0,}", s)
-                if m:
-                    d['price'] = float(m.group(0).replace(',',''))
+                import re
+                s = str(p).strip()
+                s_low = s.lower()
+                # Only parse if the string clearly contains a currency or is purely numeric-like
+                if ('tl' in s_low) or ('₺' in s_low) or re.fullmatch(r'[0-9\.,\s]+', s):
+                    # use the robust parser which understands comma/dot formats
+                    d['price'] = _parse_price_text(s)
                 else:
+                    # no reliable price info found in this field
                     d['price'] = None
             except Exception:
                 d['price'] = None
