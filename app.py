@@ -2346,6 +2346,13 @@ else:
                 except Exception:
                     st.session_state.analysis_data = _normalize_analysis_items(scrape_turkish_ecommerce_sites() or [])
                     st.session_state.last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                # Force a one-time client rerun so Streamlit shows freshly loaded files instead of a cached session
+                try:
+                    if st.session_state.analysis_data is not None and not st.session_state.get('analysis_auto_reloaded', False):
+                        st.session_state.analysis_auto_reloaded = True
+                        st.experimental_rerun()
+                except Exception:
+                    logger.debug('experimental_rerun not available or failed')
         
         # Display last update time
         if st.session_state.last_update:

@@ -28,14 +28,34 @@ def load_json(p: Path):
 
 def take_top20(site_name: str, site_file, proj_items):
     out = OrderedDict()
+    # helper to clean human-friendly product titles (remove leading qty tokens, pick best line)
+    def clean_title(name: str) -> str:
+        if not name:
+            return ''
+        parts = [p.strip() for p in str(name).splitlines() if p.strip()]
+        if parts:
+            filtered = [p for p in parts if not re.search(r'^(en ço?k|en çok ziyaret|en çok satan|en çok değerlendirilen|en çok favorilenen)', p, re.I)]
+            filtered = [p for p in filtered if len(p) > 2 and (not re.fullmatch(r'[A-Za-zÇÖÜĞİçöüğıŞş\s]+', p) or (len(p.split())>1))]
+            choose_from = filtered or parts
+            title_choice = max(choose_from, key=lambda s: len(s))
+        else:
+            title_choice = str(name)
+        # strip leading quantity tokens like '1 adet' or '2 x'
+        title_choice = re.sub(r'^\s*\d+\s*(adet|adet\.|adet\b|adet\s*-\s*)\s*[:\-–—]?\s*', '', title_choice, flags=re.I)
+        title_choice = re.sub(r'^\s*\d+\s*[x×]\s*', '', title_choice)
+        return title_choice.strip()
     # first add existing site_file items
     for it in site_file:
         name = it.get('product_name') or it.get('name') or it.get('product_name') or ''
-        norm = normalize_name(name) or normalize_name(it.get('url',''))
+        cleaned = clean_title(name) or name
+        norm = normalize_name(cleaned) or normalize_name(it.get('url',''))
         if not norm:
             continue
         if norm not in out:
-            out[norm] = it
+            # store cleaned product_name into output
+            entry = dict(it)
+            entry['product_name'] = cleaned
+            out[norm] = entry
         if len(out) >= 20:
             break
 
@@ -47,13 +67,14 @@ def take_top20(site_name: str, site_file, proj_items):
             if site_name not in url:
                 continue
         name = it.get('product_name') or it.get('name') or ''
-        norm = normalize_name(name) or normalize_name(it.get('url',''))
+        cleaned = clean_title(name) or name
+        norm = normalize_name(cleaned) or normalize_name(it.get('url',''))
         if not norm:
             continue
         if norm not in out:
             # when supplementing, try to produce a simpler dict
             out[norm] = {
-                'product_name': name,
+                'product_name': cleaned,
                 'price': it.get('price'),
                 'image_url': it.get('image_url') or it.get('image'),
                 'url': it.get('url')
