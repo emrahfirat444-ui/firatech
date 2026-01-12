@@ -234,10 +234,10 @@ header { visibility: hidden; }
 /* Minimal app background and input/button styling to avoid large floating boxes */
 .stApp { background: #f5f5f5 !important; }
 .stApp .stTextInput input, .stApp input, .stApp textarea, .stApp select {
-    background: #fff !important;
-    box-shadow: none !important;
-    border-radius: 8px !important;
-    border: 1px solid rgba(0,0,0,0.06) !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(0,0,0,0.06) !important;
 }
 .stApp .stButton>button { box-shadow: none !important; border-radius: 8px !important; }
 
@@ -256,11 +256,10 @@ header { visibility: hidden; }
 
 /* Responsive tweaks */
 @media (max-width: 600px) {
-  [data-testid="stAppViewContainer"] { padding: 12px !important; }
+    [data-testid="stAppViewContainer"] { padding: 12px !important; }
 }
-</style>
+        </style>
 """, unsafe_allow_html=True)
-
 # Session state başlatma
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -385,23 +384,28 @@ def _normalize_analysis_items(items):
         # clean product_name: remove promotional lines and leading quantity tokens
         try:
             name = d.get('product_name') or ''
+            # First, aggressively remove badge/promotional text patterns
+            name = re.sub(r'\ben\s+ço?k\s+(satan|satılan|ziyaret\s+edilen|değerlendirilen|favorilenen)\s+\d+\.\s+ürün\b', '', name, flags=re.I)
+            name = re.sub(r'\ben\s+ço?k\s+(satan|satılan|ziyaret\s+edilen|değerlendirilen|favorilenen)\b', '', name, flags=re.I)
+            # Remove other common badge patterns
+            name = re.sub(r'\b(en\s+çok|çok\s+satan)\s+\d+\.\s+ürün\b', '', name, flags=re.I)
+            
             # split lines and pick the most likely product title (longest non-company line)
             parts = [p.strip() for p in str(name).splitlines() if p.strip()]
             if parts:
-                # remove common noise tokens
-                filtered = [p for p in parts if not re.search(r'^(en ço?k|en çok ziyaret|en çok satan|en çok değerlendirilen|en çok favorilenen)', p, re.I)]
-                # remove company-only lines like 'Yataş'
-                filtered = [p for p in filtered if len(p) > 2 and not re.fullmatch(r'[A-Za-zÇÖÜĞİçöüğıŞş\s]+', p) or (len(p.split())>1)]
+                # remove lines that are purely company names (short, all-caps, or single-word brands)
+                filtered = [p for p in parts if len(p) > 8 or (len(p.split()) > 1)]
                 choose_from = filtered or parts
                 # pick the longest remaining line as title
-                title_choice = max(choose_from, key=lambda s: len(s))
+                title_choice = max(choose_from, key=lambda s: len(s)) if choose_from else ''
             else:
-                title_choice = ''
+                title_choice = name.strip()
 
             # strip leading quantity tokens like '1 adet', '1 Adet', '2 ADET' etc.
             title_choice = re.sub(r'^\s*\d+\s*(adet|adet\.|adet\b|adet\s*-\s*)\s*[:\-–—]?\s*', '', title_choice, flags=re.I)
             title_choice = re.sub(r'^\s*\d+\s*[x×]\s*', '', title_choice)
-            d['product_name'] = title_choice.strip() or d.get('product_name')
+            title_choice = title_choice.strip()
+            d['product_name'] = title_choice if title_choice else d.get('product_name')
         except Exception:
             pass
 
@@ -1551,6 +1555,21 @@ else:
             if st.button("🔎 Google Trends Analiz", use_container_width=True, key="btn_google_trends"):
                 st.session_state.page = "google_trends"
                 st.rerun()
+
+        # Scoped CSS: try to style only the Proje Analiz button (best-effort via aria-label)
+        st.markdown(
+            """
+            <style>
+            button[aria-label="📈 PROJE ANALİZ"], button[aria-label="PROJE ANALİZ"] {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                border-radius: 8px !important;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
         
         # Admin Panel (sadece admin users)
         if st.session_state.user_data.get("role") == "admin":
@@ -2291,15 +2310,84 @@ else:
         if "last_update" not in st.session_state:
             st.session_state.last_update = None
         
-        # Manual refresh button
+        # Manual refresh controls: choose marketplace and optional category URL for live scrape
+        market = st.selectbox("Hedef Pazar", options=["Trendyol", "N11", "Local Cache"], index=0)
+
+        # Preset Trendyol kategori URL'leri (kolay seçim için)
+        trendyol_presets = {
+            'Kadın T-Shirt': 'https://www.trendyol.com/kadin-t-shirt-x-g3',
+            'Kadın Giyim': 'https://www.trendyol.com/kadin',
+            'Erkek T-Shirt': 'https://www.trendyol.com/erkek-t-shirt-x-g3',
+            'Ayakkabı - Kadın': 'https://www.trendyol.com/kadin-ayakkabi-x-g3',
+            'Çanta - Kadın': 'https://www.trendyol.com/canta',
+        }
+
+        preset_choice = st.selectbox("Hazır Trendyol Kategorileri", options=['(Seçiniz)'] + list(trendyol_presets.keys()))
+        preset_url = ''
+        if preset_choice and preset_choice != '(Seçiniz)':
+            preset_url = trendyol_presets.get(preset_choice, '')
+
+        default_url = preset_url or ''
+        category_url = st.text_input("Kategori sayfa URL'si (isteğe bağlı, Trendyol için örn. https://www.trendyol.com/kadin-t-shirt)", value=default_url)
+
         if st.button("🔄 Verileri Yenile", key="refresh_analysis"):
-            with st.spinner("Veriler yenileniyor..."):
-                # Try live scrape first (if Playwright available)
-                try:
-                    # disable demo fallback here so we can prefer local cached files if scrape fails
-                    live = scrape_turkish_ecommerce_sites(allow_demo=False)
-                except Exception:
-                    live = None
+            with st.spinner("Veriler yenileniyor... Bu işlem birkaç dakika sürebilir"):
+                live = None
+                # If user selected Trendyol and provided a category URL, use the new Playwright scraper
+                if market == 'Trendyol' and category_url.strip():
+                    try:
+                        # run scraper in a separate process to avoid Playwright subprocess issues inside Streamlit
+                        try:
+                            import subprocess, shlex
+                            py = sys.executable or 'python'
+                            script = os.path.join(get_app_root(), 'scripts', 'run_trendyol_scraper.py')
+                            cmd = [py, script, '--url', category_url.strip(), '--out-dir', os.path.join(get_app_root(), 'data'), '--max', '120']
+                            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+                            if proc.returncode != 0:
+                                logger.error('Scraper subprocess failed: %s %s', proc.returncode, proc.stderr)
+                                st.error('Trendyol scraper çalıştırılamadı. Loglara bakın.')
+                                live = None
+                            else:
+                                out_path = proc.stdout.strip().splitlines()[-1] if proc.stdout else ''
+                                if out_path and os.path.exists(out_path):
+                                    try:
+                                        with open(out_path, 'r', encoding='utf-8') as f:
+                                            raw = json.load(f)
+                                        live = raw if isinstance(raw, list) else raw.get('items', raw)
+                                        normalized = []
+                                        for rec in (live or [])[:20]:
+                                            normalized.append({
+                                                'product_name': rec.get('product_name') or rec.get('title') or rec.get('product_url'),
+                                                'price': rec.get('price'),
+                                                'image_url': rec.get('image_url') or '',
+                                                'url': rec.get('product_url'),
+                                                'rank': rec.get('rank')
+                                            })
+                                        try:
+                                            with open(get_file_path('trendyol_top20.json'), 'w', encoding='utf-8') as of:
+                                                json.dump(normalized, of, ensure_ascii=False, indent=2)
+                                        except Exception:
+                                            logger.exception('Failed to write trendyol_top20.json')
+                                    except Exception:
+                                        live = None
+                                else:
+                                    logger.error('Scraper subprocess did not return a valid out_path; stdout=%s stderr=%s', proc.stdout, proc.stderr)
+                                    st.error('Scraper çıktı dosyası oluşturulamadı.')
+                                    live = None
+                        except Exception:
+                            logger.exception('Trendyol scraping subprocess failed')
+                            st.error('Trendyol scraper başlatılamadı.')
+                            live = None
+                    except Exception:
+                        logger.exception('Trendyol scraping failed')
+                        live = None
+                else:
+                    # try existing site-wide scraping or local cache fallback
+                    try:
+                        live = scrape_turkish_ecommerce_sites(allow_demo=False)
+                    except Exception:
+                        live = None
+
                 if live:
                     st.session_state.analysis_data = _normalize_analysis_items(live)
                 else:
