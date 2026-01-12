@@ -2354,20 +2354,27 @@ else:
                                         with open(out_path, 'r', encoding='utf-8') as f:
                                             raw = json.load(f)
                                         live = raw if isinstance(raw, list) else raw.get('items', raw)
-                                        normalized = []
-                                        for rec in (live or [])[:20]:
-                                            normalized.append({
-                                                'product_name': rec.get('product_name') or rec.get('title') or rec.get('product_url'),
-                                                'price': rec.get('price'),
-                                                'image_url': rec.get('image_url') or '',
-                                                'url': rec.get('product_url'),
-                                                'rank': rec.get('rank')
-                                            })
-                                        try:
-                                            with open(get_file_path('trendyol_top20.json'), 'w', encoding='utf-8') as of:
-                                                json.dump(normalized, of, ensure_ascii=False, indent=2)
-                                        except Exception:
-                                            logger.exception('Failed to write trendyol_top20.json')
+                                        # Only write to trendyol_top20.json if we actually got data
+                                        if live and len(live) > 0:
+                                            normalized = []
+                                            for rec in (live or [])[:20]:
+                                                normalized.append({
+                                                    'product_name': rec.get('product_name') or rec.get('title') or rec.get('product_url'),
+                                                    'price': rec.get('price'),
+                                                    'image_url': rec.get('image_url') or '',
+                                                    'url': rec.get('product_url'),
+                                                    'rank': rec.get('rank'),
+                                                    'category_3': rec.get('category_3')
+                                                })
+                                            try:
+                                                with open(get_file_path('trendyol_top20.json'), 'w', encoding='utf-8') as of:
+                                                    json.dump(normalized, of, ensure_ascii=False, indent=2)
+                                                logger.info(f'Wrote {len(normalized)} items to trendyol_top20.json')
+                                            except Exception:
+                                                logger.exception('Failed to write trendyol_top20.json')
+                                        else:
+                                            logger.warning('Scraper returned empty data; not overwriting trendyol_top20.json')
+                                            st.warning('⚠️ Scraper veri döndürmedi. Mevcut cache korundu.')
                                     except Exception:
                                         live = None
                                 else:
@@ -2396,54 +2403,113 @@ else:
                 st.session_state.last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 st.rerun()
         
-        # Auto-load on first visit: prefer local `trendyol_top10.json` if present
+        # Auto-load on first visit: prefer local `trendyol_top20.json` if present
         if st.session_state.analysis_data is None:
+            load_errors = []
+            loaded_from = None
             with st.spinner("Canlı veriler yükleniyor (local cache kontrol ediliyor)..."):
                 try:
                     # Prefer per-site top lists (Trendyol / N11) which contain real price fields
                     if os.path.exists(get_file_path('trendyol_top20.json')):
-                        with open(get_file_path('trendyol_top20.json'), 'r', encoding='utf-8') as f:
-                            raw = json.load(f)
-                        raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
-                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('trendyol_top20.json'))).strftime('%Y-%m-%d %H:%M:%S')
-                    elif os.path.exists(get_file_path('trendyol_top10.json')):
-                        with open(get_file_path('trendyol_top10.json'), 'r', encoding='utf-8') as f:
-                            raw = json.load(f)
-                        # If the file contains dict {'products': [...]}, normalize
-                        if isinstance(raw, dict) and 'products' in raw:
-                            raw_items = raw.get('products', [])
-                        elif isinstance(raw, list):
-                            raw_items = raw
-                        else:
-                            raw_items = []
-                        # normalize into UI schema
-                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('trendyol_top10.json'))).strftime('%Y-%m-%d %H:%M:%S')
-                    elif os.path.exists(get_file_path('n11_top20.json')):
-                        with open(get_file_path('n11_top20.json'), 'r', encoding='utf-8') as f:
-                            raw = json.load(f)
-                        raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
-                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('n11_top20.json'))).strftime('%Y-%m-%d %H:%M:%S')
-                    elif os.path.exists(get_file_path('n11_top10.json')):
-                        with open(get_file_path('n11_top10.json'), 'r', encoding='utf-8') as f:
-                            raw = json.load(f)
-                        raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
-                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('n11_top10.json'))).strftime('%Y-%m-%d %H:%M:%S')
-                    elif os.path.exists(get_file_path('proje_analiz_top40.json')):
-                        with open(get_file_path('proje_analiz_top40.json'), 'r', encoding='utf-8') as f:
-                            raw = json.load(f)
-                        raw_items = raw.get('items', raw) if isinstance(raw, dict) else raw
-                        st.session_state.analysis_data = _normalize_analysis_items(raw_items)
-                        st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime('proje_analiz_top40.json')).strftime('%Y-%m-%d %H:%M:%S')
+                        try:
+                            with open(get_file_path('trendyol_top20.json'), 'r', encoding='utf-8') as f:
+                                raw = json.load(f)
+                            raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
+                            # Skip if empty
+                            if raw_items and len(raw_items) > 0:
+                                st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                                st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('trendyol_top20.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                                loaded_from = 'trendyol_top20.json'
+                                logger.debug(f'Loaded {len(raw_items)} items from trendyol_top20.json')
+                            else:
+                                load_errors.append('trendyol_top20.json is empty')
+                                logger.warning('trendyol_top20.json exists but is empty')
+                        except Exception as e:
+                            load_errors.append(f'trendyol_top20.json: {str(e)}')
+                            logger.exception('Failed to load trendyol_top20.json')
+                    
+                    if st.session_state.analysis_data is None and os.path.exists(get_file_path('trendyol_top10.json')):
+                        try:
+                            with open(get_file_path('trendyol_top10.json'), 'r', encoding='utf-8') as f:
+                                raw = json.load(f)
+                            # If the file contains dict {'products': [...]}, normalize
+                            if isinstance(raw, dict) and 'products' in raw:
+                                raw_items = raw.get('products', [])
+                            elif isinstance(raw, list):
+                                raw_items = raw
+                            else:
+                                raw_items = []
+                            if raw_items and len(raw_items) > 0:
+                                st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                                st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('trendyol_top10.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                                loaded_from = 'trendyol_top10.json'
+                                logger.debug(f'Loaded {len(raw_items)} items from trendyol_top10.json')
+                            else:
+                                load_errors.append('trendyol_top10.json is empty')
+                        except Exception as e:
+                            load_errors.append(f'trendyol_top10.json: {str(e)}')
+                            logger.exception('Failed to load trendyol_top10.json')
+                    
+                    if st.session_state.analysis_data is None and os.path.exists(get_file_path('n11_top20.json')):
+                        try:
+                            with open(get_file_path('n11_top20.json'), 'r', encoding='utf-8') as f:
+                                raw = json.load(f)
+                            raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
+                            if raw_items and len(raw_items) > 0:
+                                st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                                st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('n11_top20.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                                loaded_from = 'n11_top20.json'
+                                logger.debug(f'Loaded {len(raw_items)} items from n11_top20.json')
+                            else:
+                                load_errors.append('n11_top20.json is empty')
+                        except Exception as e:
+                            load_errors.append(f'n11_top20.json: {str(e)}')
+                            logger.exception('Failed to load n11_top20.json')
+                    
+                    if st.session_state.analysis_data is None and os.path.exists(get_file_path('n11_top10.json')):
+                        try:
+                            with open(get_file_path('n11_top10.json'), 'r', encoding='utf-8') as f:
+                                raw = json.load(f)
+                            raw_items = raw if isinstance(raw, list) else raw.get('items', raw)
+                            if raw_items and len(raw_items) > 0:
+                                st.session_state.analysis_data = _normalize_analysis_items(raw_items)
+                                st.session_state.last_update = datetime.fromtimestamp(os.path.getmtime(get_file_path('n11_top10.json'))).strftime('%Y-%m-%d %H:%M:%S')
+                                loaded_from = 'n11_top10.json'
+                                logger.debug(f'Loaded {len(raw_items)} items from n11_top10.json')
+                            else:
+                                load_errors.append('n11_top10.json is empty')
+                        except Exception as e:
+                            load_errors.append(f'n11_top10.json: {str(e)}')
+                            logger.exception('Failed to load n11_top10.json')
+                    
+                    # DO NOT load proje_analiz_top40.json — it contains old/incorrect Mobpazar data
+                    # if st.session_state.analysis_data is None and os.path.exists(get_file_path('proje_analiz_top40.json')):
+                    #     ...
+                    
+                    # If all files failed or were empty, show error
+                    if st.session_state.analysis_data is None:
+                        error_msg = "❌ **Veri yükleme hatası**\n\n"
+                        error_msg += "Hiçbir veri dosyası başarıyla yüklenemedi.\n\n"
+                        if load_errors:
+                            error_msg += "**Hatalar:**\n"
+                            for err in load_errors:
+                                error_msg += f"- {err}\n"
+                        error_msg += "\n**Çözüm:** 'Trendyol Scrap Et' veya 'N11 Scrap Et' butonlarını kullanarak yeni veri toplayın."
+                        st.error(error_msg)
+                        logger.error(f'All data files failed to load. Errors: {load_errors}')
+                        # Set empty list to avoid infinite spinner
+                        st.session_state.analysis_data = []
+                        st.session_state.last_update = None
                     else:
-                        st.session_state.analysis_data = _normalize_analysis_items(scrape_turkish_ecommerce_sites() or [])
-                        st.session_state.last_update = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                except Exception:
-                    st.session_state.analysis_data = _normalize_analysis_items(scrape_turkish_ecommerce_sites() or [])
-                    st.session_state.last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        # Success - log which file was used
+                        logger.info(f'Successfully loaded data from: {loaded_from}')
+                        st.success(f'✓ Veriler yüklendi: **{loaded_from}** ({len(st.session_state.analysis_data)} ürün)')
+                except Exception as e:
+                    error_msg = f"❌ **Kritik hata**\n\nVeri yükleme sırasında beklenmeyen bir hata oluştu:\n\n`{str(e)}`\n\n**Çözüm:** 'Trendyol Scrap Et' butonunu kullanarak yeni veri toplayın."
+                    st.error(error_msg)
+                    logger.exception('Critical error during data loading')
+                    st.session_state.analysis_data = []
+                    st.session_state.last_update = None
                 # Force a one-time client rerun so Streamlit shows freshly loaded files instead of a cached session
                 try:
                     if st.session_state.analysis_data is not None and not st.session_state.get('analysis_auto_reloaded', False):
