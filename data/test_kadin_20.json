@@ -1,50 +1,52 @@
 [
   {
-    "rank": 1,
     "product_url": "https://www.trendyol.com/ritnice/kadin-tilia-crop-fume-orgu-hirka-p-795695413?merchantId=195439",
     "product_name": "Ritnice Kadın Tilia Crop Füme Örgü Hırka",
     "image_url": "https://cdn.dsmcdn.com/ty1553/prod/QC/20240917/12/5c049850-f843-31cd-b705-5113ce829efe/1_org_zoom.jpg",
-    "price": 769.0,
-    "category_3": "Ritnice Kadın Tilia Crop Füme Örgü Hırka",
     "reason": {
       "reason": "badge-[class*=\"badge\"]",
-      "badge_text": "En çok ziyaret edilen 7. ürün"
-    }
+      "badge_text": "En çok satılan 1. ürün"
+    },
+    "price": 769.0
   },
   {
-    "rank": 2,
     "product_url": "https://www.trendyol.com/ritnice/kadin-tilia-crop-krem-yumusak-dokulu-hirka-p-798693366?merchantId=195439",
     "product_name": "Ritnice Kadın Tilia Crop Krem Yumuşak Dokulu Hırka",
     "image_url": "https://cdn.dsmcdn.com/ty1553/prod/QC/20240917/12/8f1b6821-2175-34c9-bfb3-f61d77f7d154/1_org_zoom.jpg",
-    "price": 769.0,
-    "category_3": "Ritnice Kadın Tilia Crop Krem Yumuşak Dokulu Hırka",
     "reason": {
       "reason": "badge-[class*=\"badge\"]",
       "badge_text": "En çok ziyaret edilen 1. ürün"
-    }
+    },
+    "price": 769.0
   },
   {
-    "rank": 3,
     "product_url": "https://www.trendyol.com/ritnice/kadin-nina-bisiklet-yaka-siyah-basic-hirka-p-931998017?merchantId=195439",
     "product_name": "Ritnice Kadın Nina Bisiklet Yaka Siyah Basic Hırka",
     "image_url": "https://cdn.dsmcdn.com/ty1672/prod/QC/20250502/21/9f2da840-dd7e-3ca3-b5db-a35e71beb879/1_org_zoom.jpg",
-    "price": 769.0,
-    "category_3": "Ritnice Kadın Nina Bisiklet Yaka Siyah Basic Hırka",
     "reason": {
       "reason": "badge-[class*=\"badge\"]",
       "badge_text": "En çok ziyaret edilen 1. ürün"
-    }
+    },
+    "price": 769.0
   },
   {
-    "rank": 4,
     "product_url": "https://www.trendyol.com/ritnice/kadin-nina-bisiklet-yaka-vizon-basic-hirka-p-960697643?merchantId=195439",
     "product_name": "Ritnice Kadın Nina Bisiklet Yaka Vizon Basic Hırka",
     "image_url": "https://cdn.dsmcdn.com/ty1619/prod/QC/20250101/23/07d73acf-7fb8-3463-b90a-a86bcf7b8e28/1_org_zoom.jpg",
-    "price": 769.0,
-    "category_3": "Ritnice Kadın Nina Bisiklet Yaka Vizon Basic Hırka",
     "reason": {
       "reason": "badge-[class*=\"badge\"]",
       "badge_text": "En çok ziyaret edilen 1. ürün"
-    }
+    },
+    "price": 769.0
+  },
+  {
+    "product_url": "https://www.trendyol.com/peralist/kadin-leopar-dantel-detayli-ayar-halkali-askili-krep-bluz-p-1054125913?merchantId=1114696",
+    "product_name": "peralist Kadın Leopar Dantel Detaylı Ayar Halkalı Askılı Krep Bluz",
+    "image_url": "https://cdn.dsmcdn.com/ty1791/prod/QC_PREP/20251121/20/abd0c8f3-4089-3097-8861-56c06dd53188/1_org_zoom.jpg",
+    "reason": {
+      "reason": "badge-[class*=\"badge\"]",
+      "badge_text": "En çok değerlendirilen 3. ürün"
+    },
+    "price": 511.66
   }
 ]

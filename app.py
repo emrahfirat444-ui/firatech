@@ -1544,17 +1544,8 @@ else:
         st.write(f"Hoş geldiniz, **{st.session_state.user_data.get('name', 'Kullanıcı')}**!")
         st.subheader("Ne yapmak istersiniz?")
         
-        # Proje Analiz button (kept) - other menu buttons removed
-        st.write("")  # spacing
-        col5, col6, col7, col8 = st.columns(4)
-        with col5:
-            if st.button("📈 PROJE ANALİZ", use_container_width=True, key="btn_proje_analiz"):
-                st.session_state.page = "proje_analiz"
-                st.rerun()
-        with col6:
-            if st.button("🔎 Google Trends Analiz", use_container_width=True, key="btn_google_trends"):
-                st.session_state.page = "google_trends"
-                st.rerun()
+        # Proje Analiz and Google Trends features removed per request
+        st.info("'Proje Analiz' ve 'Google Trends' özellikleri devre dışı bırakıldı.")
 
         # Scoped CSS: try to style only the Proje Analiz button (best-effort via aria-label)
         st.markdown(
@@ -2257,106 +2248,14 @@ else:
             st.rerun()
     
     # PROJE ANALİZ SAYFASI
-    # GOOGLE TRENDS SAYFASI
-    elif st.session_state.page == "google_trends":
-        if st.button("⬅️ Ana Menü", key="back_from_google_trends"):
+    # GOOGLE TRENDS / PROJE ANALİZ features were removed by user request.
+    elif st.session_state.page in ("google_trends", "proje_analiz"):
+        if st.button("⬅️ Ana Menü", key="back_from_removed_feature"):
             st.session_state.page = "menu"
             st.rerun()
 
-        st.title("🔎 Google Trends Analiz")
-        st.write("Google Trends tarafından döndürülen o günün popüler aramalarını gösterir. (pytrends gerektirir)")
-
-        if "google_trends_data" not in st.session_state:
-            st.session_state.google_trends_data = None
-        if "google_trends_last_update" not in st.session_state:
-            st.session_state.google_trends_last_update = None
-
-        if st.button("🔄 Verileri Çek / Yenile", key="refresh_google_trends"):
-            with st.spinner("Google Trends verileri alınıyor..."):
-                items, err = fetch_google_trends_top50('turkey')
-                if err == 'pytrends_missing':
-                    st.error("`pytrends` yüklü değil. Lütfen `.venv` içine `pip install pytrends` ile kurun.")
-                    st.session_state.google_trends_data = []
-                elif err:
-                    st.error(f"Google Trends alınamadı: {err}")
-                    st.session_state.google_trends_data = []
-                else:
-                    st.session_state.google_trends_data = items
-                    st.session_state.google_trends_last_update = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                st.rerun()
-
-        if st.session_state.google_trends_last_update:
-            st.caption(f"Son güncelleme: {st.session_state.google_trends_last_update}")
-
-        data = st.session_state.get('google_trends_data')
-        if data:
-            df = pd.DataFrame(data)
-            st.subheader("Top Trendler")
-            st.dataframe(df, use_container_width=True)
-        else:
-            st.info("Henüz veri yok. 'Verileri Çek / Yenile' ile başlayın veya pytrends kurulu değilse kurulum yapın.")
-
-    elif st.session_state.page == "proje_analiz":
-        if st.button("⬅️ Ana Menü", key="back_from_proje_analiz"):
-            st.session_state.page = "menu"
-            st.rerun()
-        
-        st.title("📈 Proje Analiz - Türkiye'de En Çok Satan Ürünler")
-        st.write("Günlük olarak toplanan verilerden **top 10** ürünler:")
-        
-        # Initialize analysis state
-        if "analysis_data" not in st.session_state:
-            st.session_state.analysis_data = None
-        if "last_update" not in st.session_state:
-            st.session_state.last_update = None
-        
-        # Manual refresh controls: choose marketplace and optional category URL for live scrape
-        market = st.selectbox("Hedef Pazar", options=["Trendyol", "N11", "Local Cache"], index=0)
-
-        # Preset Trendyol kategori URL'leri (kolay seçim için)
-        trendyol_presets = {
-            'Kadın T-Shirt': 'https://www.trendyol.com/kadin-t-shirt-x-g3',
-            'Kadın Giyim': 'https://www.trendyol.com/kadin',
-            'Erkek T-Shirt': 'https://www.trendyol.com/erkek-t-shirt-x-g3',
-            'Ayakkabı - Kadın': 'https://www.trendyol.com/kadin-ayakkabi-x-g3',
-            'Çanta - Kadın': 'https://www.trendyol.com/canta',
-        }
-
-        preset_choice = st.selectbox("Hazır Trendyol Kategorileri", options=['(Seçiniz)'] + list(trendyol_presets.keys()))
-        preset_url = ''
-        if preset_choice and preset_choice != '(Seçiniz)':
-            preset_url = trendyol_presets.get(preset_choice, '')
-
-        default_url = preset_url or ''
-        category_url = st.text_input("Kategori sayfa URL'si (isteğe bağlı, Trendyol için örn. https://www.trendyol.com/kadin-t-shirt)", value=default_url)
-
-        if st.button("🔄 Verileri Yenile", key="refresh_analysis"):
-            with st.spinner("Veriler yenileniyor... Bu işlem birkaç dakika sürebilir"):
-                live = None
-                # If user selected Trendyol and provided a category URL, use the new Playwright scraper
-                if market == 'Trendyol' and category_url.strip():
-                    try:
-                        # run scraper in a separate process to avoid Playwright subprocess issues inside Streamlit
-                        try:
-                            import subprocess, shlex
-                            py = sys.executable or 'python'
-                            script = os.path.join(get_app_root(), 'scripts', 'run_trendyol_scraper.py')
-                            cmd = [py, script, '--url', category_url.strip(), '--out-dir', os.path.join(get_app_root(), 'data'), '--max', '120']
-                            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
-                            if proc.returncode != 0:
-                                logger.error('Scraper subprocess failed: %s %s', proc.returncode, proc.stderr)
-                                st.error('Trendyol scraper çalıştırılamadı. Loglara bakın.')
-                                live = None
-                            else:
-                                out_path = proc.stdout.strip().splitlines()[-1] if proc.stdout else ''
-                                if out_path and os.path.exists(out_path):
-                                    try:
-                                        with open(out_path, 'r', encoding='utf-8') as f:
-                                            raw = json.load(f)
-                                        live = raw if isinstance(raw, list) else raw.get('items', raw)
-                                        # Only write to trendyol_top20.json if we actually got data
-                                        if live and len(live) > 0:
-                                            normalized = []
+        st.title("Bu özellik devre dışı bırakıldı")
+        st.info("'Proje Analiz' ve 'Google Trends' özellikleri proje tarafından kaldırıldı. Veri temizliği yapıldı.")
                                             for rec in (live or [])[:20]:
                                                 normalized.append({
                                                     'product_name': rec.get('product_name') or rec.get('title') or rec.get('product_url'),
@@ -2529,7 +2428,43 @@ else:
             
             # Create DataFrame for table display
             df = pd.DataFrame(data)
-            st.dataframe(df, use_container_width=True)
+            # Add `best_seller` boolean and `badge_text` columns for clarity
+            def _extract_badge(rec):
+                try:
+                    r = rec.get('reason')
+                    if isinstance(r, dict):
+                        text = r.get('badge_text') or r.get('snippet') or r.get('reason')
+                        if text:
+                            return True, text
+                except Exception:
+                    pass
+                return False, ''
+
+            bs_flags = [ _extract_badge(rec) for rec in data ]
+            df['best_seller'] = [b for b, t in bs_flags]
+            df['badge_text'] = [t for b, t in bs_flags]
+
+            # Filter: default to showing only verified best-sellers
+            try:
+                show_only_verified = st.checkbox("Sadece doğrulanmış 'En Çok Satan' ürünlerini göster", value=True)
+            except Exception:
+                show_only_verified = True
+            if show_only_verified:
+                df = df[df['best_seller'] == True]
+
+            # Prefer showing badge info first
+            cols = list(df.columns)
+            # move best_seller and badge_text to front if present
+            for c in ['best_seller', 'badge_text']:
+                if c in cols:
+                    cols.remove(c)
+                    cols.insert(0, c)
+            df = df[cols]
+
+            if df is None or len(df) == 0:
+                st.info("Doğrulanmış 'En Çok Satan' ürünü bulunamadı. Sağ üstten 'Trendyol Scrap Et' ile yeniden taratabilirsiniz.")
+            else:
+                st.dataframe(df, use_container_width=True)
             
             # Bar chart for sales rank
             if "rank" in df.columns and "product_name" in df.columns:

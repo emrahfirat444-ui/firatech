@@ -123,3 +123,638 @@
 2025-12-26 13:45:16,039 DEBUG Initial session_state keys: []
 2025-12-26 13:45:16,039 DEBUG Initial query_params: {}
 2025-12-26 13:45:16,039 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:19:30,073 DEBUG Starting app.py
+2026-01-06 10:19:30,073 DEBUG Initial session_state keys: []
+2026-01-06 10:19:30,073 DEBUG Initial query_params: {}
+2026-01-06 10:19:30,073 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:19:38,181 DEBUG Starting app.py
+2026-01-06 10:19:38,251 DEBUG Initial query_params: {}
+2026-01-06 10:19:38,251 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:19:38,309 DEBUG Saving users.json with 1 users
+2026-01-06 10:19:38,311 DEBUG users.json saved
+2026-01-06 10:19:38,377 DEBUG Starting app.py
+2026-01-06 10:19:38,383 DEBUG Initial query_params: {}
+2026-01-06 10:19:38,383 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:19:42,312 DEBUG Starting app.py
+2026-01-06 10:19:42,316 DEBUG Initial session_state keys: ['leave_data', 'btn_proje_analiz', 'gallery_state', 'btn_google_trends', 'authenticated', 'token', 'page', 'chat_history', 'user_data']
+2026-01-06 10:19:42,318 DEBUG Initial query_params: {}
+2026-01-06 10:19:42,318 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:19:42,420 DEBUG Starting app.py
+2026-01-06 10:19:42,421 DEBUG Initial session_state keys: ['leave_data', 'btn_proje_analiz', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history', 'user_data']
+2026-01-06 10:19:42,421 DEBUG Initial query_params: {}
+2026-01-06 10:19:42,421 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:19:42,441 DEBUG experimental_rerun not available or failed
+2026-01-06 10:20:07,608 DEBUG Starting app.py
+2026-01-06 10:20:07,608 DEBUG Initial session_state keys: []
+2026-01-06 10:20:07,608 DEBUG Initial query_params: {}
+2026-01-06 10:20:07,608 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:20:12,202 DEBUG Starting app.py
+2026-01-06 10:20:12,209 DEBUG Initial query_params: {}
+2026-01-06 10:20:12,210 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:20:12,252 DEBUG Saving users.json with 1 users
+2026-01-06 10:20:12,253 DEBUG users.json saved
+2026-01-06 10:20:12,304 DEBUG Starting app.py
+2026-01-06 10:20:12,321 DEBUG Initial query_params: {}
+2026-01-06 10:20:12,321 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:20:14,692 DEBUG Starting app.py
+2026-01-06 10:20:14,693 DEBUG Initial session_state keys: ['authenticated', 'user_data', 'gallery_state', 'leave_data', 'btn_google_trends', 'page', 'chat_history', 'token', 'btn_proje_analiz']
+2026-01-06 10:20:14,693 DEBUG Initial query_params: {}
+2026-01-06 10:20:14,693 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:20:14,779 DEBUG Starting app.py
+2026-01-06 10:20:14,780 DEBUG Initial session_state keys: ['authenticated', 'user_data', 'gallery_state', 'leave_data', 'page', 'chat_history', 'token', 'btn_proje_analiz']
+2026-01-06 10:20:14,780 DEBUG Initial query_params: {}
+2026-01-06 10:20:14,780 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:20:14,796 DEBUG experimental_rerun not available or failed
+2026-01-06 10:20:32,015 DEBUG Starting app.py
+2026-01-06 10:20:32,017 DEBUG Initial session_state keys: ['authenticated', 'user_data', 'gallery_state', 'leave_data', 'last_update', 'analysis_auto_reloaded', 'back_from_proje_analiz', 'refresh_analysis', 'page', 'chat_history', 'analysis_data', 'token']
+2026-01-06 10:20:32,017 DEBUG Initial query_params: {}
+2026-01-06 10:20:32,017 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:20:32,855 DEBUG Loaded 20 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-06 10:20:32,856 DEBUG Loaded 10 items from C:\Projeler\test\trendyol_top10.json (site=Trendyol)
+2026-01-06 10:20:32,857 DEBUG Loaded 20 items from C:\Projeler\test\n11_top20.json (site=N11)
+2026-01-06 10:20:32,857 DEBUG Loaded 10 items from C:\Projeler\test\n11_top10.json (site=N11)
+2026-01-06 10:20:32,859 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 10:20:32,944 DEBUG Starting app.py
+2026-01-06 10:20:32,944 DEBUG Initial session_state keys: ['authenticated', 'user_data', 'gallery_state', 'leave_data', 'last_update', 'analysis_auto_reloaded', 'back_from_proje_analiz', 'refresh_analysis', 'page', 'chat_history', 'analysis_data', 'token']
+2026-01-06 10:20:32,946 DEBUG Initial query_params: {}
+2026-01-06 10:20:32,946 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:21,106 DEBUG Starting app.py
+2026-01-06 10:21:21,106 DEBUG Initial session_state keys: []
+2026-01-06 10:21:21,106 DEBUG Initial query_params: {}
+2026-01-06 10:21:21,106 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:26,636 DEBUG Starting app.py
+2026-01-06 10:21:26,636 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'login_password', 'leave_data', 'token', 'chat_history', 'page', 'gallery_state', 'user_data', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'authenticated', 'login_identifier']
+2026-01-06 10:21:26,636 DEBUG Initial query_params: {}
+2026-01-06 10:21:26,636 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:26,687 DEBUG Saving users.json with 1 users
+2026-01-06 10:21:26,688 DEBUG users.json saved
+2026-01-06 10:21:26,736 DEBUG Starting app.py
+2026-01-06 10:21:26,736 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'login_password', 'leave_data', 'token', 'chat_history', 'page', 'gallery_state', 'user_data', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'authenticated', 'login_identifier']
+2026-01-06 10:21:26,736 DEBUG Initial query_params: {}
+2026-01-06 10:21:26,736 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:29,148 DEBUG Starting app.py
+2026-01-06 10:21:29,148 DEBUG Initial session_state keys: ['leave_data', 'token', 'btn_proje_analiz', 'chat_history', 'page', 'gallery_state', 'user_data', 'authenticated', 'btn_google_trends']
+2026-01-06 10:21:29,148 DEBUG Initial query_params: {}
+2026-01-06 10:21:29,148 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:29,226 DEBUG Starting app.py
+2026-01-06 10:21:29,227 DEBUG Initial session_state keys: ['leave_data', 'token', 'btn_proje_analiz', 'chat_history', 'page', 'gallery_state', 'user_data', 'authenticated']
+2026-01-06 10:21:29,228 DEBUG Initial query_params: {}
+2026-01-06 10:21:29,228 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:29,239 DEBUG experimental_rerun not available or failed
+2026-01-06 10:21:32,008 DEBUG Starting app.py
+2026-01-06 10:21:32,009 DEBUG Initial session_state keys: ['last_update', 'back_from_proje_analiz', 'leave_data', 'token', 'chat_history', 'page', 'gallery_state', 'analysis_data', 'analysis_auto_reloaded', 'refresh_analysis', 'user_data', 'authenticated']
+2026-01-06 10:21:32,009 DEBUG Initial query_params: {}
+2026-01-06 10:21:32,009 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:21:32,590 DEBUG Loaded 20 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-06 10:21:32,590 DEBUG Loaded 10 items from C:\Projeler\test\trendyol_top10.json (site=Trendyol)
+2026-01-06 10:21:32,591 DEBUG Loaded 20 items from C:\Projeler\test\n11_top20.json (site=N11)
+2026-01-06 10:21:32,591 DEBUG Loaded 10 items from C:\Projeler\test\n11_top10.json (site=N11)
+2026-01-06 10:21:32,591 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 10:21:32,685 DEBUG Starting app.py
+2026-01-06 10:21:32,686 DEBUG Initial session_state keys: ['last_update', 'back_from_proje_analiz', 'leave_data', 'token', 'chat_history', 'page', 'gallery_state', 'analysis_data', 'analysis_auto_reloaded', 'refresh_analysis', 'user_data', 'authenticated']
+2026-01-06 10:21:32,686 DEBUG Initial query_params: {}
+2026-01-06 10:21:32,686 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:37:34,125 DEBUG Starting app.py
+2026-01-06 10:37:34,126 DEBUG Initial session_state keys: []
+2026-01-06 10:37:34,126 DEBUG Initial query_params: {}
+2026-01-06 10:37:34,126 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:37:34,546 DEBUG Starting app.py
+2026-01-06 10:37:34,547 DEBUG Initial session_state keys: []
+2026-01-06 10:37:34,547 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:37:34,547 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:37:39,234 DEBUG Starting app.py
+2026-01-06 10:37:39,235 DEBUG Initial session_state keys: []
+2026-01-06 10:37:39,236 DEBUG Initial query_params: {}
+2026-01-06 10:37:39,236 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:38:17,876 DEBUG Starting app.py
+2026-01-06 10:38:17,878 DEBUG Initial session_state keys: []
+2026-01-06 10:38:17,879 DEBUG Initial query_params: {}
+2026-01-06 10:38:17,879 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:38:19,315 DEBUG Starting app.py
+2026-01-06 10:38:19,316 DEBUG Initial session_state keys: []
+2026-01-06 10:38:19,316 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:38:19,316 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:38:21,949 DEBUG Starting app.py
+2026-01-06 10:38:21,951 DEBUG Initial session_state keys: []
+2026-01-06 10:38:21,951 DEBUG Initial query_params: {}
+2026-01-06 10:38:21,952 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:38:39,419 DEBUG Starting app.py
+2026-01-06 10:38:39,420 DEBUG Initial session_state keys: []
+2026-01-06 10:38:39,421 DEBUG Initial query_params: {}
+2026-01-06 10:38:39,421 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:38:40,723 DEBUG Starting app.py
+2026-01-06 10:38:40,724 DEBUG Initial session_state keys: []
+2026-01-06 10:38:40,724 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:38:40,724 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:38:44,608 DEBUG Starting app.py
+2026-01-06 10:38:44,609 DEBUG Initial session_state keys: []
+2026-01-06 10:38:44,609 DEBUG Initial query_params: {}
+2026-01-06 10:38:44,609 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:39:25,045 DEBUG Starting app.py
+2026-01-06 10:39:25,046 DEBUG Initial session_state keys: []
+2026-01-06 10:39:25,046 DEBUG Initial query_params: {}
+2026-01-06 10:39:25,046 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:39:26,363 DEBUG Starting app.py
+2026-01-06 10:39:26,365 DEBUG Initial session_state keys: []
+2026-01-06 10:39:26,365 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:39:26,365 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:39:28,679 DEBUG Starting app.py
+2026-01-06 10:39:28,680 DEBUG Initial session_state keys: []
+2026-01-06 10:39:28,680 DEBUG Initial query_params: {}
+2026-01-06 10:39:28,680 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:40:15,513 DEBUG Starting app.py
+2026-01-06 10:40:15,514 DEBUG Initial session_state keys: []
+2026-01-06 10:40:15,515 DEBUG Initial query_params: {}
+2026-01-06 10:40:15,515 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:40:47,262 DEBUG Starting app.py
+2026-01-06 10:40:47,263 DEBUG Initial session_state keys: []
+2026-01-06 10:40:47,264 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:40:47,264 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:40:51,138 DEBUG Starting app.py
+2026-01-06 10:40:51,138 DEBUG Initial session_state keys: []
+2026-01-06 10:40:51,138 DEBUG Initial query_params: {}
+2026-01-06 10:40:51,138 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:42:47,441 DEBUG Starting app.py
+2026-01-06 10:42:47,442 DEBUG Initial session_state keys: []
+2026-01-06 10:42:47,443 DEBUG Initial query_params: {}
+2026-01-06 10:42:47,443 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:42:51,906 DEBUG Starting app.py
+2026-01-06 10:42:51,906 DEBUG Initial session_state keys: []
+2026-01-06 10:42:51,907 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:42:51,907 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:42:55,994 DEBUG Starting app.py
+2026-01-06 10:42:55,995 DEBUG Initial session_state keys: []
+2026-01-06 10:42:55,995 DEBUG Initial query_params: {}
+2026-01-06 10:42:55,995 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:42:58,388 DEBUG Starting app.py
+2026-01-06 10:42:58,389 DEBUG Initial session_state keys: ['page', 'user_data', 'gallery_state', 'chat_history', 'login_password', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'leave_data', 'authenticated', 'login_identifier', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'token']
+2026-01-06 10:42:58,390 DEBUG Initial query_params: {}
+2026-01-06 10:42:58,390 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:42:58,430 DEBUG Saving users.json with 1 users
+2026-01-06 10:42:58,431 DEBUG users.json saved
+2026-01-06 10:42:58,471 DEBUG Starting app.py
+2026-01-06 10:42:58,472 DEBUG Initial session_state keys: ['page', 'user_data', 'gallery_state', 'chat_history', 'login_password', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'leave_data', 'authenticated', 'login_identifier', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'token']
+2026-01-06 10:42:58,472 DEBUG Initial query_params: {}
+2026-01-06 10:42:58,473 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:45:44,771 DEBUG Starting app.py
+2026-01-06 10:45:44,772 DEBUG Initial session_state keys: []
+2026-01-06 10:45:44,772 DEBUG Initial query_params: {}
+2026-01-06 10:45:44,773 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:45:44,930 DEBUG FORCE_MENU active: forcing page=menu
+2026-01-06 10:45:45,325 DEBUG Starting app.py
+2026-01-06 10:45:45,326 DEBUG Initial session_state keys: []
+2026-01-06 10:45:45,327 DEBUG Initial query_params: {'test': '1'}
+2026-01-06 10:45:45,327 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:45:45,328 DEBUG FORCE_MENU active: forcing page=menu
+2026-01-06 10:45:48,757 DEBUG Starting app.py
+2026-01-06 10:45:48,758 DEBUG Initial session_state keys: []
+2026-01-06 10:45:48,758 DEBUG Initial query_params: {}
+2026-01-06 10:45:48,758 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:45:48,759 DEBUG FORCE_MENU active: forcing page=menu
+2026-01-06 10:45:51,377 DEBUG Starting app.py
+2026-01-06 10:45:51,379 DEBUG Initial session_state keys: ['chat_history', 'leave_data', 'page', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'authenticated', 'user_data', 'login_password', 'token', 'gallery_state', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 10:45:51,379 DEBUG Initial query_params: {}
+2026-01-06 10:45:51,379 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:45:51,380 DEBUG FORCE_MENU active: forcing page=menu
+2026-01-06 10:45:51,416 DEBUG Saving users.json with 1 users
+2026-01-06 10:45:51,417 DEBUG users.json saved
+2026-01-06 10:45:51,459 DEBUG Starting app.py
+2026-01-06 10:45:51,459 DEBUG Initial session_state keys: ['chat_history', 'leave_data', 'page', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'authenticated', 'user_data', 'login_password', 'token', 'gallery_state', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 10:45:51,460 DEBUG Initial query_params: {}
+2026-01-06 10:45:51,460 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:45:51,461 DEBUG FORCE_MENU active: forcing page=menu
+2026-01-06 10:54:32,288 DEBUG Starting app.py
+2026-01-06 10:54:32,288 DEBUG Initial session_state keys: []
+2026-01-06 10:54:32,288 DEBUG Initial query_params: {}
+2026-01-06 10:54:32,288 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:54:41,157 DEBUG Starting app.py
+2026-01-06 10:54:41,159 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 10:54:41,160 DEBUG Initial query_params: {}
+2026-01-06 10:54:41,160 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:54:41,214 DEBUG Saving users.json with 1 users
+2026-01-06 10:54:41,214 DEBUG users.json saved
+2026-01-06 10:54:41,293 DEBUG Starting app.py
+2026-01-06 10:54:41,294 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 10:54:41,294 DEBUG Initial query_params: {}
+2026-01-06 10:54:41,295 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:54:44,292 DEBUG Starting app.py
+2026-01-06 10:54:44,293 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'btn_google_trends', 'gallery_state', 'token', 'page']
+2026-01-06 10:54:44,293 DEBUG Initial query_params: {}
+2026-01-06 10:54:44,294 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:54:44,371 DEBUG Starting app.py
+2026-01-06 10:54:44,371 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'gallery_state', 'token', 'page']
+2026-01-06 10:54:44,371 DEBUG Initial query_params: {}
+2026-01-06 10:54:44,371 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:54:44,386 DEBUG experimental_rerun not available or failed
+2026-01-06 10:54:47,196 DEBUG Starting app.py
+2026-01-06 10:54:47,196 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'back_from_proje_analiz', 'last_update', 'refresh_analysis', 'analysis_data', 'analysis_auto_reloaded', 'chat_history', 'gallery_state', 'token', 'page']
+2026-01-06 10:54:47,196 DEBUG Initial query_params: {}
+2026-01-06 10:54:47,196 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 10:54:51,195 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 10:54:51,290 DEBUG Starting app.py
+2026-01-06 10:54:51,290 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'back_from_proje_analiz', 'last_update', 'refresh_analysis', 'analysis_data', 'analysis_auto_reloaded', 'chat_history', 'gallery_state', 'token', 'page']
+2026-01-06 10:54:51,290 DEBUG Initial query_params: {}
+2026-01-06 10:54:51,290 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:57:58,670 DEBUG Starting app.py
+2026-01-06 11:57:58,671 DEBUG Initial session_state keys: []
+2026-01-06 11:57:58,671 DEBUG Initial query_params: {}
+2026-01-06 11:57:58,671 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:10,541 DEBUG Starting app.py
+2026-01-06 11:58:10,541 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 11:58:10,556 DEBUG Initial query_params: {}
+2026-01-06 11:58:10,557 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:10,573 DEBUG Saving users.json with 1 users
+2026-01-06 11:58:10,574 DEBUG users.json saved
+2026-01-06 11:58:10,674 DEBUG Starting app.py
+2026-01-06 11:58:10,674 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 11:58:10,674 DEBUG Initial query_params: {}
+2026-01-06 11:58:10,674 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:13,283 DEBUG Starting app.py
+2026-01-06 11:58:13,283 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'btn_google_trends', 'gallery_state', 'token', 'page']
+2026-01-06 11:58:13,283 DEBUG Initial query_params: {}
+2026-01-06 11:58:13,283 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:13,391 DEBUG Starting app.py
+2026-01-06 11:58:13,393 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'gallery_state', 'token', 'page']
+2026-01-06 11:58:13,393 DEBUG Initial query_params: {}
+2026-01-06 11:58:13,393 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:13,404 DEBUG experimental_rerun not available or failed
+2026-01-06 11:58:29,442 DEBUG Starting app.py
+2026-01-06 11:58:29,442 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 11:58:29,442 DEBUG Initial query_params: {}
+2026-01-06 11:58:29,442 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:32,260 DEBUG Starting app.py
+2026-01-06 11:58:32,260 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 11:58:32,260 DEBUG Initial query_params: {}
+2026-01-06 11:58:32,260 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:32,341 ERROR Trendyol scraping failed
+Traceback (most recent call last):
+  File "C:\Projeler\test\app.py", line 2325, in <module>
+    out_path = scrape_category(category_url.strip(), out_dir=os.path.join(get_app_root(), 'data'), max_products=120)
+  File "C:\Projeler\test\scrapers\trendyol_scraper.py", line 33, in scrape_category
+    with sync_playwright() as p:
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\sync_api\_context_manager.py", line 77, in __enter__
+    dispatcher_fiber.switch()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\sync_api\_context_manager.py", line 56, in greenlet_main
+    self._loop.run_until_complete(self._connection.run_as_sync())
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_connection.py", line 267, in run_as_sync
+    await self.run()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_connection.py", line 276, in run
+    await self._transport.connect()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_transport.py", line 133, in connect
+    raise exc
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_transport.py", line 120, in connect
+    self._proc = await asyncio.create_subprocess_exec(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\subprocess.py", line 236, in create_subprocess_exec
+    transport, protocol = await loop.subprocess_exec(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1630, in subprocess_exec
+    transport = await self._make_subprocess_transport(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 491, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+2026-01-06 11:58:32,349 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 11:58:32,443 DEBUG Starting app.py
+2026-01-06 11:58:32,443 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 11:58:32,443 DEBUG Initial query_params: {}
+2026-01-06 11:58:32,443 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:40,109 DEBUG Starting app.py
+2026-01-06 11:58:40,109 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 11:58:40,109 DEBUG Initial query_params: {}
+2026-01-06 11:58:40,109 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 11:58:40,130 ERROR Trendyol scraping failed
+Traceback (most recent call last):
+  File "C:\Projeler\test\app.py", line 2325, in <module>
+    out_path = scrape_category(category_url.strip(), out_dir=os.path.join(get_app_root(), 'data'), max_products=120)
+  File "C:\Projeler\test\scrapers\trendyol_scraper.py", line 33, in scrape_category
+    with sync_playwright() as p:
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\sync_api\_context_manager.py", line 77, in __enter__
+    dispatcher_fiber.switch()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\sync_api\_context_manager.py", line 56, in greenlet_main
+    self._loop.run_until_complete(self._connection.run_as_sync())
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_connection.py", line 267, in run_as_sync
+    await self.run()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_connection.py", line 276, in run
+    await self._transport.connect()
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_transport.py", line 133, in connect
+    raise exc
+  File "C:\Projeler\test\.venv\lib\site-packages\playwright\_impl\_transport.py", line 120, in connect
+    self._proc = await asyncio.create_subprocess_exec(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\subprocess.py", line 236, in create_subprocess_exec
+    transport, protocol = await loop.subprocess_exec(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 1630, in subprocess_exec
+    transport = await self._make_subprocess_transport(
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 491, in _make_subprocess_transport
+    raise NotImplementedError
+NotImplementedError
+2026-01-06 11:58:40,130 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 11:58:40,236 DEBUG Starting app.py
+2026-01-06 11:58:40,236 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 11:58:40,236 DEBUG Initial query_params: {}
+2026-01-06 11:58:40,238 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:22,013 DEBUG Starting app.py
+2026-01-06 15:34:22,013 DEBUG Initial session_state keys: []
+2026-01-06 15:34:22,013 DEBUG Initial query_params: {}
+2026-01-06 15:34:22,013 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:31,886 DEBUG Starting app.py
+2026-01-06 15:34:31,887 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 15:34:31,887 DEBUG Initial query_params: {}
+2026-01-06 15:34:31,887 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:31,905 DEBUG Saving users.json with 1 users
+2026-01-06 15:34:31,910 DEBUG users.json saved
+2026-01-06 15:34:32,062 DEBUG Starting app.py
+2026-01-06 15:34:32,064 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 15:34:32,064 DEBUG Initial query_params: {}
+2026-01-06 15:34:32,064 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:34,487 DEBUG Starting app.py
+2026-01-06 15:34:34,489 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'btn_google_trends', 'gallery_state', 'token', 'page']
+2026-01-06 15:34:34,491 DEBUG Initial query_params: {}
+2026-01-06 15:34:34,495 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:34,636 DEBUG Starting app.py
+2026-01-06 15:34:34,641 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'gallery_state', 'token', 'page']
+2026-01-06 15:34:34,642 DEBUG Initial query_params: {}
+2026-01-06 15:34:34,642 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:34,653 DEBUG experimental_rerun not available or failed
+2026-01-06 15:34:56,721 DEBUG Starting app.py
+2026-01-06 15:34:56,723 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 15:34:56,723 DEBUG Initial query_params: {}
+2026-01-06 15:34:56,723 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:34:57,790 DEBUG Loaded 20 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-06 15:34:57,848 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 15:34:58,034 DEBUG Starting app.py
+2026-01-06 15:34:58,038 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 15:34:58,039 DEBUG Initial query_params: {}
+2026-01-06 15:34:58,039 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:38:52,605 DEBUG Starting app.py
+2026-01-06 15:38:52,605 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 15:38:52,605 DEBUG Initial query_params: {}
+2026-01-06 15:38:52,605 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:38:53,882 DEBUG Starting app.py
+2026-01-06 15:38:53,887 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 15:38:53,887 DEBUG Initial query_params: {}
+2026-01-06 15:38:53,887 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 15:38:55,821 DEBUG Loaded 20 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-06 15:38:55,828 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-06 15:38:55,953 DEBUG Starting app.py
+2026-01-06 15:38:55,953 DEBUG Initial session_state keys: ['user_data', 'refresh_analysis', 'analysis_data', 'token', 'page', 'authenticated', 'leave_data', 'last_update', 'back_from_proje_analiz', 'analysis_auto_reloaded', 'gallery_state', 'chat_history']
+2026-01-06 15:38:55,953 DEBUG Initial query_params: {}
+2026-01-06 15:38:55,953 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:17,749 DEBUG Starting app.py
+2026-01-06 16:41:17,749 DEBUG Initial session_state keys: []
+2026-01-06 16:41:17,749 DEBUG Initial query_params: {}
+2026-01-06 16:41:17,749 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:28,817 DEBUG Starting app.py
+2026-01-06 16:41:28,820 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 16:41:28,822 DEBUG Initial query_params: {}
+2026-01-06 16:41:28,822 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:30,078 DEBUG Starting app.py
+2026-01-06 16:41:30,078 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 16:41:30,081 DEBUG Initial query_params: {}
+2026-01-06 16:41:30,082 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:30,099 DEBUG Saving users.json with 1 users
+2026-01-06 16:41:30,102 DEBUG users.json saved
+2026-01-06 16:41:30,255 DEBUG Starting app.py
+2026-01-06 16:41:30,258 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'gallery_state', 'token', 'login_password', 'page', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum']
+2026-01-06 16:41:30,258 DEBUG Initial query_params: {}
+2026-01-06 16:41:30,258 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:32,908 DEBUG Starting app.py
+2026-01-06 16:41:32,908 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'btn_google_trends', 'gallery_state', 'token', 'page']
+2026-01-06 16:41:32,908 DEBUG Initial query_params: {}
+2026-01-06 16:41:32,908 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:33,050 DEBUG Starting app.py
+2026-01-06 16:41:33,050 DEBUG Initial session_state keys: ['user_data', 'leave_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'gallery_state', 'token', 'page']
+2026-01-06 16:41:33,050 DEBUG Initial query_params: {}
+2026-01-06 16:41:33,050 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-06 16:41:33,084 DEBUG experimental_rerun not available or failed
+2026-01-12 17:07:33,355 DEBUG Starting app.py
+2026-01-12 17:07:33,355 DEBUG Initial session_state keys: []
+2026-01-12 17:07:33,355 DEBUG Initial query_params: {}
+2026-01-12 17:07:33,355 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:07:40,396 DEBUG Starting app.py
+2026-01-12 17:07:40,397 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history']
+2026-01-12 17:07:40,398 DEBUG Initial query_params: {}
+2026-01-12 17:07:40,398 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:07:40,479 DEBUG Saving users.json with 1 users
+2026-01-12 17:07:40,480 DEBUG users.json saved
+2026-01-12 17:07:40,535 DEBUG Starting app.py
+2026-01-12 17:07:40,540 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history']
+2026-01-12 17:07:40,540 DEBUG Initial query_params: {}
+2026-01-12 17:07:40,540 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:07:44,689 DEBUG Starting app.py
+2026-01-12 17:07:44,691 DEBUG Initial session_state keys: ['leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'page', 'btn_google_trends', 'chat_history', 'btn_proje_analiz']
+2026-01-12 17:07:44,692 DEBUG Initial query_params: {}
+2026-01-12 17:07:44,692 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:07:44,776 DEBUG Starting app.py
+2026-01-12 17:07:44,777 DEBUG Initial session_state keys: ['leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history', 'btn_proje_analiz']
+2026-01-12 17:07:44,777 DEBUG Initial query_params: {}
+2026-01-12 17:07:44,777 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:07:44,790 DEBUG experimental_rerun not available or failed
+2026-01-12 17:07:52,710 DEBUG Starting app.py
+2026-01-12 17:07:52,717 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:07:52,718 DEBUG Initial query_params: {}
+2026-01-12 17:07:52,718 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:07:54,505 DEBUG Starting app.py
+2026-01-12 17:07:54,505 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:07:54,505 DEBUG Initial query_params: {}
+2026-01-12 17:07:54,505 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:08:30,944 DEBUG Loaded 0 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-12 17:08:30,971 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-12 17:08:31,044 DEBUG Starting app.py
+2026-01-12 17:08:31,044 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:08:31,044 DEBUG Initial query_params: {}
+2026-01-12 17:08:31,044 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:28,299 DEBUG Starting app.py
+2026-01-12 17:12:28,300 DEBUG Initial session_state keys: []
+2026-01-12 17:12:28,301 DEBUG Initial query_params: {}
+2026-01-12 17:12:28,301 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:34,382 DEBUG Starting app.py
+2026-01-12 17:12:34,384 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history']
+2026-01-12 17:12:34,384 DEBUG Initial query_params: {}
+2026-01-12 17:12:34,385 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:34,388 DEBUG Saving users.json with 1 users
+2026-01-12 17:12:34,388 DEBUG users.json saved
+2026-01-12 17:12:34,482 DEBUG Starting app.py
+2026-01-12 17:12:34,482 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history']
+2026-01-12 17:12:34,483 DEBUG Initial query_params: {}
+2026-01-12 17:12:34,483 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:36,717 DEBUG Starting app.py
+2026-01-12 17:12:36,719 DEBUG Initial session_state keys: ['leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'page', 'btn_google_trends', 'chat_history', 'btn_proje_analiz']
+2026-01-12 17:12:36,720 DEBUG Initial query_params: {}
+2026-01-12 17:12:36,720 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:36,806 DEBUG Starting app.py
+2026-01-12 17:12:36,807 DEBUG Initial session_state keys: ['leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history', 'btn_proje_analiz']
+2026-01-12 17:12:36,807 DEBUG Initial query_params: {}
+2026-01-12 17:12:36,807 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:36,816 DEBUG experimental_rerun not available or failed
+2026-01-12 17:12:42,391 DEBUG Starting app.py
+2026-01-12 17:12:42,396 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:12:42,396 DEBUG Initial query_params: {}
+2026-01-12 17:12:42,396 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:12:44,466 DEBUG Starting app.py
+2026-01-12 17:12:44,466 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:12:44,469 DEBUG Initial query_params: {}
+2026-01-12 17:12:44,470 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:13:00,454 DEBUG Loaded 0 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-12 17:13:00,455 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-12 17:13:00,527 DEBUG Starting app.py
+2026-01-12 17:13:00,529 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:13:00,530 DEBUG Initial query_params: {}
+2026-01-12 17:13:00,530 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:26,175 DEBUG Starting app.py
+2026-01-12 17:18:26,176 DEBUG Initial session_state keys: []
+2026-01-12 17:18:26,176 DEBUG Initial query_params: {}
+2026-01-12 17:18:26,176 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:32,094 DEBUG Starting app.py
+2026-01-12 17:18:32,095 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history']
+2026-01-12 17:18:32,096 DEBUG Initial query_params: {}
+2026-01-12 17:18:32,096 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:32,107 DEBUG Saving users.json with 1 users
+2026-01-12 17:18:32,108 DEBUG users.json saved
+2026-01-12 17:18:32,185 DEBUG Starting app.py
+2026-01-12 17:18:32,188 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history']
+2026-01-12 17:18:32,188 DEBUG Initial query_params: {}
+2026-01-12 17:18:32,188 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:34,454 DEBUG Starting app.py
+2026-01-12 17:18:34,454 DEBUG Initial session_state keys: ['leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'page', 'btn_google_trends', 'chat_history', 'btn_proje_analiz']
+2026-01-12 17:18:34,456 DEBUG Initial query_params: {}
+2026-01-12 17:18:34,456 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:34,553 DEBUG Starting app.py
+2026-01-12 17:18:34,554 DEBUG Initial session_state keys: ['leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'page', 'chat_history', 'btn_proje_analiz']
+2026-01-12 17:18:34,554 DEBUG Initial query_params: {}
+2026-01-12 17:18:34,554 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:34,564 DEBUG Loaded 16 items from trendyol_top20.json
+2026-01-12 17:18:34,564 INFO Successfully loaded data from: trendyol_top20.json
+2026-01-12 17:18:34,565 DEBUG experimental_rerun not available or failed
+2026-01-12 17:18:38,082 DEBUG Starting app.py
+2026-01-12 17:18:38,084 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:18:38,084 DEBUG Initial query_params: {}
+2026-01-12 17:18:38,085 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:18:38,822 DEBUG Starting app.py
+2026-01-12 17:18:38,831 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:18:38,831 DEBUG Initial query_params: {}
+2026-01-12 17:18:38,831 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-12 17:19:02,369 WARNING Scraper returned empty data; not overwriting trendyol_top20.json
+2026-01-12 17:19:02,369 DEBUG Loaded 16 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-12 17:19:02,373 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-12 17:19:02,446 DEBUG Starting app.py
+2026-01-12 17:19:02,446 DEBUG Initial session_state keys: ['chat_history', 'refresh_analysis', 'last_update', 'leave_data', 'user_data', 'gallery_state', 'authenticated', 'token', 'analysis_auto_reloaded', 'page', 'analysis_data', 'back_from_proje_analiz']
+2026-01-12 17:19:02,446 DEBUG Initial query_params: {}
+2026-01-12 17:19:02,446 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:04:41,841 DEBUG Starting app.py
+2026-01-13 10:04:41,841 DEBUG Initial session_state keys: []
+2026-01-13 10:04:41,841 DEBUG Initial query_params: {}
+2026-01-13 10:04:41,841 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:04:49,330 DEBUG Starting app.py
+2026-01-13 10:04:49,330 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'user_data', 'login_password', 'authenticated', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'chat_history', 'page', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'token']
+2026-01-13 10:04:49,334 DEBUG Initial query_params: {}
+2026-01-13 10:04:49,335 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:04:49,436 DEBUG Saving users.json with 1 users
+2026-01-13 10:04:49,440 DEBUG users.json saved
+2026-01-13 10:04:49,524 DEBUG Starting app.py
+2026-01-13 10:04:49,525 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'user_data', 'login_password', 'authenticated', 'login_identifier', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'chat_history', 'page', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'token']
+2026-01-13 10:04:49,526 DEBUG Initial query_params: {}
+2026-01-13 10:04:49,526 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:04:52,562 DEBUG Starting app.py
+2026-01-13 10:04:52,566 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'btn_google_trends', 'user_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'page', 'token']
+2026-01-13 10:04:52,566 DEBUG Initial query_params: {}
+2026-01-13 10:04:52,566 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:04:52,655 DEBUG Starting app.py
+2026-01-13 10:04:52,657 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'user_data', 'authenticated', 'btn_proje_analiz', 'chat_history', 'page', 'token']
+2026-01-13 10:04:52,657 DEBUG Initial query_params: {}
+2026-01-13 10:04:52,657 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:04:52,673 DEBUG Loaded 16 items from trendyol_top20.json
+2026-01-13 10:04:52,673 INFO Successfully loaded data from: trendyol_top20.json
+2026-01-13 10:04:52,673 DEBUG experimental_rerun not available or failed
+2026-01-13 10:04:59,784 DEBUG Starting app.py
+2026-01-13 10:04:59,790 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'refresh_analysis', 'authenticated', 'page', 'analysis_auto_reloaded', 'token', 'analysis_data', 'user_data', 'last_update', 'back_from_proje_analiz', 'chat_history']
+2026-01-13 10:04:59,790 DEBUG Initial query_params: {}
+2026-01-13 10:04:59,790 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:05:19,596 DEBUG Starting app.py
+2026-01-13 10:05:19,600 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'refresh_analysis', 'authenticated', 'page', 'analysis_auto_reloaded', 'token', 'analysis_data', 'user_data', 'last_update', 'back_from_proje_analiz', 'chat_history']
+2026-01-13 10:05:19,600 DEBUG Initial query_params: {}
+2026-01-13 10:05:19,600 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-13 10:05:40,110 WARNING Scraper returned empty data; not overwriting trendyol_top20.json
+2026-01-13 10:05:40,116 DEBUG Loaded 16 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-13 10:05:40,119 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-13 10:05:40,231 DEBUG Starting app.py
+2026-01-13 10:05:40,231 DEBUG Initial session_state keys: ['gallery_state', 'leave_data', 'refresh_analysis', 'authenticated', 'page', 'analysis_auto_reloaded', 'token', 'analysis_data', 'user_data', 'last_update', 'back_from_proje_analiz', 'chat_history']
+2026-01-13 10:05:40,231 DEBUG Initial query_params: {}
+2026-01-13 10:05:40,231 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:08,127 DEBUG Starting app.py
+2026-01-15 10:58:08,128 DEBUG Initial session_state keys: []
+2026-01-15 10:58:08,128 DEBUG Initial query_params: {}
+2026-01-15 10:58:08,128 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:21,216 DEBUG Starting app.py
+2026-01-15 10:58:21,216 DEBUG Initial session_state keys: ['user_data', 'login_password', 'gallery_state', 'token', 'authenticated', 'page', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'leave_data', 'chat_history', 'login_identifier']
+2026-01-15 10:58:21,230 DEBUG Initial query_params: {}
+2026-01-15 10:58:21,230 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:21,363 DEBUG Saving users.json with 1 users
+2026-01-15 10:58:21,366 DEBUG users.json saved
+2026-01-15 10:58:21,464 DEBUG Starting app.py
+2026-01-15 10:58:21,472 DEBUG Initial session_state keys: ['user_data', 'login_password', 'gallery_state', 'token', 'authenticated', 'page', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'leave_data', 'chat_history', 'login_identifier']
+2026-01-15 10:58:21,472 DEBUG Initial query_params: {}
+2026-01-15 10:58:21,472 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:24,830 DEBUG Starting app.py
+2026-01-15 10:58:24,830 DEBUG Initial session_state keys: ['user_data', 'gallery_state', 'token', 'authenticated', 'page', 'btn_google_trends', 'btn_proje_analiz', 'leave_data', 'chat_history']
+2026-01-15 10:58:24,830 DEBUG Initial query_params: {}
+2026-01-15 10:58:24,830 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:24,963 DEBUG Starting app.py
+2026-01-15 10:58:24,963 DEBUG Initial session_state keys: ['user_data', 'gallery_state', 'token', 'authenticated', 'page', 'btn_proje_analiz', 'leave_data', 'chat_history']
+2026-01-15 10:58:24,963 DEBUG Initial query_params: {}
+2026-01-15 10:58:24,963 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:25,035 DEBUG Loaded 3 items from trendyol_top20.json
+2026-01-15 10:58:25,035 INFO Successfully loaded data from: trendyol_top20.json
+2026-01-15 10:58:25,037 DEBUG experimental_rerun not available or failed
+2026-01-15 10:58:31,365 DEBUG Starting app.py
+2026-01-15 10:58:31,368 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 10:58:31,368 DEBUG Initial query_params: {}
+2026-01-15 10:58:31,368 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:58:38,991 DEBUG Starting app.py
+2026-01-15 10:58:38,995 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 10:58:38,995 DEBUG Initial query_params: {}
+2026-01-15 10:58:38,995 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 10:59:25,861 WARNING Scraper returned empty data; not overwriting trendyol_top20.json
+2026-01-15 10:59:25,870 DEBUG Loaded 3 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-15 10:59:25,920 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-15 10:59:26,078 DEBUG Starting app.py
+2026-01-15 10:59:26,080 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 10:59:26,080 DEBUG Initial query_params: {}
+2026-01-15 10:59:26,080 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:27,224 DEBUG Starting app.py
+2026-01-15 11:01:27,230 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:27,233 DEBUG Initial query_params: {}
+2026-01-15 11:01:27,233 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:29,454 DEBUG Starting app.py
+2026-01-15 11:01:29,454 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:29,454 DEBUG Initial query_params: {}
+2026-01-15 11:01:29,454 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:32,910 DEBUG Starting app.py
+2026-01-15 11:01:32,912 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:32,912 DEBUG Initial query_params: {}
+2026-01-15 11:01:32,912 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:40,673 DEBUG Starting app.py
+2026-01-15 11:01:40,673 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:40,677 DEBUG Initial query_params: {}
+2026-01-15 11:01:40,677 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:41,841 DEBUG Loaded 3 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-15 11:01:41,841 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-15 11:01:42,093 DEBUG Starting app.py
+2026-01-15 11:01:42,093 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:42,093 DEBUG Initial query_params: {}
+2026-01-15 11:01:42,093 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:48,173 DEBUG Starting app.py
+2026-01-15 11:01:48,173 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:48,173 DEBUG Initial query_params: {}
+2026-01-15 11:01:48,173 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:48,858 DEBUG Starting app.py
+2026-01-15 11:01:48,858 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:48,858 DEBUG Initial query_params: {}
+2026-01-15 11:01:48,858 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 11:01:49,766 DEBUG Loaded 3 items from C:\Projeler\test\trendyol_top20.json (site=Trendyol)
+2026-01-15 11:01:49,766 DEBUG Loaded 40 items from C:\Projeler\test\proje_analiz_top40.json (site=Analiz)
+2026-01-15 11:01:49,890 DEBUG Starting app.py
+2026-01-15 11:01:49,890 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
+2026-01-15 11:01:49,890 DEBUG Initial query_params: {}
+2026-01-15 11:01:49,897 DEBUG ENABLE_PASSWORD_RESET=False
