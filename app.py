@@ -826,19 +826,23 @@ def verify_sso_credentials(identifier: str, password: str = None) -> dict:
         return {"success": False, "message": f"Login hatası: {str(e)}"}
 
     # Başarılı login - kullanıcı bilgilerini döndür
+    # preserve extra flags from the stored user record (e.g., show_trendyol_button)
+    user_info = {
+        "id": user.get("id", ""),
+        "email": user.get("email", ""),
+        "name": user.get("name", ""),
+        "department": user.get("department", ""),
+        "position": user.get("position", ""),
+        "pernr": user.get("pernr", ""),
+        "role": user.get("role", "user"),
+        "permissions": user.get("permissions", []),
+        "show_trendyol_button": user.get("show_trendyol_button", True)
+    }
+
     return {
         "success": True,
         "token": f"token_{uuid.uuid4().hex[:16]}",
-        "user": {
-            "id": user.get("id", ""),
-            "email": user.get("email", ""),
-            "name": user.get("name", ""),
-            "department": user.get("department", ""),
-            "position": user.get("position", ""),
-            "pernr": user.get("pernr", ""),
-            "role": user.get("role", "user"),
-            "permissions": user.get("permissions", [])
-        }
+        "user": user_info
     }
 
 
@@ -1571,9 +1575,16 @@ else:
         st.subheader("🛒 Trendyol Araçları")
         trendyol_col1, trendyol_col2 = st.columns([3,1])
         with trendyol_col1:
+            # Determine whether the current user may see the Trendyol scan button
+            current_user = st.session_state.user_data or {}
+            try:
+                can_show_trendyol = bool(current_user.get('show_trendyol_button', True))
+            except Exception:
+                can_show_trendyol = True
+
             scan_url = "https://www.trendyol.com/sr?fl=encoksatanurunler&sst=BEST_SELLER&pi=4"
             out_file = "data/trendyol_encoksatan_results.json"
-            if st.button("🔎 Trendyol En Çok Satan Tara", key="btn_trendyol_scan"):
+            if can_show_trendyol and st.button("🔎 Trendyol En Çok Satan Tara", key="btn_trendyol_scan"):
                 # start background scan only (do not auto-expand results)
                 import subprocess, sys, os
                 cmd = f'{sys.executable} scripts\\trendyol_best_sellers_scrape.py --url "{scan_url}" --output "{out_file}"'
