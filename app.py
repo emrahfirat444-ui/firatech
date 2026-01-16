@@ -1571,9 +1571,16 @@ else:
         st.subheader("🛒 Trendyol Araçları")
         trendyol_col1, trendyol_col2 = st.columns([3,1])
         with trendyol_col1:
+            # Determine whether the current user may see the Trendyol scan button
+            current_user = st.session_state.user_data or {}
+            try:
+                can_show_trendyol = bool(current_user.get('show_trendyol_button', True))
+            except Exception:
+                can_show_trendyol = True
+
             scan_url = "https://www.trendyol.com/sr?fl=encoksatanurunler&sst=BEST_SELLER&pi=4"
             out_file = "data/trendyol_encoksatan_results.json"
-            if st.button("🔎 Trendyol En Çok Satan Tara", key="btn_trendyol_scan"):
+            if can_show_trendyol and st.button("🔎 Trendyol En Çok Satan Tara", key="btn_trendyol_scan"):
                 # start background scan only (do not auto-expand results)
                 import subprocess, sys, os
                 cmd = f'{sys.executable} scripts\\trendyol_best_sellers_scrape.py --url "{scan_url}" --output "{out_file}"'

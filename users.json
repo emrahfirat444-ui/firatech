@@ -11,7 +11,31 @@
       ],
       "is_active": true,
       "created_at": "2025-12-26T00:00:00Z",
-      "last_login": "2026-01-16T08:18:15.112447Z"
+      "last_login": "2026-01-16T09:12:48.788168Z"
+    }
+    ,
+    {
+      "id": "emrahfirat444",
+      "email": "emrahfirat444@gmail.com",
+      "name": "Emrah Fırat",
+      "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "role": "admin",
+      "permissions": ["read", "write", "delete", "admin"],
+      "is_active": true,
+      "created_at": "2025-12-09T00:00:00Z",
+      "last_login": null
+    },
+    {
+      "id": "gfirat_bailleul",
+      "email": "gfirat@bailleul.com",
+      "name": "G. Fırat",
+      "password_hash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "role": "user",
+      "permissions": ["read"],
+      "show_trendyol_button": false,
+      "is_active": true,
+      "created_at": "2026-01-16T00:00:00Z",
+      "last_login": null
     }
   ]
 }
