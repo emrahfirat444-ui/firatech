@@ -279,6 +279,10 @@ if 'show_trendyol_results' not in st.session_state:
     st.session_state.show_trendyol_results = False
 if 'show_trendyol_full_items' not in st.session_state:
     st.session_state.show_trendyol_full_items = False
+if 'show_amazon_results' not in st.session_state:
+    st.session_state.show_amazon_results = False
+if 'show_amazon_full_items' not in st.session_state:
+    st.session_state.show_amazon_full_items = False
 
 # Test helper: allow forcing the menu page when running locally by setting env FORCE_MENU=1
 try:
@@ -1571,8 +1575,13 @@ else:
         )
 
         # Trend Yol: navigate to the Trendyol tools screen
-        if st.button("Trend Yol", key="btn_trend_yol"):
-            st.session_state.page = "trendyol"
+        col_trend, col_amz = st.columns([1,1])
+        with col_trend:
+            if st.button("Trend Yol", key="btn_trend_yol"):
+                st.session_state.page = "trendyol"
+        with col_amz:
+            if st.button("Amazon", key="btn_amazon_nav"):
+                st.session_state.page = "amazon"
         
         # Admin Panel (sadece admin users)
         if st.session_state.user_data.get("role") == "admin":
@@ -1713,6 +1722,131 @@ else:
                             st.write('Tüm ürünler listesi yüklenemedi.')
                 except Exception:
                     st.write(filtered[cols_to_show].to_dict(orient='records'))
+            else:
+                st.write('Detay dosyası boş')
+
+            # Additionally, if an Amazon details file exists, show it under a separate section
+            try:
+                amz_file = Path('data/amazon_encoksatan_details.json')
+                if amz_file.exists():
+                    try:
+                        amz_details = json.loads(amz_file.read_text(encoding='utf-8'))
+                    except Exception:
+                        amz_details = []
+
+                    if amz_details:
+                        st.write('---')
+                        st.subheader('🛍️ Amazon — En Çok Satan (detaylar)')
+                        import pandas as pd
+                        amz_df = pd.DataFrame(amz_details)
+                        cols_show = [c for c in ['page_title','page_price','image_saved','href'] if c in amz_df.columns]
+                        try:
+                            amz_display = amz_df[cols_show].fillna('')
+                            if 'page_price' in amz_display.columns:
+                                amz_display['page_price'] = amz_display['page_price'].astype(str)
+                            st.dataframe(amz_display, use_container_width=True)
+                        except Exception:
+                            st.write(amz_df[cols_show].to_dict(orient='records'))
+            except Exception:
+                pass
+
+    # İK ASISTAN SAYFASI (disabled)
+    # Amazon tools page
+    elif st.session_state.page == "amazon":
+        # Back button to main menu
+        col_back, col_title = st.columns([1, 10])
+        with col_back:
+            if st.button("⬅️", key="amazon_back"):
+                st.session_state.page = "menu"
+                st.session_state.show_amazon_results = False
+                st.session_state.show_amazon_full_items = False
+                st.rerun()
+        with col_title:
+            st.title("🛍️ Amazon Araçları")
+
+        st.write("---")
+
+        # Determine whether the current user may see the Amazon scan button
+        current_user = st.session_state.user_data or {}
+        try:
+            can_show_amazon = bool(current_user.get('show_amazon_button', True))
+        except Exception:
+            can_show_amazon = True
+
+        scan_url = "https://www.amazon.com/Best-Sellers/zgbs"
+        out_file = "data/amazon_encoksatan_results.json"
+
+        if can_show_amazon and st.button("🔎 Amazon En Çok Satan Tara", key="btn_amazon_scan"):
+            import subprocess, sys
+            cmd = f'{sys.executable} scripts\\amazon_best_sellers_scrape.py --url "{scan_url}" --output "{out_file}"'
+            try:
+                subprocess.Popen(cmd, shell=True)
+                st.info("Tarama başlatıldı — sonuçlar yazılacaktır: " + out_file)
+            except Exception as e:
+                st.error(f"Tarama başlatılamadı: {e}")
+
+        if st.button("📄 Amazon En Çok Satan Raporla", key="btn_amazon_report"):
+            st.session_state.show_amazon_results = True
+
+        if st.session_state.show_amazon_results:
+            if st.button("▾ Küçült", key="btn_amazon_collapse"):
+                st.session_state.show_amazon_results = False
+
+        # Show detailed results (if available) with badge filter + thumbnails
+        from pathlib import Path
+        import json
+        details_file = Path('data/amazon_encoksatan_details.json')
+        if st.session_state.show_amazon_results and details_file.exists():
+            try:
+                details = json.loads(details_file.read_text(encoding='utf-8'))
+            except Exception as e:
+                st.error(f"Detay dosyası okunamadı: {e}")
+                details = []
+
+            if details:
+                import pandas as pd
+                df = pd.DataFrame(details)
+                st.write(f"Amazon sonuçlar: {len(df)} kayıt")
+                cols_to_show = [c for c in ['page_title','page_price','image_saved','href'] if c in df.columns]
+                try:
+                    df_display = df[cols_to_show].fillna('')
+                    if 'page_price' in df_display.columns:
+                        df_display['page_price'] = df_display['page_price'].astype(str)
+                    st.dataframe(df_display, use_container_width=True)
+
+                    if st.button('Tüm Amazon Ürünlerini Gör (görsel + link)', key='btn_amazon_view_all'):
+                        st.session_state.show_amazon_full_items = not st.session_state.show_amazon_full_items
+
+                    if st.session_state.show_amazon_full_items:
+                        try:
+                            all_rows = []
+                            for idx, row in df.iterrows():
+                                img = (row.get('image_url') or row.get('image_saved') or '').strip()
+                                title = row.get('page_title') or row.get('title') or ''
+                                href = row.get('href') or row.get('url') or ''
+                                price = row.get('page_price') or row.get('price') or ''
+                                all_rows.append({'img': img, 'title': title, 'href': href, 'price': price})
+
+                            per_row = 4
+                            for start in range(0, len(all_rows), per_row):
+                                chunk = all_rows[start:start+per_row]
+                                cols = st.columns(len(chunk))
+                                for i, item in enumerate(chunk):
+                                    with cols[i]:
+                                        try:
+                                            if item['img']:
+                                                st.image(item['img'], use_container_width=True)
+                                        except Exception:
+                                            pass
+                                        st.write(item['title'])
+                                        if item['price']:
+                                            st.caption(str(item['price']))
+                                        if item['href']:
+                                            st.markdown(f"[Ürüne git]({item['href']})")
+                        except Exception:
+                            st.write('Tüm ürünler listesi yüklenemedi.')
+                except Exception:
+                    st.write(df[cols_to_show].to_dict(orient='records'))
             else:
                 st.write('Detay dosyası boş')
 
