@@ -1553,7 +1553,7 @@ else:
         st.subheader("Ne yapmak istersiniz?")
         
         # Proje Analiz and Google Trends features removed per request
-        st.info("'Proje Analiz' ve 'Google Trends' özellikleri devre dışı bırakıldı.")
+        # 'Proje Analiz' and 'Google Trends' features have been removed — no user-facing notice.
 
         # Scoped CSS: try to style only the Proje Analiz button (best-effort via aria-label)
         st.markdown(
@@ -1692,10 +1692,11 @@ else:
                                 st.write('Tüm ürünler listesi yüklenemedi.')
                     except Exception:
                         st.write(filtered[cols_to_show].to_dict(orient='records'))
-                else:
-                    st.write('Detay dosyası boş')
+                    else:
+                        st.write('Detay dosyası boş')
             else:
-                st.write('Detay dosyası bulunamadı — tarama yap veya dosyayı oluştur.')
+                # Details file not present — silently show nothing here (user can start a scan)
+                pass
         
         # Admin Panel (sadece admin users)
         if st.session_state.user_data.get("role") == "admin":
