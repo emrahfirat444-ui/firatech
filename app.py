@@ -8,7 +8,8 @@ import json
 from datetime import datetime, timedelta
 import pandas as pd
 import uuid
-from azure.data.tables import TableServiceClient
+# Azure Tables SDK is imported lazily inside functions that need it to
+# avoid forcing `azure-data-tables` installation at deploy time.
 from bs4 import BeautifulSoup
 
 
@@ -1163,14 +1164,24 @@ def fetch_top_products_from_azure():
         ]
     
     try:
+        # Import Azure SDK lazily so deployment doesn't fail when it's not needed
+        try:
+            from azure.data.tables import TableServiceClient
+        except Exception:
+            TableServiceClient = None
+
+        if not TableServiceClient:
+            st.error("Azure Table SDK (azure-data-tables) not installed on the server.")
+            return []
+
         # Real Azure Table query
         table_service = TableServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
         table_client = table_service.get_table_client(AZURE_TABLE_NAME)
-        
+
         # Query latest date's data (assume PartitionKey is date in YYYYMMDD format)
         today = datetime.now().strftime("%Y%m%d")
         entities = table_client.query_entities(f"PartitionKey eq '{today}'")
-        
+
         results = []
         for entity in entities:
             results.append({
@@ -1182,11 +1193,11 @@ def fetch_top_products_from_azure():
                 "source": entity.get("Source", ""),
                 "url": entity.get("Url", "")
             })
-        
+
         # Sort by rank
         results.sort(key=lambda x: x["rank"])
         return results[:10]
-    
+
     except Exception as e:
         st.error(f"Azure Table'dan veri çekerken hata: {str(e)}")
         return []
@@ -1334,26 +1345,32 @@ def scrape_turkish_ecommerce_sites(allow_demo: bool = True):
     # Persist to Azure Table if configured
     if AZURE_STORAGE_CONNECTION_STRING:
         try:
-            table_service = TableServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
-            table_client = table_service.get_table_client(AZURE_TABLE_NAME)
-            today = datetime.now().strftime('%Y%m%d')
-            for item in top10:
-                entity = {
-                    'PartitionKey': today,
-                    'RowKey': str(uuid.uuid4()),
-                    'Rank': int(item['rank']),
-                    'ProductName': item['product_name'],
-                    'Price': float(item.get('price', 0.0)),
-                    'Category': item.get('category', ''),
-                    'ImageUrl': item.get('image_url', ''),
-                    'Source': item.get('source', ''),
-                    'Url': item.get('url', '')
-                }
-                try:
-                    table_client.create_entity(entity)
-                except Exception:
-                    # ignore failures to persist
-                    pass
+            try:
+                from azure.data.tables import TableServiceClient
+            except Exception:
+                TableServiceClient = None
+
+            if TableServiceClient:
+                table_service = TableServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
+                table_client = table_service.get_table_client(AZURE_TABLE_NAME)
+                today = datetime.now().strftime('%Y%m%d')
+                for item in top10:
+                    entity = {
+                        'PartitionKey': today,
+                        'RowKey': str(uuid.uuid4()),
+                        'Rank': int(item['rank']),
+                        'ProductName': item['product_name'],
+                        'Price': float(item.get('price', 0.0)),
+                        'Category': item.get('category', ''),
+                        'ImageUrl': item.get('image_url', ''),
+                        'Source': item.get('source', ''),
+                        'Url': item.get('url', '')
+                    }
+                    try:
+                        table_client.create_entity(entity)
+                    except Exception:
+                        # ignore failures to persist
+                        pass
         except Exception:
             pass
 
@@ -1363,31 +1380,37 @@ def scrape_turkish_ecommerce_sites(allow_demo: bool = True):
     
     # Save to Azure Table
     try:
-        table_service = TableServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
-        table_client = table_service.get_table_client(AZURE_TABLE_NAME)
-        
-        # Create table if not exists
         try:
-            table_service.create_table(AZURE_TABLE_NAME)
+            from azure.data.tables import TableServiceClient
         except Exception:
-            pass  # table already exists
-        
-        today = datetime.now().strftime("%Y%m%d")
-        
-        for product in top_products:
-            entity = {
-                "PartitionKey": today,
-                "RowKey": str(uuid.uuid4()),
-                "Rank": product["rank"],
-                "ProductName": product["product_name"],
-                "Price": product["price"],
-                "Category": product["category"],
-                "ImageUrl": product["image_url"],
-                "Source": product["source"],
-                "Url": product["url"]
-            }
-            table_client.upsert_entity(entity)
-    
+            TableServiceClient = None
+
+        if TableServiceClient:
+            table_service = TableServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
+            table_client = table_service.get_table_client(AZURE_TABLE_NAME)
+
+            # Create table if not exists
+            try:
+                table_service.create_table(AZURE_TABLE_NAME)
+            except Exception:
+                pass  # table already exists
+
+            today = datetime.now().strftime("%Y%m%d")
+
+            for product in top_products:
+                entity = {
+                    "PartitionKey": today,
+                    "RowKey": str(uuid.uuid4()),
+                    "Rank": product["rank"],
+                    "ProductName": product["product_name"],
+                    "Price": product["price"],
+                    "Category": product["category"],
+                    "ImageUrl": product["image_url"],
+                    "Source": product["source"],
+                    "Url": product["url"]
+                }
+                table_client.upsert_entity(entity)
+
     except Exception as e:
         print(f"Azure Table'a kayıt hatası: {str(e)}")
 
