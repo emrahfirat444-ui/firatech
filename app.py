@@ -1570,133 +1570,9 @@ else:
             unsafe_allow_html=True,
         )
 
-        # Trendyol quick-scan: En Çok Satan
-        st.write("---")
-        st.subheader("🛒 Trendyol Araçları")
-        trendyol_col1, trendyol_col2 = st.columns([3,1])
-        with trendyol_col1:
-            # Determine whether the current user may see the Trendyol scan button
-            current_user = st.session_state.user_data or {}
-            try:
-                can_show_trendyol = bool(current_user.get('show_trendyol_button', True))
-            except Exception:
-                can_show_trendyol = True
-
-            scan_url = "https://www.trendyol.com/sr?fl=encoksatanurunler&sst=BEST_SELLER&pi=4"
-            out_file = "data/trendyol_encoksatan_results.json"
-            if can_show_trendyol and st.button("🔎 Trendyol En Çok Satan Tara", key="btn_trendyol_scan"):
-                # start background scan only (do not auto-expand results)
-                import subprocess, sys, os
-                cmd = f'{sys.executable} scripts\\trendyol_best_sellers_scrape.py --url "{scan_url}" --output "{out_file}"'
-                try:
-                    subprocess.Popen(cmd, shell=True)
-                    st.info("Tarama başlatıldı — sonuçlar yazılacaktır: " + out_file)
-                except Exception as e:
-                    st.error(f"Tarama başlatılamadı: {e}")
-
-            # separate button to open the detailed report view
-            if st.button("📄 Trendyol En Çok Satan Raporla", key="btn_trendyol_report"):
-                st.session_state.show_trendyol_results = True
-
-            if st.session_state.show_trendyol_results:
-                if st.button("▾ Küçült", key="btn_trendyol_collapse"):
-                    st.session_state.show_trendyol_results = False
-
-            # Show detailed results (if available) with badge filter + thumbnails
-            from pathlib import Path
-            import json
-            details_file = Path('data/trendyol_encoksatan_details.json')
-            if st.session_state.show_trendyol_results and details_file.exists():
-                try:
-                    details = json.loads(details_file.read_text(encoding='utf-8'))
-                except Exception as e:
-                    st.error(f"Detay dosyası okunamadı: {e}")
-                    details = []
-
-                if details:
-                    import pandas as pd
-                    df = pd.DataFrame(details)
-                    # ensure badge_on_page exists
-                    if 'badge_on_page' not in df.columns:
-                        df['badge_on_page'] = False
-
-                    # checkbox removed per request — default: show all results
-                    show_only_badge = False
-                    filtered = df[df['badge_on_page'] == True] if show_only_badge else df
-                    st.write(f"Sonuçlar: {len(filtered)} kayıt (toplam {len(df)} kayıttan)")
-                    # show table of key columns with nicer formatting
-                    cols_to_show = [c for c in ['page_title','page_price','badge_on_page','image_saved','href'] if c in filtered.columns]
-                    try:
-                        df_display = filtered[cols_to_show].fillna('')
-                        if 'page_price' in df_display.columns:
-                            df_display['page_price'] = df_display['page_price'].astype(str)
-                        # Render the main dataframe in the view
-                        st.dataframe(df_display, use_container_width=True)
-                        # Button to show full visual list under the table
-                        if st.button('Tüm Ürünleri Gör (görsel + link)', key='btn_trendyol_view_all'):
-                            st.session_state.show_trendyol_full_items = not st.session_state.show_trendyol_full_items
-
-                        if st.session_state.show_trendyol_full_items:
-                            try:
-                                all_rows = []
-                                for idx, row in filtered.iterrows():
-                                    # Prefer remote CDN URL if available — more reliable on deployed hosts
-                                    img_url_field = (row.get('image_url') or '').strip()
-                                    img_saved_field = (row.get('image_saved') or '').strip()
-
-                                    chosen_img = None
-                                    # use absolute HTTP/HTTPS URL first
-                                    if img_url_field and (img_url_field.startswith('http://') or img_url_field.startswith('https://')):
-                                        chosen_img = img_url_field
-                                    else:
-                                        # try saved local path if exists (normalize backslashes)
-                                        if img_saved_field:
-                                            normalized = img_saved_field.replace('\\', '/').lstrip('./')
-                                            # make an absolute path relative to app root
-                                            candidate = os.path.join(get_app_root(), normalized)
-                                            try:
-                                                if Path(candidate).exists():
-                                                    chosen_img = candidate
-                                                else:
-                                                    # fallback: if saved field already looks like a URL, use it
-                                                    if img_saved_field.startswith('http://') or img_saved_field.startswith('https://'):
-                                                        chosen_img = img_saved_field
-                                            except Exception:
-                                                # ignore and leave chosen_img as None
-                                                pass
-
-                                    title = row.get('page_title') or row.get('title') or ''
-                                    href = row.get('href') or row.get('url') or ''
-                                    price = row.get('page_price') or row.get('price') or ''
-                                    all_rows.append({'img': chosen_img, 'title': title, 'href': href, 'price': price})
-
-                                per_row = 4
-                                for start in range(0, len(all_rows), per_row):
-                                    chunk = all_rows[start:start+per_row]
-                                    cols = st.columns(len(chunk))
-                                    for i, item in enumerate(chunk):
-                                        with cols[i]:
-                                            try:
-                                                if item['img'] and Path(item['img']).exists():
-                                                    st.image(item['img'], use_container_width=True)
-                                                elif item['img']:
-                                                    st.image(item['img'], use_container_width=True)
-                                            except Exception:
-                                                pass
-                                            st.write(item['title'])
-                                            if item['price']:
-                                                st.caption(str(item['price']))
-                                            if item['href']:
-                                                st.markdown(f"[Ürüne git]({item['href']})")
-                            except Exception:
-                                st.write('Tüm ürünler listesi yüklenemedi.')
-                    except Exception:
-                        st.write(filtered[cols_to_show].to_dict(orient='records'))
-                    else:
-                        st.write('Detay dosyası boş')
-            else:
-                # Details file not present — silently show nothing here (user can start a scan)
-                pass
+        # Trend Yol: navigate to the Trendyol tools screen
+        if st.button("Trend Yol", key="btn_trend_yol"):
+            st.session_state.page = "trendyol"
         
         # Admin Panel (sadece admin users)
         if st.session_state.user_data.get("role") == "admin":
@@ -1705,6 +1581,141 @@ else:
                 st.session_state.page = "admin_panel"
                 st.rerun()
     
+    # Trendyol tools page
+    elif st.session_state.page == "trendyol":
+        # Back button to main menu
+        col_back, col_title = st.columns([1, 10])
+        with col_back:
+            if st.button("⬅️", key="trendyol_back"):
+                st.session_state.page = "menu"
+                st.session_state.show_trendyol_results = False
+                st.session_state.show_trendyol_full_items = False
+                st.rerun()
+        with col_title:
+            st.title("🛒 Trendyol Araçları")
+
+        st.write("---")
+
+        # Determine whether the current user may see the Trendyol scan button
+        current_user = st.session_state.user_data or {}
+        try:
+            can_show_trendyol = bool(current_user.get('show_trendyol_button', True))
+        except Exception:
+            can_show_trendyol = True
+
+        scan_url = "https://www.trendyol.com/sr?fl=encoksatanurunler&sst=BEST_SELLER&pi=4"
+        out_file = "data/trendyol_encoksatan_results.json"
+
+        if can_show_trendyol and st.button("🔎 Trendyol En Çok Satan Tara", key="btn_trendyol_scan"):
+            import subprocess, sys
+            cmd = f'{sys.executable} scripts\\trendyol_best_sellers_scrape.py --url "{scan_url}" --output "{out_file}"'
+            try:
+                subprocess.Popen(cmd, shell=True)
+                st.info("Tarama başlatıldı — sonuçlar yazılacaktır: " + out_file)
+            except Exception as e:
+                st.error(f"Tarama başlatılamadı: {e}")
+
+        # separate button to open the detailed report view
+        if st.button("📄 Trendyol En Çok Satan Raporla", key="btn_trendyol_report"):
+            st.session_state.show_trendyol_results = True
+
+        if st.session_state.show_trendyol_results:
+            if st.button("▾ Küçült", key="btn_trendyol_collapse"):
+                st.session_state.show_trendyol_results = False
+
+        # Show detailed results (if available) with badge filter + thumbnails
+        from pathlib import Path
+        import json
+        details_file = Path('data/trendyol_encoksatan_details.json')
+        if st.session_state.show_trendyol_results and details_file.exists():
+            try:
+                details = json.loads(details_file.read_text(encoding='utf-8'))
+            except Exception as e:
+                st.error(f"Detay dosyası okunamadı: {e}")
+                details = []
+
+            if details:
+                import pandas as pd
+                df = pd.DataFrame(details)
+                # ensure badge_on_page exists
+                if 'badge_on_page' not in df.columns:
+                    df['badge_on_page'] = False
+
+                # checkbox removed per request — default: show all results
+                show_only_badge = False
+                filtered = df[df['badge_on_page'] == True] if show_only_badge else df
+                st.write(f"Sonuçlar: {len(filtered)} kayıt (toplam {len(df)} kayıttan)")
+                # show table of key columns with nicer formatting
+                cols_to_show = [c for c in ['page_title','page_price','badge_on_page','image_saved','href'] if c in filtered.columns]
+                try:
+                    df_display = filtered[cols_to_show].fillna('')
+                    if 'page_price' in df_display.columns:
+                        df_display['page_price'] = df_display['page_price'].astype(str)
+                    # Render the main dataframe in the view
+                    st.dataframe(df_display, use_container_width=True)
+                    # Button to show full visual list under the table
+                    if st.button('Tüm Ürünleri Gör (görsel + link)', key='btn_trendyol_view_all'):
+                        st.session_state.show_trendyol_full_items = not st.session_state.show_trendyol_full_items
+
+                    if st.session_state.show_trendyol_full_items:
+                        try:
+                            all_rows = []
+                            for idx, row in filtered.iterrows():
+                                # Prefer remote CDN URL if available — more reliable on deployed hosts
+                                img_url_field = (row.get('image_url') or '').strip()
+                                img_saved_field = (row.get('image_saved') or '').strip()
+
+                                chosen_img = None
+                                # use absolute HTTP/HTTPS URL first
+                                if img_url_field and (img_url_field.startswith('http://') or img_url_field.startswith('https://')):
+                                    chosen_img = img_url_field
+                                else:
+                                    # try saved local path if exists (normalize backslashes)
+                                    if img_saved_field:
+                                        normalized = img_saved_field.replace('\\', '/').lstrip('./')
+                                        # make an absolute path relative to app root
+                                        candidate = os.path.join(get_app_root(), normalized)
+                                        try:
+                                            if Path(candidate).exists():
+                                                chosen_img = candidate
+                                            else:
+                                                # fallback: if saved field already looks like a URL, use it
+                                                if img_saved_field.startswith('http://') or img_saved_field.startswith('https://'):
+                                                    chosen_img = img_saved_field
+                                        except Exception:
+                                            # ignore and leave chosen_img as None
+                                            pass
+
+                                title = row.get('page_title') or row.get('title') or ''
+                                href = row.get('href') or row.get('url') or ''
+                                price = row.get('page_price') or row.get('price') or ''
+                                all_rows.append({'img': chosen_img, 'title': title, 'href': href, 'price': price})
+
+                            per_row = 4
+                            for start in range(0, len(all_rows), per_row):
+                                chunk = all_rows[start:start+per_row]
+                                cols = st.columns(len(chunk))
+                                for i, item in enumerate(chunk):
+                                    with cols[i]:
+                                        try:
+                                            if item['img'] and Path(item['img']).exists():
+                                                st.image(item['img'], use_container_width=True)
+                                            elif item['img']:
+                                                st.image(item['img'], use_container_width=True)
+                                        except Exception:
+                                            pass
+                                        st.write(item['title'])
+                                        if item['price']:
+                                            st.caption(str(item['price']))
+                                        if item['href']:
+                                            st.markdown(f"[Ürüne git]({item['href']})")
+                        except Exception:
+                            st.write('Tüm ürünler listesi yüklenemedi.')
+                except Exception:
+                    st.write(filtered[cols_to_show].to_dict(orient='records'))
+            else:
+                st.write('Detay dosyası boş')
+
     # İK ASISTAN SAYFASI (disabled)
     elif False and st.session_state.page == "assistant":
         if st.session_state.leave_data is None:
