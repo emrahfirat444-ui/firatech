@@ -826,19 +826,23 @@ def verify_sso_credentials(identifier: str, password: str = None) -> dict:
         return {"success": False, "message": f"Login hatası: {str(e)}"}
 
     # Başarılı login - kullanıcı bilgilerini döndür
+    # preserve extra flags from the stored user record (e.g., show_trendyol_button)
+    user_info = {
+        "id": user.get("id", ""),
+        "email": user.get("email", ""),
+        "name": user.get("name", ""),
+        "department": user.get("department", ""),
+        "position": user.get("position", ""),
+        "pernr": user.get("pernr", ""),
+        "role": user.get("role", "user"),
+        "permissions": user.get("permissions", []),
+        "show_trendyol_button": user.get("show_trendyol_button", True)
+    }
+
     return {
         "success": True,
         "token": f"token_{uuid.uuid4().hex[:16]}",
-        "user": {
-            "id": user.get("id", ""),
-            "email": user.get("email", ""),
-            "name": user.get("name", ""),
-            "department": user.get("department", ""),
-            "position": user.get("position", ""),
-            "pernr": user.get("pernr", ""),
-            "role": user.get("role", "user"),
-            "permissions": user.get("permissions", [])
-        }
+        "user": user_info
     }
 
 
