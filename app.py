@@ -1629,11 +1629,35 @@ else:
                             try:
                                 all_rows = []
                                 for idx, row in filtered.iterrows():
-                                    img_path = row.get('image_saved') or row.get('image_url')
+                                    # Prefer remote CDN URL if available — more reliable on deployed hosts
+                                    img_url_field = (row.get('image_url') or '').strip()
+                                    img_saved_field = (row.get('image_saved') or '').strip()
+
+                                    chosen_img = None
+                                    # use absolute HTTP/HTTPS URL first
+                                    if img_url_field and (img_url_field.startswith('http://') or img_url_field.startswith('https://')):
+                                        chosen_img = img_url_field
+                                    else:
+                                        # try saved local path if exists (normalize backslashes)
+                                        if img_saved_field:
+                                            normalized = img_saved_field.replace('\\', '/').lstrip('./')
+                                            # make an absolute path relative to app root
+                                            candidate = os.path.join(get_app_root(), normalized)
+                                            try:
+                                                if Path(candidate).exists():
+                                                    chosen_img = candidate
+                                                else:
+                                                    # fallback: if saved field already looks like a URL, use it
+                                                    if img_saved_field.startswith('http://') or img_saved_field.startswith('https://'):
+                                                        chosen_img = img_saved_field
+                                            except Exception:
+                                                # ignore and leave chosen_img as None
+                                                pass
+
                                     title = row.get('page_title') or row.get('title') or ''
                                     href = row.get('href') or row.get('url') or ''
                                     price = row.get('page_price') or row.get('price') or ''
-                                    all_rows.append({'img': img_path, 'title': title, 'href': href, 'price': price})
+                                    all_rows.append({'img': chosen_img, 'title': title, 'href': href, 'price': price})
 
                                 per_row = 4
                                 for start in range(0, len(all_rows), per_row):
