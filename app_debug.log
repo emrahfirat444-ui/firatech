@@ -758,3 +758,93 @@ NotImplementedError
 2026-01-15 11:01:49,890 DEBUG Initial session_state keys: ['analysis_auto_reloaded', 'user_data', 'gallery_state', 'back_from_proje_analiz', 'page', 'chat_history', 'analysis_data', 'last_update', 'token', 'authenticated', 'leave_data', 'refresh_analysis']
 2026-01-15 11:01:49,890 DEBUG Initial query_params: {}
 2026-01-15 11:01:49,897 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:30:23,044 DEBUG Starting app.py
+2026-01-15 16:30:23,048 DEBUG Initial session_state keys: []
+2026-01-15 16:30:23,048 DEBUG Initial query_params: {}
+2026-01-15 16:30:23,048 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:31:02,889 DEBUG Starting app.py
+2026-01-15 16:31:02,891 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'chat_history', 'login_identifier', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'page', 'token', 'leave_data', 'authenticated', 'gallery_state']
+2026-01-15 16:31:02,892 DEBUG Initial query_params: {}
+2026-01-15 16:31:02,892 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:31:02,984 DEBUG Saving users.json with 1 users
+2026-01-15 16:31:02,984 DEBUG users.json saved
+2026-01-15 16:31:03,090 DEBUG Starting app.py
+2026-01-15 16:31:03,093 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'chat_history', 'login_identifier', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'page', 'token', 'leave_data', 'authenticated', 'gallery_state']
+2026-01-15 16:31:03,093 DEBUG Initial query_params: {}
+2026-01-15 16:31:03,093 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:40:31,362 DEBUG Starting app.py
+2026-01-15 16:40:31,364 DEBUG Initial session_state keys: []
+2026-01-15 16:40:31,364 DEBUG Initial query_params: {}
+2026-01-15 16:40:31,364 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:40:40,207 DEBUG Starting app.py
+2026-01-15 16:40:40,208 DEBUG Initial session_state keys: ['login_password', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'user_data', 'page', 'token', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'authenticated', 'gallery_state']
+2026-01-15 16:40:40,209 DEBUG Initial query_params: {}
+2026-01-15 16:40:40,210 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:40:41,862 DEBUG Starting app.py
+2026-01-15 16:40:41,864 DEBUG Initial session_state keys: []
+2026-01-15 16:40:41,864 DEBUG Initial query_params: {}
+2026-01-15 16:40:41,866 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:40:49,318 DEBUG Starting app.py
+2026-01-15 16:40:49,318 DEBUG Initial session_state keys: ['login_password', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'user_data', 'page', 'token', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'authenticated', 'gallery_state']
+2026-01-15 16:40:49,318 DEBUG Initial query_params: {}
+2026-01-15 16:40:49,322 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-15 16:40:49,345 DEBUG Saving users.json with 1 users
+2026-01-15 16:40:49,350 DEBUG users.json saved
+2026-01-15 16:40:49,470 DEBUG Starting app.py
+2026-01-15 16:40:49,472 DEBUG Initial session_state keys: ['login_password', 'login_identifier', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'chat_history', 'user_data', 'page', 'token', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'authenticated', 'gallery_state']
+2026-01-15 16:40:49,474 DEBUG Initial query_params: {}
+2026-01-15 16:40:49,474 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 08:46:45,952 DEBUG Starting app.py
+2026-01-16 08:46:45,952 DEBUG Initial session_state keys: []
+2026-01-16 08:46:45,952 DEBUG Initial query_params: {}
+2026-01-16 08:46:45,952 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 08:46:52,860 DEBUG Starting app.py
+2026-01-16 08:46:52,860 DEBUG Initial session_state keys: ['chat_history', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'page', 'login_password', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'gallery_state', 'login_identifier', 'authenticated', 'user_data', 'token']
+2026-01-16 08:46:52,860 DEBUG Initial query_params: {}
+2026-01-16 08:46:52,860 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 08:46:52,946 DEBUG Saving users.json with 1 users
+2026-01-16 08:46:52,948 DEBUG users.json saved
+2026-01-16 08:46:53,018 DEBUG Starting app.py
+2026-01-16 08:46:53,019 DEBUG Initial session_state keys: ['chat_history', 'leave_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'page', 'login_password', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'gallery_state', 'login_identifier', 'authenticated', 'user_data', 'token']
+2026-01-16 08:46:53,019 DEBUG Initial query_params: {}
+2026-01-16 08:46:53,020 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 08:46:55,106 DEBUG Starting app.py
+2026-01-16 08:46:55,106 DEBUG Initial session_state keys: ['chat_history', 'leave_data', 'page', 'btn_trendyol_scan', 'gallery_state', 'authenticated', 'user_data', 'token']
+2026-01-16 08:46:55,106 DEBUG Initial query_params: {}
+2026-01-16 08:46:55,106 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:20:15,020 DEBUG Starting app.py
+2026-01-16 09:20:15,021 DEBUG Initial session_state keys: []
+2026-01-16 09:20:15,022 DEBUG Initial query_params: {}
+2026-01-16 09:20:15,022 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:20:20,939 DEBUG Starting app.py
+2026-01-16 09:20:20,939 DEBUG Initial session_state keys: ['token', 'gallery_state', 'authenticated', 'login_identifier', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'page', 'chat_history', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_password', 'leave_data', 'user_data']
+2026-01-16 09:20:20,939 DEBUG Initial query_params: {}
+2026-01-16 09:20:20,939 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:20:20,982 DEBUG Saving users.json with 1 users
+2026-01-16 09:20:20,984 DEBUG users.json saved
+2026-01-16 09:20:21,047 DEBUG Starting app.py
+2026-01-16 09:20:21,048 DEBUG Initial session_state keys: ['token', 'gallery_state', 'authenticated', 'login_identifier', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'page', 'chat_history', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_password', 'leave_data', 'user_data']
+2026-01-16 09:20:21,049 DEBUG Initial query_params: {}
+2026-01-16 09:20:21,049 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:21:06,749 DEBUG Starting app.py
+2026-01-16 09:21:06,751 DEBUG Initial session_state keys: ['token', 'gallery_state', 'authenticated', 'page', 'chat_history', 'btn_trendyol_scan', 'leave_data', 'user_data']
+2026-01-16 09:21:06,751 DEBUG Initial query_params: {}
+2026-01-16 09:21:06,751 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:24:42,121 DEBUG Starting app.py
+2026-01-16 09:24:42,122 DEBUG Initial session_state keys: []
+2026-01-16 09:24:42,122 DEBUG Initial query_params: {}
+2026-01-16 09:24:42,123 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:24:47,883 DEBUG Starting app.py
+2026-01-16 09:24:47,883 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_identifier', 'leave_data', 'authenticated', 'page', 'chat_history']
+2026-01-16 09:24:47,883 DEBUG Initial query_params: {}
+2026-01-16 09:24:47,883 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:24:47,922 DEBUG Saving users.json with 1 users
+2026-01-16 09:24:47,924 DEBUG users.json saved
+2026-01-16 09:24:47,984 DEBUG Starting app.py
+2026-01-16 09:24:47,986 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🚀 Şifre ile Giriş Yap', 'user_data', 'login_password', 'gallery_state', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_identifier', 'leave_data', 'authenticated', 'page', 'chat_history']
+2026-01-16 09:24:47,986 DEBUG Initial query_params: {}
+2026-01-16 09:24:47,986 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:24:51,575 DEBUG Starting app.py
+2026-01-16 09:24:51,576 DEBUG Initial session_state keys: ['user_data', 'gallery_state', 'btn_trendyol_scan', 'token', 'leave_data', 'authenticated', 'page', 'chat_history']
+2026-01-16 09:24:51,576 DEBUG Initial query_params: {}
+2026-01-16 09:24:51,576 DEBUG ENABLE_PASSWORD_RESET=False
