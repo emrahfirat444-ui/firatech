@@ -848,3 +848,241 @@ NotImplementedError
 2026-01-16 09:24:51,576 DEBUG Initial session_state keys: ['user_data', 'gallery_state', 'btn_trendyol_scan', 'token', 'leave_data', 'authenticated', 'page', 'chat_history']
 2026-01-16 09:24:51,576 DEBUG Initial query_params: {}
 2026-01-16 09:24:51,576 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:33:46,348 DEBUG Starting app.py
+2026-01-16 09:33:46,348 DEBUG Initial session_state keys: []
+2026-01-16 09:33:46,348 DEBUG Initial query_params: {}
+2026-01-16 09:33:46,348 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:33:53,734 DEBUG Starting app.py
+2026-01-16 09:33:53,735 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'leave_data', 'login_identifier', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:33:53,735 DEBUG Initial query_params: {}
+2026-01-16 09:33:53,735 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:33:53,767 DEBUG Saving users.json with 1 users
+2026-01-16 09:33:53,767 DEBUG users.json saved
+2026-01-16 09:33:53,829 DEBUG Starting app.py
+2026-01-16 09:33:53,831 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'leave_data', 'login_identifier', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:33:53,831 DEBUG Initial query_params: {}
+2026-01-16 09:33:53,832 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:38:38,558 DEBUG Starting app.py
+2026-01-16 09:38:38,559 DEBUG Initial session_state keys: []
+2026-01-16 09:38:38,559 DEBUG Initial query_params: {}
+2026-01-16 09:38:38,560 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:38:49,220 DEBUG Starting app.py
+2026-01-16 09:38:49,220 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:38:49,220 DEBUG Initial query_params: {}
+2026-01-16 09:38:49,220 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:38:49,234 DEBUG Saving users.json with 1 users
+2026-01-16 09:38:49,236 DEBUG users.json saved
+2026-01-16 09:38:49,300 DEBUG Starting app.py
+2026-01-16 09:38:49,300 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:38:49,300 DEBUG Initial query_params: {}
+2026-01-16 09:38:49,300 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:38:51,936 DEBUG Starting app.py
+2026-01-16 09:38:51,936 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:38:51,936 DEBUG Initial query_params: {}
+2026-01-16 09:38:51,936 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:39:00,154 DEBUG Starting app.py
+2026-01-16 09:39:00,155 DEBUG Initial session_state keys: ['btn_trendyol_collapse', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:39:00,155 DEBUG Initial query_params: {}
+2026-01-16 09:39:00,155 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:39:01,402 DEBUG Starting app.py
+2026-01-16 09:39:01,402 DEBUG Initial session_state keys: ['btn_trendyol_collapse', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:39:01,402 DEBUG Initial query_params: {}
+2026-01-16 09:39:01,402 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:39:03,351 DEBUG Starting app.py
+2026-01-16 09:39:03,351 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:39:03,351 DEBUG Initial query_params: {}
+2026-01-16 09:39:03,351 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:43:42,948 DEBUG Starting app.py
+2026-01-16 09:43:42,948 DEBUG Initial session_state keys: []
+2026-01-16 09:43:42,948 DEBUG Initial query_params: {}
+2026-01-16 09:43:42,948 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:43:49,078 DEBUG Starting app.py
+2026-01-16 09:43:49,078 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:43:49,078 DEBUG Initial query_params: {}
+2026-01-16 09:43:49,078 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:43:49,089 DEBUG Saving users.json with 1 users
+2026-01-16 09:43:49,091 DEBUG users.json saved
+2026-01-16 09:43:49,165 DEBUG Starting app.py
+2026-01-16 09:43:49,165 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:43:49,165 DEBUG Initial query_params: {}
+2026-01-16 09:43:49,165 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:43:51,786 DEBUG Starting app.py
+2026-01-16 09:43:51,786 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:43:51,786 DEBUG Initial query_params: {}
+2026-01-16 09:43:51,786 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:47:03,884 DEBUG Starting app.py
+2026-01-16 09:47:03,884 DEBUG Initial session_state keys: []
+2026-01-16 09:47:03,884 DEBUG Initial query_params: {}
+2026-01-16 09:47:03,884 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:47:11,345 DEBUG Starting app.py
+2026-01-16 09:47:11,345 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:47:11,349 DEBUG Initial query_params: {}
+2026-01-16 09:47:11,349 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:47:11,360 DEBUG Saving users.json with 1 users
+2026-01-16 09:47:11,362 DEBUG users.json saved
+2026-01-16 09:47:11,432 DEBUG Starting app.py
+2026-01-16 09:47:11,432 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 09:47:11,432 DEBUG Initial query_params: {}
+2026-01-16 09:47:11,432 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:47:13,810 DEBUG Starting app.py
+2026-01-16 09:47:13,810 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:47:13,810 DEBUG Initial query_params: {}
+2026-01-16 09:47:13,810 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 09:49:07,188 DEBUG Starting app.py
+2026-01-16 09:49:07,188 DEBUG Initial session_state keys: ['btn_trendyol_collapse', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 09:49:07,188 DEBUG Initial query_params: {}
+2026-01-16 09:49:07,188 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:35:27,210 DEBUG Starting app.py
+2026-01-16 10:35:27,210 DEBUG Initial session_state keys: []
+2026-01-16 10:35:27,210 DEBUG Initial query_params: {}
+2026-01-16 10:35:27,210 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:35:30,836 DEBUG Starting app.py
+2026-01-16 10:35:30,839 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:35:30,841 DEBUG Initial query_params: {}
+2026-01-16 10:35:30,841 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:35:36,378 DEBUG Starting app.py
+2026-01-16 10:35:36,378 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:35:36,378 DEBUG Initial query_params: {}
+2026-01-16 10:35:36,378 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:35:36,402 DEBUG Saving users.json with 1 users
+2026-01-16 10:35:36,405 DEBUG users.json saved
+2026-01-16 10:35:36,492 DEBUG Starting app.py
+2026-01-16 10:35:36,492 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:35:36,492 DEBUG Initial query_params: {}
+2026-01-16 10:35:36,492 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:35:39,232 DEBUG Starting app.py
+2026-01-16 10:35:39,232 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:35:39,232 DEBUG Initial query_params: {}
+2026-01-16 10:35:39,232 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:36:39,267 DEBUG Starting app.py
+2026-01-16 10:36:39,267 DEBUG Initial session_state keys: ['btn_trendyol_collapse', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:36:39,270 DEBUG Initial query_params: {}
+2026-01-16 10:36:39,270 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:36:40,313 DEBUG Starting app.py
+2026-01-16 10:36:40,313 DEBUG Initial session_state keys: ['btn_trendyol_collapse', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:36:40,313 DEBUG Initial query_params: {}
+2026-01-16 10:36:40,313 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:36:43,101 DEBUG Starting app.py
+2026-01-16 10:36:43,101 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:36:43,101 DEBUG Initial query_params: {}
+2026-01-16 10:36:43,101 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:39:22,442 DEBUG Starting app.py
+2026-01-16 10:39:22,442 DEBUG Initial session_state keys: []
+2026-01-16 10:39:22,455 DEBUG Initial query_params: {}
+2026-01-16 10:39:22,455 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:39:28,405 DEBUG Starting app.py
+2026-01-16 10:39:28,409 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:39:28,410 DEBUG Initial query_params: {}
+2026-01-16 10:39:28,410 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:39:28,430 DEBUG Saving users.json with 1 users
+2026-01-16 10:39:28,432 DEBUG users.json saved
+2026-01-16 10:39:28,552 DEBUG Starting app.py
+2026-01-16 10:39:28,554 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:39:28,556 DEBUG Initial query_params: {}
+2026-01-16 10:39:28,559 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:39:30,809 DEBUG Starting app.py
+2026-01-16 10:39:30,811 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:39:30,813 DEBUG Initial query_params: {}
+2026-01-16 10:39:30,813 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:42:24,962 DEBUG Starting app.py
+2026-01-16 10:42:24,965 DEBUG Initial session_state keys: []
+2026-01-16 10:42:24,965 DEBUG Initial query_params: {}
+2026-01-16 10:42:24,965 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:42:30,615 DEBUG Starting app.py
+2026-01-16 10:42:30,623 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:42:30,624 DEBUG Initial query_params: {}
+2026-01-16 10:42:30,624 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:42:30,642 DEBUG Saving users.json with 1 users
+2026-01-16 10:42:30,646 DEBUG users.json saved
+2026-01-16 10:42:30,742 DEBUG Starting app.py
+2026-01-16 10:42:30,742 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:42:30,742 DEBUG Initial query_params: {}
+2026-01-16 10:42:30,742 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:42:33,478 DEBUG Starting app.py
+2026-01-16 10:42:33,478 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:42:33,478 DEBUG Initial query_params: {}
+2026-01-16 10:42:33,478 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:44:40,163 DEBUG Starting app.py
+2026-01-16 10:44:40,163 DEBUG Initial session_state keys: []
+2026-01-16 10:44:40,163 DEBUG Initial query_params: {}
+2026-01-16 10:44:40,163 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:44:46,377 DEBUG Starting app.py
+2026-01-16 10:44:46,378 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:44:46,378 DEBUG Initial query_params: {}
+2026-01-16 10:44:46,378 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:44:46,389 DEBUG Saving users.json with 1 users
+2026-01-16 10:44:46,395 DEBUG users.json saved
+2026-01-16 10:44:46,472 DEBUG Starting app.py
+2026-01-16 10:44:46,473 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:44:46,475 DEBUG Initial query_params: {}
+2026-01-16 10:44:46,475 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:44:48,970 DEBUG Starting app.py
+2026-01-16 10:44:48,970 DEBUG Initial session_state keys: ['token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:44:48,970 DEBUG Initial query_params: {}
+2026-01-16 10:44:48,970 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:47:29,662 DEBUG Starting app.py
+2026-01-16 10:47:29,663 DEBUG Initial session_state keys: []
+2026-01-16 10:47:29,663 DEBUG Initial query_params: {}
+2026-01-16 10:47:29,663 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:47:35,476 DEBUG Starting app.py
+2026-01-16 10:47:35,477 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:47:35,477 DEBUG Initial query_params: {}
+2026-01-16 10:47:35,477 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:47:35,477 DEBUG Saving users.json with 1 users
+2026-01-16 10:47:35,477 DEBUG users.json saved
+2026-01-16 10:47:35,567 DEBUG Starting app.py
+2026-01-16 10:47:35,568 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_password', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'show_trendyol_full_items', 'token', 'show_trendyol_results', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 10:47:35,569 DEBUG Initial query_params: {}
+2026-01-16 10:47:35,569 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:47:37,896 DEBUG Starting app.py
+2026-01-16 10:47:37,896 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:47:37,896 DEBUG Initial query_params: {}
+2026-01-16 10:47:37,896 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 10:47:40,091 DEBUG Starting app.py
+2026-01-16 10:47:40,091 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'btn_trendyol_collapse', 'token', 'btn_trendyol_view_all', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 10:47:40,091 DEBUG Initial query_params: {}
+2026-01-16 10:47:40,091 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:01:00,388 DEBUG Starting app.py
+2026-01-16 11:01:00,389 DEBUG Initial session_state keys: []
+2026-01-16 11:01:00,389 DEBUG Initial query_params: {}
+2026-01-16 11:01:00,389 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:01:08,062 DEBUG Starting app.py
+2026-01-16 11:01:08,062 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 11:01:08,062 DEBUG Initial query_params: {}
+2026-01-16 11:01:08,062 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:01:08,077 DEBUG Saving users.json with 1 users
+2026-01-16 11:01:08,079 DEBUG users.json saved
+2026-01-16 11:01:08,147 DEBUG Starting app.py
+2026-01-16 11:01:08,148 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_password', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'show_trendyol_full_items', 'token', 'show_trendyol_results', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 11:01:08,148 DEBUG Initial query_params: {}
+2026-01-16 11:01:08,149 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:01:10,678 DEBUG Starting app.py
+2026-01-16 11:01:10,678 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 11:01:10,678 DEBUG Initial query_params: {}
+2026-01-16 11:01:10,678 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:01:12,492 DEBUG Starting app.py
+2026-01-16 11:01:12,492 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'btn_trendyol_collapse', 'token', 'btn_trendyol_view_all', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 11:01:12,492 DEBUG Initial query_params: {}
+2026-01-16 11:01:12,492 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:05:09,963 DEBUG Starting app.py
+2026-01-16 11:05:09,964 DEBUG Initial session_state keys: []
+2026-01-16 11:05:09,965 DEBUG Initial query_params: {}
+2026-01-16 11:05:09,965 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:05:16,586 DEBUG Starting app.py
+2026-01-16 11:05:16,586 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'FormSubmitter:login_form-🔑 Şifremi Unuttum', 'token', 'login_password', 'show_trendyol_results', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 11:05:16,586 DEBUG Initial query_params: {}
+2026-01-16 11:05:16,586 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:05:16,586 DEBUG Saving users.json with 1 users
+2026-01-16 11:05:16,586 DEBUG users.json saved
+2026-01-16 11:05:16,651 DEBUG Starting app.py
+2026-01-16 11:05:16,651 DEBUG Initial session_state keys: ['FormSubmitter:login_form-🔑 Şifremi Unuttum', 'login_password', 'login_identifier', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'show_trendyol_full_items', 'token', 'show_trendyol_results', 'user_data', 'FormSubmitter:login_form-🚀 Şifre ile Giriş Yap']
+2026-01-16 11:05:16,651 DEBUG Initial query_params: {}
+2026-01-16 11:05:16,651 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:05:18,588 DEBUG Starting app.py
+2026-01-16 11:05:18,588 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'token', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 11:05:18,588 DEBUG Initial query_params: {}
+2026-01-16 11:05:18,588 DEBUG ENABLE_PASSWORD_RESET=False
+2026-01-16 11:05:20,351 DEBUG Starting app.py
+2026-01-16 11:05:20,351 DEBUG Initial session_state keys: ['show_trendyol_full_items', 'btn_trendyol_collapse', 'token', 'btn_trendyol_view_all', 'show_trendyol_results', 'leave_data', 'authenticated', 'gallery_state', 'page', 'chat_history', 'btn_trendyol_report', 'btn_trendyol_scan', 'user_data']
+2026-01-16 11:05:20,351 DEBUG Initial query_params: {}
+2026-01-16 11:05:20,351 DEBUG ENABLE_PASSWORD_RESET=False
